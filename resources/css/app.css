@@ -1,0 +1,8 @@
+@import 'topPanel.css';
+@import 'homePage.css';
+@import 'registrationPage.css';
+
+
+body{
+    margin: 0;
+}

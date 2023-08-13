@@ -1,0 +1,72 @@
+.topPanel {
+    position: sticky;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 80px;
+    background-color: #405b48;
+}
+
+.topPanelText button {
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    border: transparent;
+    color: white;
+    font-size: 27px;
+    vertical-align: middle;
+    transition: all 500ms ease;
+    cursor: pointer;
+}
+
+button#logo {
+    font-size: 45px;
+}
+
+#imageSize {
+    height: 70px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding-top: 12px;
+    text-decoration: none;
+}
+
+li img {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 0px 40px;
+    text-decoration: none;
+}
+
+ul li:nth-child(-n+2) {
+    float: left;
+}
+
+div.circle{
+    width: 55px;
+    height: 55px;
+    background: #83A7C9;
+    border-radius: 50%;
+}
+
+a.mini{
+    padding-top: 25px;
+    padding-right: 60px;
+    padding-left: 10px;
+}
