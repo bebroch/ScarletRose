@@ -22,12 +22,12 @@
 
             @auth('web')
             <li>
-                <select name="" id="">
-
-                </select>
                 <a class="mini" href="{{route('createCard')}}">
                     <button>{{Auth::user()->login}}</button>
                 </a>
+            </li>
+
+            <li>
                 <a href="{{route('createCard')}}">
                     <div class="circle"></div>
                 </a>
