@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 class CreateCardController extends Controller
 {
     public function create(){
-        return view('createCard');
+        return view('personalArea.createCard');
     }
 
     public function delite(){
-        return view('createCard');
+        return view('personalArea.createCard');
     }
 }

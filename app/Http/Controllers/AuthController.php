@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 class AuthController extends Controller
 {
     public function showLoginForm(){
-        return view('login');
+        return view('registration.login');
     }
 
     public function logout(){
@@ -18,7 +18,7 @@ class AuthController extends Controller
     }
 
     public function showRegisterForm(){
-        return view('registration');
+        return view('registration.registration');
     }
 
     public function login(Request $req){
@@ -28,10 +28,10 @@ class AuthController extends Controller
         ]);
 
         if(auth('web')->attempt($data)){
-            return Redirect::to(route('home'));
+            return redirect(route('home'));
         }
 
-        return Redirect::to(route('login'))->withErrors(['login' => 'Неверно указан логин или пароль.']);
+        return redirect(route('login'))->withErrors(['login' => 'Неверно указан логин или пароль.']);
 
     }
 
@@ -53,6 +53,6 @@ class AuthController extends Controller
             auth('web')->login($user);
         }
 
-        return Redirect::to(route('home'));
+        return redirect(route('home'));
     }
 }

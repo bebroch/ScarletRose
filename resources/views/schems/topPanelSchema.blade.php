@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 <body>
     <div class="topPanel topPanelText">
@@ -21,28 +22,34 @@
             </li>
 
             @auth('web')
-            <li>
-                <a class="mini" href="{{route('createCard')}}">
-                    <button>{{Auth::user()->login}}</button>
-                </a>
+            <li onmouseenter="window.view()" onmouseleave="window.hidden()">
+                <button class="mini" >{{Auth::user()->login}}
+                    <div class="hidden" id="pop">
+                        <a href="{{route('personalArea')}}">Личный кабинет</a>
+                        <a href="{{route('news')}}">Новости</a>
+                        <a href="{{route('posters')}}">Афиша</a>
+                        <a href="{{route('home')}}">Галерея</a>
+                        <a href="{{route('logout')}}">Выйти</a>
+                    </div>
+                </button>
             </li>
 
-            <li>
-                <a href="{{route('createCard')}}">
-                    <div class="circle"></div>
-                </a>
+            <li onmouseenter="window.view()" onmouseleave="window.hidden()">
+                <div class="circle"></div>
             </li>
             @endauth
 
             @guest('web')
-            <li class="mini">
-                <a href="{{ route('login') }}">
-                    <button>Войти</button>
+            <li>
+                <a class="mini" href="{{ route('login') }}">
+                    <button class="mini">Войти</button>
                 </a>
             </li>
             @endguest
         </ul>
     </div>
+
+
 
     @yield('content')
 </body>

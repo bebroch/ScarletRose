@@ -7,14 +7,19 @@
     background-color: #405b48;
 }
 
-.topPanelText button {
-    width: auto;
-    height: auto;
+.topPanelText button{
     background-color: transparent;
     border: transparent;
     color: white;
     font-size: 27px;
     vertical-align: middle;
+    transition: all 500ms ease;
+    cursor: pointer;
+}
+
+.topPanelText button:hover{
+    background: rgba(0,0,0,0);
+	color: #a60d2e;
     transition: all 500ms ease;
     cursor: pointer;
 }
@@ -59,14 +64,31 @@ ul li:nth-child(-n+2) {
 }
 
 div.circle{
-    width: 55px;
-    height: 55px;
+    top: 10px;
+    width: 80px;
+    height: 80px;
     background: #83A7C9;
     border-radius: 50%;
 }
 
-a.mini{
+button.mini{
     padding-top: 25px;
+    padding-bottom: 25px;
     padding-right: 60px;
     padding-left: 10px;
+}
+
+a.mini{
+    padding-top: 0px;
+}
+
+div.hidden{
+    display: none;
+    position: fixed;
+    top: 80px;
+    right: 0;
+    width: 300px;
+    height: 500px;
+    background-color: #a60d2e;
+    transition: all 500ms ease;
 }
