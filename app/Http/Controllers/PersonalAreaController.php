@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class PersonalAreaController extends Controller
 {
     public function showPersonalArea(){
-        return view();
+        return view('personalArea.personalArea');
     }
 
     public function showMyPictureForm(){

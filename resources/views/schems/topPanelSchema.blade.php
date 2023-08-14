@@ -21,15 +21,18 @@
                 </a>
             </li>
 
+
+
             @auth('web')
             <li onmouseenter="window.view()" onmouseleave="window.hidden()">
                 <button class="mini" >{{Auth::user()->login}}
-                    <div class="hidden" id="pop">
+                    <div class="hidden buttonHidenBlock" id="pop">
                         <a href="{{route('personalArea')}}">Личный кабинет</a>
+                        <hr>
                         <a href="{{route('news')}}">Новости</a>
                         <a href="{{route('posters')}}">Афиша</a>
                         <a href="{{route('home')}}">Галерея</a>
-                        <a href="{{route('logout')}}">Выйти</a>
+                        <a class="buttonHidenBlock" href="{{route('logout')}}">Выйти</a>
                     </div>
                 </button>
             </li>
