@@ -1,6 +1,7 @@
-@import 'topPanel.css';
+/*@import 'topPanel.css';*/
 @import 'homePage.css';
 @import 'registrationPage.css';
+@import 'newTestTopPanel.css';
 
 
 body{

@@ -1,0 +1,101 @@
+ul {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #405b48;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 30px 16px;
+    text-decoration: none;
+    transition: all 500ms ease;
+}
+
+li.header a{
+    font-size: 45px;
+    padding: 15px 15px;
+    color: white;
+    cursor: context-menu;
+
+}
+
+li.header{
+    padding-left: 20%;
+}
+
+li.logo a{
+    font-size: 45px;
+    padding: 15px 10px;
+}
+
+li a:hover:not(.header a) {
+    color:#f64b53;
+    transition: all 500ms ease;
+}
+
+li img{
+    height: 70px;
+    padding-left: 40px;
+    padding-top: 10px;
+}
+
+li.last{
+    float: right;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+li.circle div{
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    background-color: #111;
+}
+
+li.circle{
+    padding: 10px;
+}
+
+@media screen and (max-width: 1200px){
+    ul li.last,
+    ul li{
+        float: none;
+    }
+    div.hidden{
+        top: 200px;
+    }
+}
+
+div.hidden{
+    position: fixed;
+    top: 90px;
+    right: -300px;
+    width: 300px;
+    height: 400px;
+    border-radius: 0 0 0 40px;
+    background-color: #839f23;
+    transition: all 400ms ease;
+}
+
+div.hidden a{
+    padding: 10px 0;
+}
+
+div.hidden a:nth-last-child(2){
+    padding-bottom: 100px;
+}
+
+li.last:hover
+div.hidden{
+    right: 0;
+    transition: all 400ms ease;
+}

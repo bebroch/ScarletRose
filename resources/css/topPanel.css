@@ -36,7 +36,7 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: visible;
 }
 
 li {
@@ -52,19 +52,18 @@ li a {
 }
 
 li img {
-    display: block;
     color: white;
-    text-align: center;
-    padding: 0px 40px;
-    text-decoration: none;
+    padding: 0 0 0 60px;
 }
 
 ul li:nth-child(1),
-ul li:nth-child(2) {
+ul li:nth-child(2),
+ul li:nth-child(3) {
     float: left;
 }
 
 div.circle{
+    display: block;
     top: 10px;
     width: 80px;
     height: 80px;
@@ -105,4 +104,12 @@ button.mini:hover div.hidden{
 
 a.buttonHidenBlock{
     padding-top: 170px;
+}
+
+div.header{
+    padding-left: 300%;
+}
+
+h1.header{
+    color: white;
 }

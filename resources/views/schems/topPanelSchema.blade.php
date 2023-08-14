@@ -9,16 +9,58 @@
     @vite('resources/js/app.js')
 </head>
 <body>
-    <div class="topPanel topPanelText">
+    <ul>
+        <li><img src="{{asset('build/assets/rose-073a4941.png')}}"></li>
+        <li class="logo"><a href="{{route('home')}}">Арт клуб "Алая роза" </a></li>
+        <li class="header"><a>@yield('title')</a></li>
+
+        @auth('web')
+        <li class="last" onmouseenter="window.view()" onmouseleave="window.hidden()">
+            <a>
+                {{Auth::user()->login}}
+            </a>
+                <div class="hidden buttonHidenBlock" id="pop">
+                    <a href="{{route('personalArea')}}">Личный кабинет</a>
+                    <hr>
+                    <a href="{{route('news')}}">Новости</a>
+                    <a href="{{route('posters')}}">Афиша</a>
+                    <a href="{{route('home')}}">Галерея</a>
+                    <a></a>
+                    <a class="buttonHidenBlock" href="{{route('logout')}}">Выйти</a>
+                </div>
+        </li>
+
+        <li class="last circle" onmouseenter="window.view()" onmouseleave="window.hidden()">
+            <div></div>
+        </li>
+        @endauth
+
+        @guest('web')
+        <li class="last">
+            <a href="{{ route('login') }}">
+                Войти
+            </a>
+        </li>
+        @endguest
+    </ul>
+
+
+    <!--<div class="topPanel topPanelText">
         <ul>
+
+
             <li>
                 <img id="imageSize" src="{{asset('build/assets/rose-073a4941.png')}}">
             </li>
 
             <li>
-                <a href="{{route('home')}}">
-                    <button id="logo">"Алая Роза" артклуб</button>
-                </a>
+                <a href="{{route('home')}}">"Алая Роза" артклуб</a>
+            </li>
+
+            <li>
+                <div class="header">
+                    <h1 class="header">@yield('title')</h1>
+                </div>
             </li>
 
 
@@ -50,7 +92,7 @@
             </li>
             @endguest
         </ul>
-    </div>
+    </div>-->
 
 
 
