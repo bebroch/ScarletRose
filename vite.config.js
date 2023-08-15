@@ -8,7 +8,6 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/css/app.css',
-                'resources/images/rose.png',
             ],
             refresh: true,
         }),

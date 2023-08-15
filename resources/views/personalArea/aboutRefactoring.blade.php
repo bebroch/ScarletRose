@@ -1,7 +1,7 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-Изменение поля "О себе"
+Изменить информацию
 @endsection
 
 @section('content')

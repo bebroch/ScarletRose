@@ -1,5 +1,4 @@
-ul {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.topPanel {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -11,7 +10,7 @@ li {
     float: left;
 }
 
-li a {
+.text a {
     display: block;
     color: white;
     text-align: center;
@@ -25,14 +24,13 @@ li.header a{
     padding: 15px 15px;
     color: white;
     cursor: context-menu;
-
 }
 
 li.header{
     padding-left: 20%;
 }
 
-li.logo a{
+.logo a{
     font-size: 45px;
     padding: 15px 10px;
 }
@@ -42,7 +40,7 @@ li a:hover:not(.header a) {
     transition: all 500ms ease;
 }
 
-li img{
+ul.topPanel li img{
     height: 70px;
     padding-left: 40px;
     padding-top: 10px;
@@ -66,8 +64,8 @@ li.circle{
 }
 
 @media screen and (max-width: 1200px){
-    ul li.last,
-    ul li{
+    ul.topPanel  li.last,
+    ul.topPanel  li{
         float: none;
     }
     div.hidden{
