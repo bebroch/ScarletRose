@@ -1,7 +1,7 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-Мои картины
+Картины
 @endsection
 
 @section('content')
@@ -22,5 +22,6 @@
     </div>
     @endforeach
 </div>
+
 
 @endsection

@@ -6,11 +6,19 @@
     background-color: #405b48;
 }
 
-li {
+.topPanel li {
     float: left;
 }
 
-.text a {
+.textWhite {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    transition: all 500ms ease;
+}
+
+.textWhite a {
     display: block;
     color: white;
     text-align: center;
@@ -19,14 +27,13 @@ li {
     transition: all 500ms ease;
 }
 
-li.header a{
+.textWhite.header a{
     font-size: 45px;
     padding: 15px 15px;
-    color: white;
     cursor: context-menu;
 }
 
-li.header{
+.textWhite.header{
     padding-left: 20%;
 }
 
@@ -35,12 +42,12 @@ li.header{
     padding: 15px 10px;
 }
 
-li a:hover:not(.header a) {
+.topPanel li a:hover:not(.header a) {
     color:#f64b53;
     transition: all 500ms ease;
 }
 
-ul.topPanel li img{
+.topPanel li img{
     height: 70px;
     padding-left: 40px;
     padding-top: 10px;
@@ -75,13 +82,14 @@ li.circle{
 
 div.hidden{
     position: fixed;
-    top: 90px;
+    top: 98px;
     right: -300px;
     width: 300px;
     height: 400px;
     border-radius: 0 0 0 40px;
     background-color: #839f23;
     transition: all 400ms ease;
+    z-index: 1;
 }
 
 div.hidden a{
@@ -89,7 +97,7 @@ div.hidden a{
 }
 
 div.hidden a:nth-last-child(2){
-    padding-bottom: 100px;
+    padding-bottom: 20%;
 }
 
 li.last:hover

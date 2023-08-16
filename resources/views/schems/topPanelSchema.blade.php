@@ -7,24 +7,23 @@
     <title>@yield('title')</title>
     <link rel="icon" href="{{asset('imagesAsset/roseIcon.png')}}">
     @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
 </head>
 <body>
     <ul class="topPanel">
         <li><img src="{{asset('imagesAsset/rose.png')}}"></li>
-        <li class="logo text"><a href="{{route('home')}}">Арт клуб "Алая роза" </a></li>
-        <li class="header text"><a>@yield('title')</a></li>
+        <li class="textWhite logo"><a href="{{route('home')}}">Арт клуб "Алая роза" </a></li>
+        <li class="textWhite header"><a>@yield('title')</a></li>
 
         @auth('web')
-        <li class="last text" onmouseenter="window.view()" onmouseleave="window.hidden()">
+        <li class="last textWhite" onmouseenter="window.view()" onmouseleave="window.hidden()">
             <a>
                 {{Auth::user()->login}}
             </a>
-            <div class="hidden text" id="pop">
+            <div class="hidden textWhite" id="pop">
                 <a href="{{route('personalArea')}}">Личный кабинет</a>
                 <hr>
                 <a href="{{route('news')}}">Новости</a>
-                <a href="{{route('posters')}}">Афиша</a>
+                <a href="{{route('posters')}}">Афиши</a>
                 <a href="{{route('home')}}">Галерея</a>
                 <a></a>
                 <a href="{{route('logout')}}">Выйти</a>
@@ -37,7 +36,7 @@
         @endauth
 
         @guest('web')
-        <li class="last text">
+        <li class="last textWhite">
             <a href="{{ route('login') }}">
                 Войти
             </a>

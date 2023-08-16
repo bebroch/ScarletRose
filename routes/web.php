@@ -45,4 +45,6 @@ Route::get('/PersonalArea/AddMyPicture', [PersonalAreaController::class, 'showAd
 Route::post('/PersonalArea/AddMyPicture/adderPicture_process', [PersonalAreaController::class, 'adderPicture'])->name('adderPicture');
 Route::get('/PersonalArea/UpdateMyInformation', [PersonalAreaController::class, 'showUpdateMyInformationForm'])->name('updateInformation');
 
+Route::post('/PersonalArea/updateMyInformationForm_process', [PersonalAreaController::class, 'updateMyInformationForm_process'])->name('updateInformation_process');
+
 

@@ -7,7 +7,7 @@
 @section('content')
 <div class="mainPanel">
     <ul>
-        <li class="personData">
+        <li class="personData text">
             <div class="personImage"></div>
             <a>
                 {{Auth::user()->login}}

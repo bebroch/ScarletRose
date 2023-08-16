@@ -4,6 +4,13 @@
 Вход
 @endsection
 
+@section('resources')
+@vite('resources/css/forSchems/TopPanelStyle.css')
+@endsection
+
+
+
+
 @section('content')
 
 <div class="restOfItWindow">

@@ -3,6 +3,7 @@
 @import 'registration/registrationStyle.css';
 @import 'personalArea/personalAreaStyle.css';
 @import 'personalArea/createCardStyle.css';
+@import 'bootstrap';
 
 html{
     min-height: 100%;

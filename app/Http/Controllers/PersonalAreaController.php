@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pictures;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,15 +16,14 @@ class PersonalAreaController extends Controller
     }
 
     public function showMyPictureForm(){
-        return view('personalArea.myPictures');
+        $images = Pictures::all()
+            ->where('user_id', '=', Auth::user()->id);
+
+        return view('personalArea.myPictures', compact('images'));
     }
 
     public function showAddMyPictureForm(){
         return view('personalArea.createCard');
-    }
-
-    public function showUpdateMyInformationForm(){
-        return view('personalArea.aboutRefactoring');
     }
 
     public function adderPicture(Request $request){
@@ -37,7 +37,7 @@ class PersonalAreaController extends Controller
 
         $path = $request->file('uploadPicture')->store("public/images/");
 
-        $picture = Pictures::create([
+        Pictures::create([
             'name' => $request->namePicture,
             'imagePath' => $path,
             'about' => $request->aboutPicture,
@@ -45,5 +45,26 @@ class PersonalAreaController extends Controller
         ]);
 
         return redirect(route('home'));
+    }
+
+    public function showUpdateMyInformationForm(){
+        return view('personalArea.aboutRefactoring');
+    }
+
+    public function updateMyInformationForm_process(Request $request){
+        dump($request);
+        dd($request->test);
+
+
+        $data = [
+            'login' => $request->login,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'phone' => $request->phone,
+            'about' => $request->about,
+        ];
+
+        $user = Auth::user();
+        User::update($user->id, $data);
     }
 }

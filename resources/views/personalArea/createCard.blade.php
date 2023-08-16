@@ -10,7 +10,7 @@
         <form action="{{route('adderPicture')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div>
-                <label>Фото картины</label>
+                <label>Фото</label>
                 <br>
                 <input type="file" accept="image/png, image/jpeg, image/jpg" name="uploadPicture" onchange="loadFile(event)">
                 @error('uploadPicture')
@@ -19,7 +19,7 @@
             </div>
 
             <div>
-                <label>Название картины</label>
+                <label>Название</label>
                 <br>
                 <textarea name="namePicture" id="namePicture" class="textInput" cols="1" rows="10"></textarea>
                 @error('namePicture')
@@ -28,7 +28,7 @@
             </div>
 
             <div>
-                <label>Техника написания картины</label>
+                <label>Техника написания</label>
                 <br>
                 <textarea name="technique" id="techniquePicture" class="textInput" cols="1" rows="10"></textarea>
                 @error('technique')
