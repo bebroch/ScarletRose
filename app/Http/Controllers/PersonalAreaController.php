@@ -52,19 +52,17 @@ class PersonalAreaController extends Controller
     }
 
     public function updateMyInformationForm_process(Request $request){
-        dump($request);
-        dd($request->test);
-
 
         $data = [
-            'login' => $request->login,
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'phone' => $request->phone,
-            'about' => $request->about,
+            'login'     => $request->login ? $request->login : "",
+            'firstname' => $request->firstname ? $request->firstname : "",
+            'lastname'  => $request->lastname ? $request->lastname : "",
+            'phone'     => $request->phone ? $request->phone : "",
+            'about'     => $request->about ? $request->about : "",
         ];
 
-        $user = Auth::user();
-        User::update($user->id, $data);
+        User::where('id', '=', Auth::user()->id)->update($data);
+
+        return redirect(route('personalArea'));
     }
 }

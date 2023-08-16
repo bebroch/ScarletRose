@@ -6,57 +6,39 @@
 
 @section('content')
 
-<div class="card container mt-5" style="width: 27em; border: 1px solid black">
+<div class="card container mt-5" style="width: 27em;">
 
     <form action="{{route('updateInformation_process')}}" method="POST">
         @csrf
         <div class="input-group mb-3 mt-3">
-            <input type="text" name="login" value="{{Auth::user()->login}}" class="form-control" placeholder="Логин" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Изменить</button>
+            <label class="input-group-text" for="inputGroupSelect01">Логин</label>
+            <input name="login" value="{{Auth::user()->login}}" placeholder="Введите логин" type="text" aria-label="First name" class="form-control">
         </div>
-    </form>
-
-
-
-
-    <form action="{{route('updateInformation_process')}}" method="POST">
-        @csrf
-        <div class="input-group mb-3">
-            <input type="text" name="firstname" value="{{Auth::user()->firstname}}" class="form-control" placeholder="Имя" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Изменить</button>
+        <div class="input-group mb-3 mt-3">
+            <label class="input-group-text" for="inputGroupSelect01">Имя</label>
+            <input name="firstname" value="{{Auth::user()->firstname}}" placeholder="Введите имя" type="text" aria-label="First name" class="form-control">
         </div>
-    </form>
-
-
-
-
-    <form action="{{route('updateInformation_process')}}" method="POST">
-        @csrf
-        <div class="input-group mb-3">
-            <input type="text" name="lastname" value="{{Auth::user()->lastname}}" class="form-control" placeholder="Фамилия" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Изменить</button>
+        <div class="input-group mb-3 mt-3">
+            <label class="input-group-text" for="inputGroupSelect01">Фамилия</label>
+            <input name="lastname" value="{{Auth::user()->lastname}}" placeholder="Введите фамилию" type="text" aria-label="First name" class="form-control">
         </div>
-    </form>
-
-
-
-    <form action="{{route('updateInformation_process')}}" method="POST">
-            @csrf
-        <div class="input-group mb-3">
-            <input type="text" name="phone" value="{{Auth::user()->phone}}" class="form-control" placeholder="Телефон (+7-012-345-67-89)" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Изменить</button>
+        <div class="input-group mb-3 mt-3">
+            <label class="input-group-text" for="inputGroupSelect01">Телефон</label>
+            <input name="phone" value="{{Auth::user()->phone}}" placeholder="Введите номер телефона" type="text" aria-label="First name" class="form-control">
         </div>
-    </form>
-
-
-
-    <form action="{{route('updateInformation_process')}}" method="POST">
-            @csrf
-        <div class="input-group mb-3">
-            <textarea type="text" name="about" value="{{Auth::user()->about}}" class="form-control" placeholder="О себе" aria-label="Recipient's username" aria-describedby="button-addon2"></textarea>
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Изменить</button>
+        <div class="input-group mb-3 mt-3">
+            <label class="input-group-text" for="inputGroupSelect01">О себе</label>
+            <textarea type="text" name="about" class="form-control" placeholder="О себе" aria-label="Recipient's username" aria-describedby="button-addon2">{{Auth::user()->about}}</textarea>
         </div>
-    </form>
-</div>
 
+
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-outline-secondary mb-3" type="submit" id="button-addon2">Изменить</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
 @endsection
