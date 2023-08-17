@@ -7,6 +7,7 @@
     <title>@yield('title')</title>
     <link rel="icon" href="{{asset('imagesAsset/roseIcon.png')}}">
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 <body>
     <ul class="topPanel">
@@ -25,6 +26,10 @@
                 <a href="{{route('news')}}">Новости</a>
                 <a href="{{route('posters')}}">Афиши</a>
                 <a href="{{route('home')}}">Галерея</a>
+
+                @if (Auth::user()->is_admin)
+                <a href="{{route('admin')}}">Админ панель</a>
+                @endif
                 <a></a>
                 <a href="{{route('logout')}}">Выйти</a>
             </div>
