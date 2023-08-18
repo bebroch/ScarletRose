@@ -36,27 +36,54 @@ class PersonalAreaController extends Controller
 
     public function adderPicture(Request $request){
 
+        // Валидация
         $request->validate([
             'uploadPicture' => 'required|image:jpg, jpeg, png',
             'namePicture' => 'required|string',
-            'technique' => 'required',
-            'aboutPicture' => 'required|string'
+            'aboutPicture' => 'required|string',
+            'price' => 'integer',
         ]);
 
-        $path = $request->file('uploadPicture')->store("public/images/");
 
+        // Путь до картинки, размеры картинки
+        $path = $request->file('uploadPicture')->store("public/images/");
+        $data = getimagesize($request->file('uploadPicture'));
+
+        // картинка идёт в ДБ
         $image = Pictures::create([
             'name' => $request->namePicture,
             'imagePath' => $path,
             'about' => $request->aboutPicture,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'width' => $data[0],
+            'height' => $data[1],
+            'price' => $request->price,
         ]);
 
+        $technique = array();
 
-        under_categories_pictures::create([
-            'under_category_id' => under_categories::where('name', '=', $request->technique)->id,
-            'picture_id' => $image
-        ]);
+        foreach ($request->collect() as $key => $value) {
+            if (!$key)
+                continue;
+            if(explode(',', $key)[0] == 'technique'){
+                $technique[] = explode(',', $key);
+            }
+        }
+
+        foreach ($technique as $value) {
+            if($value[2]){
+                under_categories_pictures::create([
+                    'under_category_id' => under_categories::find($value[2])->id,
+                    'picture_id' => $image->id,
+                ]);
+            }
+            else{
+                Categories_pictures::create([
+                    'category_id' => Categories::find($value[1]),
+                    'picture_id' => $image->id,
+                ]);
+            }
+        }
 
         return redirect(route('home'));
     }

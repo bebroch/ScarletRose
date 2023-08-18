@@ -16,6 +16,17 @@
                 <div class="card-body">
                     <h3 class="card-title">{{$image->name}}</h3>
                     <p class="card-text">{{Str::limit($image->about, 100, '...')}}</p>
+                    @if ($image->price)
+                        <p>Стоимость: {{$image->price}}&#8381;</p>
+                    @endif
+                    @auth('web')
+                    @if (Auth::user()->is_admin)
+                    <form action="{{route('deletePicture')}}">
+                        <input type="text" hidden value="{{$image->id}}" name="image">
+                        <input type="submit" value="Удалить картину">
+                    </form>
+                    @endif
+                    @endauth
                 </div>
             </a>
         </div>

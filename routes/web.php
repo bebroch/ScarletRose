@@ -35,13 +35,10 @@ Route::middleware(['web'])->group(function(){
     Route::get('/AdminPanel/AddCategory_process', [AdminController::class, 'addingCategory'])->name('addingCategory');
     Route::get('/AdminPanel/DeleteCategory_process', [AdminController::class, 'deleteCategory'])->name('deleteCategory');
     Route::get('/AdminPanel/DeleteUnderCategory_process', [AdminController::class, 'deleteUnderCategory'])->name('deleteUnderCategory');
+    Route::get('/AdminPanel/DeletePicture_process', [AdminController::class, 'deletePicture'])->name('deletePicture');
 
     Route::get('/AdminPanel/Search', [AdminController::class, 'showSearch'])->name('AdminSearch');
     Route::get('/AdminPanel/Users', [AdminController::class, 'showUsers'])->name('AdminUsers');
-
-    Route::get('/AdminPanel/Pictures', [AdminController::class, 'showPictures'])->name('AdminPictures');
-    Route::get('/AdminPanel/News', [AdminController::class, 'showNews'])->name('AdminNews');
-    Route::get('/AdminPanel/Posters', [AdminController::class, 'showPosters'])->name('AdminPosters');
 });
 
 // Основная страница, Новости и Афиша

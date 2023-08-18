@@ -9,6 +9,7 @@ use App\Http\Requests\adminAddingRequest;
 use App\Http\Requests\adminAddingUnderCategoryRequest;
 use App\Models\Categories;
 use App\Models\News;
+use App\Models\Pictures;
 use App\Models\Posters;
 use App\Models\under_categories;
 use Illuminate\Http\Request;
@@ -137,5 +138,11 @@ class AdminController extends Controller
             return view('adminPanel.AdminUser');
         }
         return redirect('home.home');
+    }
+
+    // Удаление картины
+    public function deletePicture(Request $request){
+        Pictures::find($request->image)->delete();
+        return redirect(route('home'));
     }
 }

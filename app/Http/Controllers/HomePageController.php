@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use App\Models\Pictures;
 use App\Models\Posters;
+use App\Models\under_categories;
+use App\Models\under_categories_pictures;
 use App\Models\User;
 
 class HomePageController extends Controller
@@ -17,6 +19,9 @@ class HomePageController extends Controller
     public function showPictures_id($id){
         $image = Pictures::find($id);
         $user = User::find($image->user_id)->login;
+
+
+
         if($image){
             return view('home.pictures.picture', compact('image', 'user'));
         }

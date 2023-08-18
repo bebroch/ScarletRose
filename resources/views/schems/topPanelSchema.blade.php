@@ -16,7 +16,7 @@
         <li class="textWhite header"><a>@yield('title')</a></li>
 
         @auth('web')
-        <li class="last textWhite" onmouseenter="window.view()" onmouseleave="window.hidden()">
+        <li class="last textWhite">
             <a>
                 {{Auth::user()->login}}
             </a>
@@ -35,7 +35,7 @@
             </div>
         </li>
 
-        <li class="last circle" onmouseenter="window.view()" onmouseleave="window.hidden()">
+        <li class="last circle">
             <div></div>
         </li>
         @endauth

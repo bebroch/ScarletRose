@@ -59,13 +59,12 @@
                 <ul class="dropdown-menu dropdown-menu-dark">
                   <li><a class="dropdown-item" href="{{route('addNew')}}">Добавить новость</a></li>
                   <li><a class="dropdown-item" href="{{route('addPoster')}}">Добавить афишу</a></li>
-                  <li><a class="dropdown-item" href="{{route('addCategory')}}">Создать категорию</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
                   <li><a class="dropdown-item" href="{{route('AdminSearch')}}">Поиск</a></li>
                   <li><a class="dropdown-item" href="{{route('AdminUsers')}}">Редактировать пользователей</a></li>
-                  <li><a class="dropdown-item" href="{{route('AdminPictures')}}">Редактировать категории</a></li>
+                  <li><a class="dropdown-item" href="{{route('addCategory')}}">Редактирование категорий</a></li>
                 </ul>
             </li>
             @endif
