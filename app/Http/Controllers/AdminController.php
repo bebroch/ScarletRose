@@ -6,10 +6,14 @@ use App\Http\Requests\adminAddingCategoryRequest;
 use App\Http\Requests\adminAddingNewsRequest;
 use App\Http\Requests\adminAddingPosterRequest;
 use App\Http\Requests\adminAddingRequest;
+use App\Http\Requests\adminAddingUnderCategoryRequest;
+use App\Models\Categories;
 use App\Models\News;
 use App\Models\Posters;
+use App\Models\under_categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -68,7 +72,8 @@ class AdminController extends Controller
     // Категории
     public function showAddCategory(){
         if(Auth::user()->is_admin){
-            return view('adminPanel.addPoster');
+            $categories = Categories::all();
+            return view('adminPanel.addCategory', compact('categories'));
         }
         return redirect('home.home');
     }
@@ -78,12 +83,44 @@ class AdminController extends Controller
             return redirect('home.home');
         }
 
-        News::create([
-            'name' => $request->title,
-            'about' => $request->about,
+        Categories::create([
+            'name' => $request->nameCategory,
         ]);
 
-        return redirect(route('news'));
+        return redirect(route('addCategory'));
+    }
+
+    public function addingUnderCategory(adminAddingUnderCategoryRequest $request){
+        if(!Auth::user()->is_admin){
+            return redirect('home.home');
+        }
+
+        under_categories::create([
+            'name' => $request->nameUnderCategory,
+            'category_id' => Categories::where('name', '=', $request->category)->first()->id,
+        ]);
+
+        return redirect(route('addCategory'));
+    }
+
+    public function deleteCategory(Request $request){
+        if(!Auth::user()->is_admin){
+            return redirect('home.home');
+        }
+
+        Categories::where('name','=',$request->category)->delete();
+
+        return redirect(route('addCategory'));
+    }
+
+    public function deleteUnderCategory(Request $request){
+        if(!Auth::user()->is_admin){
+            return redirect('home.home');
+        }
+
+        under_categories::where('name','=', $request->under_category)->delete();
+
+        return redirect(route('addCategory'));
     }
 
     // Поиск

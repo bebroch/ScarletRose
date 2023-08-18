@@ -6,16 +6,6 @@
 
 @section('content')
 
-
-<a href="">Картины на рассмотрении</a>
-<a href="">Добавить новость</a>
-<a href="">Добавить афишу</a>
-
-<a href="">Пользователи</a>
-<a href="">Картины</a>
-<a href="">Новости</a>
-<a href="">Афиши</a>
-
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <nav class="navbar navbar-dark bg-dark">
@@ -31,7 +21,7 @@
       </button>
       <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
         <div class="offcanvas-header">
-          <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Меню</h3>
+          <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel">{{Auth::user()->login}}</h3>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -43,15 +33,27 @@
               <a class="nav-link" aria-current="page" href="#">Новости</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Афиши</a>
+              <a class="nav-link" aria-current="page" href="#">Афиша</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">Личный кабинет</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Личный кабинет
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                  <li><a class="dropdown-item" href="#">Мои картины</a></li>
+                  <li><a class="dropdown-item" href="#">Добавить картину</a></li>
+                  <li><a class="dropdown-item" href="#">Обо мне</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="#">Изменить информацию</a></li>
+                </ul>
             </li>
+
 
             @if (Auth::user()->is_admin)
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Админ панель
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark">
@@ -62,12 +64,9 @@
                     <hr class="dropdown-divider">
                   </li>
                   <li><a class="dropdown-item" href="{{route('AdminSearch')}}">Поиск</a></li>
-                  <li><a class="dropdown-item" href="{{route('AdminUsers')}}">Пользователи</a></li>
-                  <li><a class="dropdown-item" href="{{route('AdminPictures')}}">Картины</a></li>
-                  <li><a class="dropdown-item" href="{{route('AdminNews')}}">Новости</a></li>
-                  <li><a class="dropdown-item" href="{{route('AdminPosters')}}">Афиши</a></li>
+                  <li><a class="dropdown-item" href="{{route('AdminUsers')}}">Редактировать пользователей</a></li>
+                  <li><a class="dropdown-item" href="{{route('AdminPictures')}}">Редактировать категории</a></li>
                 </ul>
-
             </li>
             @endif
 
@@ -91,7 +90,4 @@
       </div>
     </div>
   </nav>
-
-
-
 @endsection

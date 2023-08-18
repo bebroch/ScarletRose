@@ -3,19 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class adminAddingCategoryRequest extends FormRequest
+class adminAddingUnderCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        if(Auth::user()->is_admin){
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +22,8 @@ class adminAddingCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nameCategory' => 'required|unique:categories,name'
+            'nameUnderCategory' => 'required|unique:under_categories,name',
+            'category' => 'required'
         ];
     }
 }

@@ -24,7 +24,7 @@
                 <a href="{{route('personalArea')}}">Личный кабинет</a>
                 <hr>
                 <a href="{{route('news')}}">Новости</a>
-                <a href="{{route('posters')}}">Афиши</a>
+                <a href="{{route('posters')}}">Афиша</a>
                 <a href="{{route('home')}}">Галерея</a>
 
                 @if (Auth::user()->is_admin)

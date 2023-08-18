@@ -31,7 +31,10 @@ Route::middleware(['web'])->group(function(){
     Route::get('/AdminPanel/AddPoster_process', [AdminController::class, 'addingPoster'])->name('addingPoster');
 
     Route::get('/AdminPanel/AddCategory', [AdminController::class, 'showAddCategory'])->name('addCategory');
+    Route::get('/AdminPanel/AddUnderCategory_process', [AdminController::class, 'addingUnderCategory'])->name('addingUnderCategory');
     Route::get('/AdminPanel/AddCategory_process', [AdminController::class, 'addingCategory'])->name('addingCategory');
+    Route::get('/AdminPanel/DeleteCategory_process', [AdminController::class, 'deleteCategory'])->name('deleteCategory');
+    Route::get('/AdminPanel/DeleteUnderCategory_process', [AdminController::class, 'deleteUnderCategory'])->name('deleteUnderCategory');
 
     Route::get('/AdminPanel/Search', [AdminController::class, 'showSearch'])->name('AdminSearch');
     Route::get('/AdminPanel/Users', [AdminController::class, 'showUsers'])->name('AdminUsers');

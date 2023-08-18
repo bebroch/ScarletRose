@@ -27,10 +27,24 @@
                 @enderror
             </div>
 
+            <!--
             <div>
                 <label>Техника написания</label>
                 <br>
                 <textarea name="technique" id="techniquePicture" class="textInput" cols="1" rows="10"></textarea>
+                @error('technique')
+                <br><a>{{$message}}</a>
+                @enderror
+            </div>
+            -->
+
+            <div>
+                <select name="technique">
+                    <option>-- Выберите Категорию --</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
                 @error('technique')
                 <br><a>{{$message}}</a>
                 @enderror
