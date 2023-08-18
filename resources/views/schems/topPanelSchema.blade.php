@@ -7,6 +7,7 @@
     <title>@yield('title')</title>
     <link rel="icon" href="{{asset('imagesAsset/roseIcon.png')}}">
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 </head>
 <body>
     <ul class="topPanel">
@@ -15,7 +16,7 @@
         <li class="textWhite header"><a>@yield('title')</a></li>
 
         @auth('web')
-        <li class="last textWhite" onmouseenter="window.view()" onmouseleave="window.hidden()">
+        <li class="last textWhite">
             <a>
                 {{Auth::user()->login}}
             </a>
@@ -23,14 +24,18 @@
                 <a href="{{route('personalArea')}}">Личный кабинет</a>
                 <hr>
                 <a href="{{route('news')}}">Новости</a>
-                <a href="{{route('posters')}}">Афиши</a>
+                <a href="{{route('posters')}}">Афиша</a>
                 <a href="{{route('home')}}">Галерея</a>
+
+                @if (Auth::user()->is_admin)
+                <a href="{{route('admin')}}">Админ панель</a>
+                @endif
                 <a></a>
                 <a href="{{route('logout')}}">Выйти</a>
             </div>
         </li>
 
-        <li class="last circle" onmouseenter="window.view()" onmouseleave="window.hidden()">
+        <li class="last circle">
             <div></div>
         </li>
         @endauth
