@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class adminAddingNewsRequest extends FormRequest
 {
@@ -11,7 +12,10 @@ class adminAddingNewsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        if(Auth::user()->is_admin){
+            return true;
+        }
+        return false;
     }
 
     /**

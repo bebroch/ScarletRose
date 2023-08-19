@@ -1,54 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
-    <link rel="icon" href="{{asset('imagesAsset/roseIcon.png')}}">
+    <link rel="icon" href="{{ asset('imagesAsset/roseIcon.png') }}">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 </head>
+
+<!-- Цвета заднего фона #405b48 #3CB371 -->
+
 <body>
-    <ul class="topPanel">
-        <li><img src="{{asset('imagesAsset/rose.png')}}"></li>
-        <li class="textWhite logo"><a href="{{route('home')}}">Арт клуб "Алая роза" </a></li>
-        <li class="textWhite header"><a>@yield('title')</a></li>
+    <nav class="navbar navbar-dark" style="background-color: #405b48;"> <!-- Заменен bg-dark на bg-success -->
+        <div class="container-fluid">
+            <!-- Главное меню -->
+            <nav class="navbar navbar-dark" style="background-color: #405b48;"> <!-- Заменен bg-dark на bg-success -->
+                <div class="container-fluid">
+                    <a class="navbar-brand fs-1" href="{{ route('home') }}">
+                        <img src="{{ asset('imagesAsset/rose.png') }}" height="53px"
+                            class="d-inline-block align-text-top">
+                        Арт клуб "Алая роза"
+                    </a>
+                </div>
 
-        @auth('web')
-        <li class="last textWhite">
-            <a>
-                {{Auth::user()->login}}
-            </a>
-            <div class="hidden textWhite" id="pop">
-                <a href="{{route('personalArea')}}">Личный кабинет</a>
-                <hr>
-                <a href="{{route('news')}}">Новости</a>
-                <a href="{{route('posters')}}">Афиша</a>
-                <a href="{{route('home')}}">Галерея</a>
+            </nav>
+            @guest('web')
+                <a class="navbar-brand" href="{{route('login')}}" style="font-size: 28px;">Войти</a>
+            @endguest
+            <!-- End Главное меню -->
+            @auth('web')
+                <!-- Кнопка справа -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- End Кнопка справа -->
+                <!-- Меню справа -->
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                    aria-labelledby="offcanvasDarkNavbarLabel">
+                    <!-- Имя пользователя -->
+                    <div class="offcanvas-header" style="background-color: #405b48;">
+                        <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel">{{ Auth::user()->login }}</h3>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <!-- End Имя пользователя -->
+                    <!-- Пункты меню -->
+                    <div class="offcanvas-body" style="background-color: #405b48;">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <!-- Галерея -->
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('home') }}"
+                                    style="font-size: 20px;">Галерея</a>
+                            </li>
+                            <!-- Новости -->
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('news') }}"
+                                    style="font-size: 20px;">Новости</a>
+                            </li>
+                            <!-- Афиша -->
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('posters') }}"
+                                    style="font-size: 20px;">Афиша</a>
+                            </li>
+                            <!-- Личный кабинет -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" role="button" style="font-size: 20px;"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Личный кабинет
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="{{ route('myPictures') }}">Мои картины</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('addPicture') }}">Добавить картину</a></li>
+                                    <li><a class="dropdown-item" href="#">Обо мне</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('updateInformation') }}">Изменить
+                                            информацию</a></li>
+                                </ul>
+                            </li>
 
-                @if (Auth::user()->is_admin)
-                <a href="{{route('admin')}}">Админ панель</a>
-                @endif
-                <a></a>
-                <a href="{{route('logout')}}">Выйти</a>
-            </div>
-        </li>
+                            <!-- Админ Панель -->
+                            @if (Auth::user()->is_admin)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" role="button" style="font-size: 20px;"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Админ панель
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li><a class="dropdown-item" href="{{ route('addNew') }}">Добавить новость</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('addPoster') }}">Добавить афишу</a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('AdminSearch') }}">Поиск</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('AdminUsers') }}">Редактировать
+                                                пользователей</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('addCategory') }}">Редактирование
+                                                категорий</a></li>
+                                    </ul>
+                                </li>
+                            @endif
 
-        <li class="last circle">
-            <div></div>
-        </li>
-        @endauth
+                            <!-- Отступ -->
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"></a>
+                            </li>
 
-        @guest('web')
-        <li class="last textWhite">
-            <a href="{{ route('login') }}">
-                Войти
-            </a>
-        </li>
-        @endguest
-    </ul>
+                            <!-- Выйти -->
+                            <li class="nav-item">
+                                <a class="nav-link" style="font-size: 20px;" aria-current="page"
+                                    href="{{ route('logout') }}">Выйти</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Пункты меню -->
+                </div>
+                <!-- End Меню справа -->
+            @endauth
+
+        </div>
+    </nav>
 
     @yield('content')
 </body>
+
 </html>

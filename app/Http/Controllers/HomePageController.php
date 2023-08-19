@@ -8,9 +8,11 @@ use App\Models\Posters;
 use App\Models\under_categories;
 use App\Models\under_categories_pictures;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomePageController extends Controller
 {
+    // Показ картин
     public function showPictures(){
         $images = Pictures::all();
         return view('home.pictures.pictures', compact('images'));
@@ -18,9 +20,7 @@ class HomePageController extends Controller
 
     public function showPictures_id($id){
         $image = Pictures::find($id);
-        $user = User::find($image->user_id)->login;
-
-
+        $user = User::find($image->user_id);
 
         if($image){
             return view('home.pictures.picture', compact('image', 'user'));
@@ -28,6 +28,7 @@ class HomePageController extends Controller
         return abort(404);
     }
 
+    // Показ новостей
     public function showNews(){
         $news = News::all();
         return view('home.news.news', compact('news'));
@@ -41,6 +42,7 @@ class HomePageController extends Controller
         return abort(404);
     }
 
+    // Показ афиш
     public function showPosters(){
         $posters = Posters::all();
         return view('home.posters.posters', compact('posters'));
@@ -52,5 +54,13 @@ class HomePageController extends Controller
             return view('home.posters.poster', compact('poster'));
         }
         return abort(404);
+    }
+
+    // Показ пользователей
+    public function userProfile($id){
+        $user = User::find($id);
+
+        return view('home.users', compact('user'));
+
     }
 }

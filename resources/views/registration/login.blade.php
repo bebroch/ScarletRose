@@ -4,12 +4,6 @@
 Вход
 @endsection
 
-@section('resources')
-@vite('resources/css/forSchems/TopPanelStyle.css')
-@endsection
-
-
-
 
 @section('content')
 
@@ -33,7 +27,7 @@
                 </tr>
                 <tr>
                     <td class="registrationFields">
-                        <input class="@error('password') borderRed @enderror" type="text" name="password" placeholder="Пароль">
+                        <input class="@error('password') borderRed @enderror" type="password" name="password" placeholder="Пароль">
                         @error('password')
                             <p>{{$message}}</p>
                         @enderror

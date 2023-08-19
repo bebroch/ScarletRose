@@ -51,13 +51,13 @@ class PersonalAreaController extends Controller
 
         // картинка идёт в ДБ
         $image = Pictures::create([
-            'name' => $request->namePicture,
+            'name'      => $request->namePicture,
             'imagePath' => $path,
-            'about' => $request->aboutPicture,
-            'user_id' => Auth::user()->id,
-            'width' => $data[0],
-            'height' => $data[1],
-            'price' => $request->price,
+            'about'     => $request->aboutPicture,
+            'user_id'   => Auth::user()->id,
+            'width'     => $data[0],
+            'height'    => $data[1],
+            'price'     => $request->price ? $request->price : null,
         ]);
 
         $technique = array();
