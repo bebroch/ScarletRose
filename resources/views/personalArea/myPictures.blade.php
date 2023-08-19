@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="row g-4 p-5">
+<div class="row g-0 p-5">
 
     @foreach ($images as $image)
     <div class="col">
