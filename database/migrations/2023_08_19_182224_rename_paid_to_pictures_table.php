@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        /*
         Schema::table('pictures', function (Blueprint $table) {
-
-            $table->integer('price')->nullable()->after('name');
-            $table->integer('width')->after('about');
-            $table->integer('height')->after('width');
-
+            $table->integer('price')->nullable()->change();
         });
-        */
     }
 
     /**
@@ -27,12 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        /*
         Schema::table('pictures', function (Blueprint $table) {
-            $table->dropColumn('price');
-            $table->dropColumn('width');
-            $table->dropColumn('height');
+            $table->integer('price')->change();
         });
-        */
     }
 };

@@ -5,39 +5,33 @@ namespace App\Http\Controllers;
 use App\Http\Requests\adminAddingCategoryRequest;
 use App\Http\Requests\adminAddingNewsRequest;
 use App\Http\Requests\adminAddingPosterRequest;
-use App\Http\Requests\adminAddingRequest;
 use App\Http\Requests\adminAddingUnderCategoryRequest;
 use App\Models\Categories;
 use App\Models\News;
 use App\Models\Pictures;
 use App\Models\Posters;
 use App\Models\under_categories;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     // Админ панель
-    public function index(){
-        if(Auth::user()->is_admin){
-            return view('adminPanel.admin');
-        }
-        return redirect('home.home');
+    public function index()
+    {
+
+        return view('adminPanel.admin');
     }
 
     // Новости
-    public function showAddNew(){
-        if(Auth::user()->is_admin){
-            return view('adminPanel.addNew');
-        }
-        return redirect('home.home');
+    public function showAddNew()
+    {
+
+        return view('adminPanel.addNew');
     }
 
     public function addingNew(adminAddingNewsRequest $request){
-        if(!Auth::user()->is_admin){
-            return redirect('home.home');
-        }
 
         News::create([
             'name' => $request->title,
@@ -49,16 +43,11 @@ class AdminController extends Controller
 
     // Афиша
     public function showAddPoster(){
-        if(Auth::user()->is_admin){
-            return view('adminPanel.addPoster');
-        }
-        return redirect('home.home');
+
+        return view('adminPanel.addPoster');
     }
 
     public function addingPoster(adminAddingPosterRequest $request){
-        if(!Auth::user()->is_admin){
-            return redirect('home.home');
-        }
 
         Posters::create([
             'name' => $request->title,
@@ -72,17 +61,12 @@ class AdminController extends Controller
 
     // Категории
     public function showAddCategory(){
-        if(Auth::user()->is_admin){
-            $categories = Categories::all();
-            return view('adminPanel.addCategory', compact('categories'));
-        }
-        return redirect('home.home');
+
+        $categories = Categories::all();
+        return view('adminPanel.addCategory', compact('categories'));
     }
 
     public function addingCategory(adminAddingCategoryRequest $request){
-        if(!Auth::user()->is_admin){
-            return redirect('home.home');
-        }
 
         Categories::create([
             'name' => $request->nameCategory,
@@ -92,9 +76,6 @@ class AdminController extends Controller
     }
 
     public function addingUnderCategory(adminAddingUnderCategoryRequest $request){
-        if(!Auth::user()->is_admin){
-            return redirect('home.home');
-        }
 
         under_categories::create([
             'name' => $request->nameUnderCategory,
@@ -105,9 +86,6 @@ class AdminController extends Controller
     }
 
     public function deleteCategory(Request $request){
-        if(!Auth::user()->is_admin){
-            return redirect('home.home');
-        }
 
         Categories::where('name','=',$request->category)->delete();
 
@@ -115,9 +93,6 @@ class AdminController extends Controller
     }
 
     public function deleteUnderCategory(Request $request){
-        if(!Auth::user()->is_admin){
-            return redirect('home.home');
-        }
 
         under_categories::where('name','=', $request->under_category)->delete();
 
@@ -126,22 +101,30 @@ class AdminController extends Controller
 
     // Поиск
     public function showSearch(){
-        if(Auth::user()->is_admin){
-            return view('adminPanel.AdminSearch');
-        }
-        return redirect('home.home');
+
+        return view('adminPanel.AdminSearch');
     }
 
     // Пользователи
     public function showUsers(){
-        if(Auth::user()->is_admin){
-            return view('adminPanel.AdminUser');
-        }
-        return redirect('home.home');
+
+        $users = User::all();
+        return view('adminPanel.users.AdminUsers', compact('users'));
+    }
+
+    public function showUser($id){
+        $user = User::find($id);
+        return view('adminPanel.users.AdminUser', compact('user'));
+    }
+
+    public function deleteUser(Request $request){
+        User::find($request->id)->delete();
+        return redirect(route('AdminUsers'));
     }
 
     // Удаление картины
     public function deletePicture(Request $request){
+
         Pictures::find($request->image)->delete();
         return redirect(route('home'));
     }

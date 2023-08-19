@@ -1,12 +1,16 @@
 @extends('schems.topPanelSchema')
 
+@section('title')
+{{$image->name}}
+@endsection
+
 @section('content')
 
 <div style="margin: 40px">
     <img style="float: left" width="400" src="{{Storage::url("$image->imagePath")}}">
     <div>
         <h1>{{$image->name}}</h1>
-        <h3>{{$user}}</h3>
+        <h3><a href="{{ route("userProfile", ['id' => $user->id], false) }}">{{$user->login}}</a></h3>
         @if (DB::table('under_categories_pictures')->where('picture_id', '=', $image->id)->get()->first())
             <h3>Категории:
         @endif
@@ -18,12 +22,14 @@
         @if ($image->price)
             <h4>Стоимость: {{$image->price}}&#8381;</h4>
         @endif
-        @if (Auth::user()->is_admin)
-        <form action="{{route('deletePicture')}}">
-            <input type="text" hidden value="{{$image->id}}" name="image">
-            <input type="submit" value="Удалить картину">
-        </form>
-        @endif
+        @auth('web')
+            @if (Auth::user()->is_admin)
+                <form action="{{route('deletePicture')}}">
+                    <input type="text" hidden value="{{$image->id}}" name="image">
+                    <input type="submit" value="Удалить картину">
+                </form>
+            @endif
+        @endauth
     </div>
 </div>
 

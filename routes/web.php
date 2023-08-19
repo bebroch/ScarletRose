@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CreateCardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PersonalAreaController;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,22 +24,27 @@ Route::middleware(['web'])->group(function(){
     Route::post('/PersonalArea/UpdateMyInformation/UpdateMyInformation_process', [PersonalAreaController::class, 'updateMyInformationForm_process'])->name('updateInformation_process');
 
     // Админ панель
-    Route::get('/AdminPanel', [AdminController::class, 'index'])->name('admin');
-    Route::get('/AdminPanel/AddNew', [AdminController::class, 'showAddNew'])->name('addNew');
-    Route::get('/AdminPanel/AddNew_process', [AdminController::class, 'addingNew'])->name('addingNew');
+    Route::group(['middleware' => ['auth', 'isadmin']], function(){
 
-    Route::get('/AdminPanel/AddPoster', [AdminController::class, 'showAddPoster'])->name('addPoster');
-    Route::get('/AdminPanel/AddPoster_process', [AdminController::class, 'addingPoster'])->name('addingPoster');
+        Route::get('/AdminPanel', [AdminController::class, 'index'])->name('admin');
+        Route::get('/AdminPanel/AddNew', [AdminController::class, 'showAddNew'])->name('addNew');
+        Route::get('/AdminPanel/AddNew_process', [AdminController::class, 'addingNew'])->name('addingNew');
 
-    Route::get('/AdminPanel/AddCategory', [AdminController::class, 'showAddCategory'])->name('addCategory');
-    Route::get('/AdminPanel/AddUnderCategory_process', [AdminController::class, 'addingUnderCategory'])->name('addingUnderCategory');
-    Route::get('/AdminPanel/AddCategory_process', [AdminController::class, 'addingCategory'])->name('addingCategory');
-    Route::get('/AdminPanel/DeleteCategory_process', [AdminController::class, 'deleteCategory'])->name('deleteCategory');
-    Route::get('/AdminPanel/DeleteUnderCategory_process', [AdminController::class, 'deleteUnderCategory'])->name('deleteUnderCategory');
-    Route::get('/AdminPanel/DeletePicture_process', [AdminController::class, 'deletePicture'])->name('deletePicture');
+        Route::get('/AdminPanel/AddPoster', [AdminController::class, 'showAddPoster'])->name('addPoster');
+        Route::get('/AdminPanel/AddPoster_process', [AdminController::class, 'addingPoster'])->name('addingPoster');
 
-    Route::get('/AdminPanel/Search', [AdminController::class, 'showSearch'])->name('AdminSearch');
-    Route::get('/AdminPanel/Users', [AdminController::class, 'showUsers'])->name('AdminUsers');
+        Route::get('/AdminPanel/AddCategory', [AdminController::class, 'showAddCategory'])->name('addCategory');
+        Route::get('/AdminPanel/AddUnderCategory_process', [AdminController::class, 'addingUnderCategory'])->name('addingUnderCategory');
+        Route::get('/AdminPanel/AddCategory_process', [AdminController::class, 'addingCategory'])->name('addingCategory');
+        Route::get('/AdminPanel/DeleteCategory_process', [AdminController::class, 'deleteCategory'])->name('deleteCategory');
+        Route::get('/AdminPanel/DeleteUnderCategory_process', [AdminController::class, 'deleteUnderCategory'])->name('deleteUnderCategory');
+        Route::get('/AdminPanel/DeletePicture_process', [AdminController::class, 'deletePicture'])->name('deletePicture');
+
+        Route::get('/AdminPanel/Search', [AdminController::class, 'showSearch'])->name('AdminSearch');
+        Route::get('/AdminPanel/Users', [AdminController::class, 'showUsers'])->name('AdminUsers');
+        Route::get('/AdminPanel/Users/{id}', [AdminController::class, 'showUser'])->name('AdminUser');
+        Route::get('/AdminPanel/Users/{id}/deleteUser_process', [AdminController::class, 'deleteUser'])->name('deleteUser');
+    });
 });
 
 // Основная страница, Новости и Афиша
@@ -48,6 +54,7 @@ Route::get('/news', [HomePageController::class, 'showNews'])->name('news');
 Route::get('/news/{id}', [HomePageController::class, 'showNews_id']);
 Route::get('/posters', [HomePageController::class, 'showPosters'])->name('posters');
 Route::get('/posters/{id}', [HomePageController::class, 'showPosters_id']);
+Route::get('/user/{id}', [HomePageController::class, 'userProfile'])->name('userProfile');
 
 // Регистрация
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
