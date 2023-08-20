@@ -1,5 +1,3 @@
-@import 'forSchems/TopPanelStyle.css';
-@import 'home/homeStyle.css';
 @import 'registration/registrationStyle.css';
 @import 'personalArea/personalAreaStyle.css';
 @import 'personalArea/createCardStyle.css';
@@ -14,3 +12,5 @@ body{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
 }
+
+

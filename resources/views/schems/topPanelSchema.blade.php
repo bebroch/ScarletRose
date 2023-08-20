@@ -67,6 +67,11 @@
                                 <a class="nav-link" aria-current="page" href="{{ route('posters') }}"
                                     style="font-size: 20px;">Афиша</a>
                             </li>
+                            <!-- Выставки -->
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('exhibitions') }}"
+                                    style="font-size: 20px;">Выставка</a>
+                            </li>
                             <!-- Личный кабинет -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" role="button" style="font-size: 20px;"
@@ -110,10 +115,10 @@
 
                             <!-- Отступ -->
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"></a>
+                                <a class="nav-link" aria-current="page"></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"></a>
+                                <a class="nav-link" aria-current="page"></a>
                             </li>
 
                             <!-- Выйти -->
