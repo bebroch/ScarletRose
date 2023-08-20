@@ -5,14 +5,13 @@
 @endsection
 
 @section('content')
-    <div class="row g-0 p-5">
-
-        @foreach ($images as $image)
-            <div class="col">
-                <div class="card" style="width: 27em">
-
-                    <img src="{{ Storage::url("$image->imagePath") }}" class="card-img-top">
-                    <div class="card-body">
+    <div class="container-fluid">
+            <div class="row row-cols-1 row-cols-md-3 m-2 g-5">
+                @foreach ($images as $image)
+                <div class="col">
+                    <div class="card">
+                      <img src="{{ Storage::url("$image->imagePath") }}" class="card-img-top">
+                      <div class="card-body">
                         <a href="{{ route('home') }}/{{ $image->id }}">
                             <h3 class="card-title">{{ $image->name }}</h3>
                             <p class="card-text">{{ Str::limit($image->about, 100, '...') }}</p>
@@ -28,12 +27,11 @@
                                     Удалить картину
                                 </button>
                             @endif
-                        @endauth
+                        @endauth</div>
                     </div>
-
-                </div>
-            </div>
+                  </div>
         @endforeach
+            </div>
     </div>
 
 

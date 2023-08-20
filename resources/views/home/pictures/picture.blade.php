@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <div style="margin: 40px">
         <img style="float: left" width="400" src="{{ Storage::url("$image->imagePath") }}">
         <div>
@@ -33,7 +34,8 @@
     </div>
 
 
-
+    @auth('web')
+    @if (Auth::user()->is_admin)
     <!-- Модальное окно -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -56,4 +58,6 @@
             </div>
         </div>
     </div>
+    @endif
+    @endauth
 @endsection

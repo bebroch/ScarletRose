@@ -51,6 +51,10 @@ Route::middleware(['web'])->group(function(){
         Route::get('/AdminPanel/Users', [AdminController::class, 'showUsers'])->name('AdminUsers');
         Route::get('/AdminPanel/Users/{id}', [AdminController::class, 'showUser'])->name('AdminUser');
         Route::get('/AdminPanel/Users/{id}/deleteUser_process', [AdminController::class, 'deleteUser'])->name('deleteUser');
+
+        Route::get('/linkstorage', function () {
+            Artisan::call('storage:link');
+        });
     });
 });
 
@@ -77,3 +81,8 @@ Route::post('/register_proccess', [AuthController::class, 'register'])->name('re
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
+
+// Перенаправление
+Route::post('/', function(){
+    return route('home');
+});
