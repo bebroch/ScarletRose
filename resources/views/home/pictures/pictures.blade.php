@@ -6,29 +6,29 @@
 
 @section('content')
     <div class="container-fluid">
-            <div class="row row-cols-1 row-cols-md-3 mt-1 g-3">
+        <div class="row row-cols-1 row-cols-md-3 mt-1 g-3">
             @foreach ($images as $image)
                 <div class="col">
                     <div class="card">
-                        <img src="{{ Storage::url("$image->imagePath") }}" class="card-img-top">
-                        <div class="card-body">
-                            <a href="{{ route('home') }}/{{ $image->id }}">
+                        <a class="nav-link" href="{{ route('home') }}/{{ $image->id }}">
+                            <img src="{{ Storage::url("$image->imagePath") }}" class="card-img-top">
+                            <div class="card-body">
                                 <h3 class="card-title">{{ $image->name }}</h3>
                                 <p class="card-text">{{ Str::limit($image->about, 100, '...') }}</p>
                                 @if ($image->price)
                                     <p>Стоимость: {{ $image->price }}&#8381;</p>
                                 @endif
-                            </a>
-                            @auth('web')
-                                @if (Auth::user()->is_admin)
-                                    <!-- Кнопка-триггер модального окна -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">
-                                        Удалить картину
-                                    </button>
-                                @endif
-                            @endauth
-                        </div>
+                            </div>
+                        </a>
+                        @auth('web')
+                            @if (Auth::user()->is_admin)
+                                <!-- Кнопка-триггер модального окна -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    Удалить картину
+                                </button>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             @endforeach

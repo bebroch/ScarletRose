@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PersonalAreaController extends Controller
 {
-    // Админ панель
+    // Юзер панель
     public function showPersonalArea(){
         return view('personalArea.personalArea');
     }
@@ -60,8 +60,6 @@ class PersonalAreaController extends Controller
             'price'     => $request->price ? $request->price : null,
         ]);
 
-        // 121 212 121 212
-
         $technique = array();
 
         foreach ($request->collect() as $key => $value) {
@@ -88,6 +86,11 @@ class PersonalAreaController extends Controller
         }
 
         return redirect(route('home'));
+    }
+
+    public function deletePicture($id){
+        Pictures::find($id)->delete();
+        return redirect(route('myPictures'));
     }
 
     // Изменить информацию

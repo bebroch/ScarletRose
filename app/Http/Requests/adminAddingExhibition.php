@@ -23,7 +23,8 @@ class adminAddingExhibition extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'end_at' => 'required',
+            'start_at' => 'required|before_or_equal:end_at',
+            'end_at' => 'required|after_or_equal:start_at',
             'about' => 'required',
         ];
     }

@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row row-cols-1 row-cols-md-3 m-2 g-5">
+        <div class="row row-cols-1 row-cols-md-3 mt-1 g-3">
             @foreach ($images as $image)
                 <div class="col">
                     <div class="card">
@@ -48,10 +48,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <form action="{{ route('deletePicture') }}">
-                        <input type="text" hidden value="{{ $image->id }}" name="image">
-                        <input class="btn btn-danger" type="submit" value="Удалить картину">
-                    </form>
+                    <a class="btn btn-danger" href="{{ route('deleteMyPicture', ['id' => $image->id]) }}">Удалить</a>
                 </div>
             </div>
         </div>

@@ -27,7 +27,7 @@
                             <div class="container-fluid">
                                 <div class="col">
                                     <div class="card">
-                                        <a href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
+                                        <a class="nav-link" href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
                                             <img src="..." class="card-img-top">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $exhibition->title }}</h5>
@@ -42,7 +42,8 @@
                                             @endif
                                         @endauth
                                         <div class="card-footer bg-transparent border-success">
-                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }} -
+                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }}
+                                            -
                                             {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
                                         </div>
                                     </div>
@@ -59,7 +60,7 @@
                             <div class="container-fluid">
                                 <div class="col">
                                     <div class="card">
-                                        <a href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
+                                        <a class="nav-link" href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
                                             <img src="..." class="card-img-top">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $exhibition->title }}</h5>
@@ -74,7 +75,8 @@
                                             @endif
                                         @endauth
                                         <div class="card-footer bg-transparent border-success">
-                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }} -
+                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }}
+                                            -
                                             {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
                                         </div>
                                     </div>
@@ -92,7 +94,7 @@
                             <div class="container-fluid">
                                 <div class="col">
                                     <div class="card">
-                                        <a href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
+                                        <a class="nav-link" href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
                                             <img src="..." class="card-img-top">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $exhibition->title }}</h5>
@@ -107,7 +109,8 @@
                                             @endif
                                         @endauth
                                         <div class="card-footer bg-transparent border-success">
-                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }} -
+                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }}
+                                            -
                                             {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
                                         </div>
                                     </div>

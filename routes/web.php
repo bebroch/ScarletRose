@@ -13,7 +13,6 @@ Route::middleware(['web'])->group(function(){
 
     // Создание и удаления картины
     Route::get('/CreateCard', [CreateCardController::class, 'create'])->name('createCard');
-    Route::get('/DeliteCard', [CreateCardController::class, 'delite'])->name('deliteCard');
 
     // Личный кабинет
     Route::get('/PersonalArea', [PersonalAreaController::class, 'showPersonalArea'])->name('personalArea');
@@ -22,6 +21,7 @@ Route::middleware(['web'])->group(function(){
     // Добавить картину
     Route::get('/PersonalArea/AddMyPicture', [PersonalAreaController::class, 'showAddMyPictureForm'])->name('addPicture');
     Route::post('/PersonalArea/AddMyPicture/adderPicture_process', [PersonalAreaController::class, 'adderPicture'])->name('adderPicture');
+    Route::get('/PersonalArea/AddMyPicture/{id}/deletePicture_process', [PersonalAreaController::class, 'deletePicture'])->name('deleteMyPicture');
     // Обновить информацию
     Route::get('/PersonalArea/UpdateMyInformation', [PersonalAreaController::class, 'showUpdateMyInformationForm'])->name('updateInformation');
     Route::post('/PersonalArea/UpdateMyInformation/UpdateMyInformation_process', [PersonalAreaController::class, 'updateMyInformationForm_process'])->name('updateInformation_process');
@@ -43,6 +43,8 @@ Route::middleware(['web'])->group(function(){
         Route::get('/AdminPanel/AddCategory_process', [AdminController::class, 'addingCategory'])->name('addingCategory');
         Route::get('/AdminPanel/DeleteCategory_process', [AdminController::class, 'deleteCategory'])->name('deleteCategory');
         Route::get('/AdminPanel/DeleteUnderCategory_process', [AdminController::class, 'deleteUnderCategory'])->name('deleteUnderCategory');
+
+        // Удалить картину
         Route::get('/AdminPanel/DeletePicture_process', [AdminController::class, 'deletePicture'])->name('deletePicture');
 
         // Добавить Выставку
@@ -54,11 +56,13 @@ Route::middleware(['web'])->group(function(){
 
         // Страница Поиска
         Route::get('/AdminPanel/Search', [AdminController::class, 'showSearch'])->name('AdminSearch');
+
         // Пользователи
         Route::get('/AdminPanel/Users', [AdminController::class, 'showUsers'])->name('AdminUsers');
         Route::get('/AdminPanel/Users/{id}', [AdminController::class, 'showUser'])->name('AdminUser');
         Route::get('/AdminPanel/Users/{id}/deleteUser_process', [AdminController::class, 'deleteUser'])->name('deleteUser');
 
+        // Установка Storage:link
         Route::get('/linkstorage', function () {
             Artisan::call('storage:link');
         });
