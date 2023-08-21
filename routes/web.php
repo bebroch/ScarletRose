@@ -45,6 +45,10 @@ Route::middleware(['web'])->group(function(){
         Route::get('/AdminPanel/DeleteUnderCategory_process', [AdminController::class, 'deleteUnderCategory'])->name('deleteUnderCategory');
         Route::get('/AdminPanel/DeletePicture_process', [AdminController::class, 'deletePicture'])->name('deletePicture');
 
+        // Добавить Выставку
+        Route::get('/AdminPanel/AddExhibition', [AdminController::class, 'showAddExhibition'])->name('addExhibition');
+        Route::get('/AdminPanel/AddingExhibition', [AdminController::class, 'addingExhibition'])->name('addingExhibition');
+
         // Страница Поиска
         Route::get('/AdminPanel/Search', [AdminController::class, 'showSearch'])->name('AdminSearch');
         // Пользователи

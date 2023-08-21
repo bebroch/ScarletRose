@@ -184,9 +184,9 @@
         });
 
         document.getElementById("passive").addEventListener("click", function() {
-            document.getElementById("firstBlock").style.display = "block";
+            document.getElementById("firstBlock").style.display = "none";
             document.getElementById("secondBlock").style.display = "none";
-            document.getElementById("thirdBlock").style.display = "none";
+            document.getElementById("thirdBlock").style.display = "block";
         });
     </script>
 

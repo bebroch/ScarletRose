@@ -73,6 +73,7 @@ class HomePageController extends Controller
             ['end_at', '<', now()]
         ])->get();
 
+
         return view('home.exhibitions.exhibitions', compact('exhibitionsFuture', 'exhibitionsActive', 'exhibitionsPassive'));
     }
 

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\adminAddingCategoryRequest;
+use App\Http\Requests\adminAddingExhibition;
 use App\Http\Requests\adminAddingNewsRequest;
 use App\Http\Requests\adminAddingPosterRequest;
 use App\Http\Requests\adminAddingUnderCategoryRequest;
 use App\Models\Categories;
+use App\Models\Exhibitions;
 use App\Models\News;
 use App\Models\Pictures;
 use App\Models\Posters;
@@ -97,6 +99,22 @@ class AdminController extends Controller
         under_categories::where('name','=', $request->under_category)->delete();
 
         return redirect(route('addCategory'));
+    }
+
+    // Выставки
+    public function showAddExhibition(){
+        return view('adminPanel.addExhibition');
+    }
+
+    public function addingExhibition(adminAddingExhibition $request){
+        Exhibitions::create([
+            'title' => $request->title,
+            'start_at' => $request->start_at,
+            'end_at' => $request->end_at,
+            'about' => $request->about,
+        ]);
+
+        return redirect(route('exhibitions'));
     }
 
     // Поиск

@@ -98,8 +98,14 @@
                                         Админ панель
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
-                                        <li><a class="dropdown-item" href="{{ route('addNew') }}">Добавить новость</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('addPoster') }}">Добавить афишу</a>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('addNew') }}">Добавить новость</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('addPoster') }}">Добавить афишу</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('addExhibition') }}">Добавить выставку</a>
                                         </li>
                                         <li>
                                             <hr class="dropdown-divider">
