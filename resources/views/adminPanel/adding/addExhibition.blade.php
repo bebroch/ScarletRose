@@ -1,7 +1,7 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-Добавить Новость
+Добавить Выставку
 @endsection
 
 @section('content')

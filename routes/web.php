@@ -47,7 +47,10 @@ Route::middleware(['web'])->group(function(){
 
         // Добавить Выставку
         Route::get('/AdminPanel/AddExhibition', [AdminController::class, 'showAddExhibition'])->name('addExhibition');
-        Route::get('/AdminPanel/AddingExhibition', [AdminController::class, 'addingExhibition'])->name('addingExhibition');
+        Route::get('/AdminPanel/AddingExhibition_process', [AdminController::class, 'addingExhibition'])->name('addingExhibition');
+        Route::get('/AdminPanel/EditExhibition/{id}', [AdminController::class, 'showEditExhibition'])->name('editExhibition');
+        Route::get('/AdminPanel/editExhibition_process', [AdminController::class, 'showEditExhibition_process'])->name('editExhibition_process');
+        Route::get('/AdminPanel/deleteExhibition_process/{id}', [AdminController::class, 'deletingExhibition'])->name('deletingExhibition');
 
         // Страница Поиска
         Route::get('/AdminPanel/Search', [AdminController::class, 'showSearch'])->name('AdminSearch');
@@ -73,7 +76,7 @@ Route::get('/posters', [HomePageController::class, 'showPosters'])->name('poster
 Route::get('/posters/{id}', [HomePageController::class, 'showPosters_id']);
 // Выставки
 Route::get('/exhibitions', [HomePageController::class, 'showExhibitions'])->name('exhibitions');
-Route::get('/exhibitions/{id}', [HomePageController::class, 'showExhibition_id']);
+Route::get('/exhibitions/{id}', [HomePageController::class, 'showExhibition_id'])->name('exhibition');
 // Личная страница пользователя
 Route::get('/user/{id}', [HomePageController::class, 'userProfile'])->name('userProfile');
 

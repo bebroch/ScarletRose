@@ -41,7 +41,7 @@ class PersonalAreaController extends Controller
             'uploadPicture' => 'required|image:jpg, jpeg, png',
             'namePicture' => 'required|string',
             'aboutPicture' => 'required|string',
-            'price' => 'integer',
+            'price' => 'integer|gt:0|lt:4294967295',
         ]);
 
 
@@ -59,6 +59,8 @@ class PersonalAreaController extends Controller
             'height'    => $data[1],
             'price'     => $request->price ? $request->price : null,
         ]);
+
+        // 121 212 121 212
 
         $technique = array();
 

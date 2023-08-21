@@ -22,7 +22,7 @@
                             </a>
                             @if (!$user->is_admin)
                                 <!-- Кнопка-триггер модального окна -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop">
                                     Удалить пользователя
                                 </button>
@@ -51,7 +51,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                     <form action="{{ route('deleteUser', ['id' => $user->id]) }}">
-                        <input class="btn btn-primary" type="submit" name="userName"
+                        <input class="btn btn-danger" type="submit" name="userName"
                             value="Удалить пользователя - {{ $user->login }}">
                     </form>
                 </div>

@@ -30,7 +30,7 @@ class AdminController extends Controller
     public function showAddNew()
     {
 
-        return view('adminPanel.addNew');
+        return view('adminPanel.adding.addNew');
     }
 
     public function addingNew(adminAddingNewsRequest $request){
@@ -46,7 +46,7 @@ class AdminController extends Controller
     // Афиша
     public function showAddPoster(){
 
-        return view('adminPanel.addPoster');
+        return view('adminPanel.adding.addPoster');
     }
 
     public function addingPoster(adminAddingPosterRequest $request){
@@ -65,7 +65,7 @@ class AdminController extends Controller
     public function showAddCategory(){
 
         $categories = Categories::all();
-        return view('adminPanel.addCategory', compact('categories'));
+        return view('adminPanel.adding.addCategory', compact('categories'));
     }
 
     public function addingCategory(adminAddingCategoryRequest $request){
@@ -103,7 +103,7 @@ class AdminController extends Controller
 
     // Выставки
     public function showAddExhibition(){
-        return view('adminPanel.addExhibition');
+        return view('adminPanel.adding.addExhibition');
     }
 
     public function addingExhibition(adminAddingExhibition $request){
@@ -114,6 +114,25 @@ class AdminController extends Controller
             'about' => $request->about,
         ]);
 
+        return redirect(route('exhibitions'));
+    }
+
+    public function showEditExhibition($id){
+        $exhibition = Exhibitions::find($id);
+        return view('adminPanel.editExhibition', compact('exhibition'));
+    }
+    public function showEditExhibition_process(adminAddingExhibition $request){
+        Exhibitions::find($request->id)->update([
+            'title' => $request->title,
+            'start_at' => $request->start_at,
+            'end_at' => $request->end_at,
+            'about' => $request->about,
+        ]);
+        return redirect(route('exhibitions'));
+    }
+
+    public function deletingExhibition($id){
+        Exhibitions::find($id)->delete();
         return redirect(route('exhibitions'));
     }
 

@@ -1,7 +1,7 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-Выставка
+    Выставка
 @endsection
 
 @section('content')
@@ -23,14 +23,27 @@
             <div class="card-group p-4" style="display: none" id="firstBlock">
                 <div class="container-fluid">
                     <div class="row row-cols-3">
-                        @foreach ($exhibitionsFuture as $exhibitionF)
+                        @foreach ($exhibitionsFuture as $exhibition)
                             <div class="container-fluid">
                                 <div class="col">
                                     <div class="card">
-                                        <img src="..." class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $exhibitionF->title }}</h5>
-                                            <p class="card-text">{{ $exhibitionF->about }}</p>
+                                        <a href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
+                                            <img src="..." class="card-img-top">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $exhibition->title }}</h5>
+                                                <p class="card-text">{{ $exhibition->about }}</p>
+                                            </div>
+                                        </a>
+                                        @auth('web')
+                                            @if (Auth::user()->is_admin)
+                                                <a class="btn btn-warning"
+                                                    href="{{ route('editExhibition', ['id' => $exhibition->id]) }}">Редактировать
+                                                    запись</a>
+                                            @endif
+                                        @endauth
+                                        <div class="card-footer bg-transparent border-success">
+                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }} -
+                                            {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
                                         </div>
                                     </div>
                                 </div>
@@ -42,14 +55,27 @@
             <div class="card-group p-4" id="secondBlock">
                 <div class="container-fluid">
                     <div class="row row-cols-3">
-                        @foreach ($exhibitionsActive as $exhibitionA)
+                        @foreach ($exhibitionsActive as $exhibition)
                             <div class="container-fluid">
                                 <div class="col">
                                     <div class="card">
-                                        <img src="..." class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{$exhibitionA->title}}</h5>
-                                            <p class="card-text">{{$exhibitionA->about}}</p>
+                                        <a href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
+                                            <img src="..." class="card-img-top">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $exhibition->title }}</h5>
+                                                <p class="card-text">{{ $exhibition->about }}</p>
+                                            </div>
+                                        </a>
+                                        @auth('web')
+                                            @if (Auth::user()->is_admin)
+                                                <a class="btn btn-warning"
+                                                    href="{{ route('editExhibition', ['id' => $exhibition->id]) }}">Редактировать
+                                                    запись</a>
+                                            @endif
+                                        @endauth
+                                        <div class="card-footer bg-transparent border-success">
+                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }} -
+                                            {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
                                         </div>
                                     </div>
                                 </div>
@@ -62,14 +88,27 @@
             <div class="card-group p-4" style="display: none" id="thirdBlock">
                 <div class="container-fluid">
                     <div class="row row-cols-3">
-                        @foreach ($exhibitionsPassive as $exhibitionP)
+                        @foreach ($exhibitionsPassive as $exhibition)
                             <div class="container-fluid">
                                 <div class="col">
                                     <div class="card">
-                                        <img src="..." class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $exhibitionP->title }}</h5>
-                                            <p class="card-text">{{ $exhibitionP->about }}</p>
+                                        <a href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
+                                            <img src="..." class="card-img-top">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $exhibition->title }}</h5>
+                                                <p class="card-text">{{ $exhibition->about }}</p>
+                                            </div>
+                                        </a>
+                                        @auth('web')
+                                            @if (Auth::user()->is_admin)
+                                                <a class="btn btn-warning"
+                                                    href="{{ route('editExhibition', ['id' => $exhibition->id]) }}">Редактировать
+                                                    запись</a>
+                                            @endif
+                                        @endauth
+                                        <div class="card-footer bg-transparent border-success">
+                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }} -
+                                            {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
                                         </div>
                                     </div>
                                 </div>

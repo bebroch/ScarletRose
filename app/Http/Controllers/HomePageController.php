@@ -78,20 +78,10 @@ class HomePageController extends Controller
     }
 
     public function showExhibition_id($id){
-       /*
-        $exh = Exhibitions::where([
-            'start_at', '<', now()
 
-        ]);  */
+        $exhibition = Exhibitions::find($id);
 
-        $users = User::where([
-            ['id', '<', 6],
-            ['id', '>', 2],
-        ])->get();
-
-        //dd($exhibitions1->first()->id);
-
-        return view('home.exhibitions.exhibition', compact('users'));
+        return view('home.exhibitions.exhibition', compact('exhibition'));
     }
 
     // Показ пользователей
