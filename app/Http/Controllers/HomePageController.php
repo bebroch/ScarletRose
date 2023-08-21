@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exhibitions;
 use App\Models\News;
 use App\Models\Pictures;
 use App\Models\Posters;
@@ -54,6 +55,33 @@ class HomePageController extends Controller
             return view('home.posters.poster', compact('poster'));
         }
         return abort(404);
+    }
+
+    // Выставки
+    public function showExhibitions(){
+
+        $exhibitionsFuture = Exhibitions::where([
+            ['start_at', '>', now()]
+        ])->get();
+
+        $exhibitionsActive = Exhibitions::where([
+            ['start_at', '<', now()],
+            ['end_at', '>', now()]
+        ])->get();
+
+        $exhibitionsPassive = Exhibitions::where([
+            ['end_at', '<', now()]
+        ])->get();
+
+
+        return view('home.exhibitions.exhibitions', compact('exhibitionsFuture', 'exhibitionsActive', 'exhibitionsPassive'));
+    }
+
+    public function showExhibition_id($id){
+
+        $exhibition = Exhibitions::find($id);
+
+        return view('home.exhibitions.exhibition', compact('exhibition'));
     }
 
     // Показ пользователей

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\adminAddingCategoryRequest;
+use App\Http\Requests\adminAddingExhibition;
 use App\Http\Requests\adminAddingNewsRequest;
 use App\Http\Requests\adminAddingPosterRequest;
 use App\Http\Requests\adminAddingUnderCategoryRequest;
 use App\Models\Categories;
+use App\Models\Exhibitions;
 use App\Models\News;
 use App\Models\Pictures;
 use App\Models\Posters;
@@ -28,7 +30,7 @@ class AdminController extends Controller
     public function showAddNew()
     {
 
-        return view('adminPanel.addNew');
+        return view('adminPanel.adding.addNew');
     }
 
     public function addingNew(adminAddingNewsRequest $request){
@@ -44,7 +46,7 @@ class AdminController extends Controller
     // Афиша
     public function showAddPoster(){
 
-        return view('adminPanel.addPoster');
+        return view('adminPanel.adding.addPoster');
     }
 
     public function addingPoster(adminAddingPosterRequest $request){
@@ -63,7 +65,7 @@ class AdminController extends Controller
     public function showAddCategory(){
 
         $categories = Categories::all();
-        return view('adminPanel.addCategory', compact('categories'));
+        return view('adminPanel.adding.addCategory', compact('categories'));
     }
 
     public function addingCategory(adminAddingCategoryRequest $request){
@@ -97,6 +99,41 @@ class AdminController extends Controller
         under_categories::where('name','=', $request->under_category)->delete();
 
         return redirect(route('addCategory'));
+    }
+
+    // Выставки
+    public function showAddExhibition(){
+        return view('adminPanel.adding.addExhibition');
+    }
+
+    public function addingExhibition(adminAddingExhibition $request){
+        Exhibitions::create([
+            'title' => $request->title,
+            'start_at' => $request->start_at,
+            'end_at' => $request->end_at,
+            'about' => $request->about,
+        ]);
+
+        return redirect(route('exhibitions'));
+    }
+
+    public function showEditExhibition($id){
+        $exhibition = Exhibitions::find($id);
+        return view('adminPanel.editExhibition', compact('exhibition'));
+    }
+    public function showEditExhibition_process(adminAddingExhibition $request){
+        Exhibitions::find($request->id)->update([
+            'title' => $request->title,
+            'start_at' => $request->start_at,
+            'end_at' => $request->end_at,
+            'about' => $request->about,
+        ]);
+        return redirect(route('exhibitions'));
+    }
+
+    public function deletingExhibition($id){
+        Exhibitions::find($id)->delete();
+        return redirect(route('exhibitions'));
     }
 
     // Поиск
