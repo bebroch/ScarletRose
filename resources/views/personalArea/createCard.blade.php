@@ -40,13 +40,39 @@
                             </button>
                         </div>
 
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>Высота<br>
+                                        <input name="height" style="width: 80%">см</label>
+                                    @error('height')
+                                        <a>{{ $message }}</a>
+                                    @enderror
+                                </td>
+                                <td>
+                                    <label>Ширина<br>
+                                        <input name="width" style="width: 80%">см</label>
+                                    @error('width')
+                                        <a>{{ $message }}</a>
+                                    @enderror
+                                </td>
+                            </tr>
+
+                        </table>
+
+
                         <label>О картине</label><br>
                         <textarea name="aboutPicture" style="width: 100%; height:100px; max-height: 300px" cols="1" rows="10"></textarea>
                         @error('aboutPicture')
                             <a>{{ $message }}</a>
                         @enderror
 
+
                         @error('price')
+                            <br><a>{{ $message }}</a>
+                        @enderror
+
+                        @error('exhibitions')
                             <br><a>{{ $message }}</a>
                         @enderror
 
@@ -80,13 +106,12 @@
                                 <div>
                                     <div>
                                         @if (!DB::table('under_categories')->where('category_id', '=', $category->id)->get()->first())
-                                            <label style="font-size: 18px; font-weight:bold"
-                                                for="{{ $category->id }} {{ $category->name }}">{{ $category->name }}</label>
-                                            <input type="checkbox"
-                                                name="technique, {{ $category->id }},{{ $category->id }}"><br>
+                                            <label style="font-size: 18px; font-weight:bold">
+                                                <input type="checkbox" name="categories[]" value="{{ $category->id }}">
+                                                {{ $category->name }}</label><br>
                                         @else
-                                            <label style="font-size: 18px; font-weight:bold"
-                                                for="{{ $category->id }} {{ $category->name }}">{{ $category->name }}</label><br>
+                                            <label
+                                                style="font-size: 18px; font-weight:bold">{{ $category->name }}</label><br>
                                         @endif
                                     </div>
                                     <div>
@@ -96,8 +121,8 @@
                                                 <label>
                                                     <li class="list-group-item">
                                                         <input style="width: 15px" type="checkbox"
-                                                            id="{{ $category->name }}"
-                                                            name="technique,{{ $category->id }},{{ $item->id }}"
+                                                            id="{{ $category->name }}" name="technology[]"
+                                                            value="{{ $item->id }}"
                                                             onclick="onlyOne(this, '{{ $category->name }}')">
                                                         {{ $item->name }}
                                                     </li>
@@ -109,9 +134,11 @@
                                 </div>
                             @endforeach
                             <div>
-                                <input type="checkbox"
-                                    onclick="var input = document.getElementById('price'); if(this.checked){ input.disabled = false; input.focus();}else{input.disabled=true;}">
-                                <label style="font-size: 18px; font-weight:bold" for="На продажу">На продажу</label>
+                                <label style="font-size: 18px; font-weight:bold">
+                                    <input type="checkbox" name="checkPrice"
+                                        onclick="var input = document.getElementById('price'); if(this.checked){ input.disabled = false; input.focus();}else{input.disabled=true;}">
+                                    На продажу
+                                </label>
                                 <input disabled name="price" id="price" style="width:90%">
                                 <label for="price">&#8381;</label>
                             </div>
@@ -152,8 +179,9 @@
                                 aria-labelledby="home-tab">
                                 @foreach (DB::table('exhibitions')->where([['start_at', '<', now()], ['end_at', '>', now()]])->get() as $exhibition)
                                     <label>
-                                        <input class="activeCheckBox" hidden type="checkbox" name="exhibitions, {{ $exhibition->title }}">
-                                        <div class="card mb-3 cheboxContainer" style="max-width: 540px;">
+                                        <input class="activeCheckBox" hidden type="checkbox" name="exhibitions[]"
+                                            value="{{ $exhibition->id }}">
+                                        <div class="card mb-3 cheboxContainer noselect" style="max-width: 540px;">
                                             <div class="row g-0">
                                                 <div class="col-md-4">
                                                     <img src="..." class="img-fluid rounded-start" alt="...">
@@ -179,8 +207,9 @@
                                 @foreach (DB::table('exhibitions')->where([['start_at', '>', now()]])->get() as $exhibition)
                                     <label>
 
-                                        <input class="activeCheckBox" hidden type="checkbox" name="exhibitions, {{ $exhibition->title }}">
-                                        <div class="card mb-3 cheboxContainer" style="max-width: 540px;">
+                                        <input class="activeCheckBox" hidden type="checkbox" name="exhibitions[]"
+                                            value="{{ $exhibition->id }}">
+                                        <div class="card mb-3 cheboxContainer noselect" style="max-width: 540px;">
                                             <div class="row g-0">
                                                 <div class="col-md-4">
                                                     <img src="..." class="img-fluid rounded-start" alt="...">
@@ -213,11 +242,26 @@
 
     </form>
     <style>
-        .activeCheckBox:checked ~ .cheboxContainer{
+        .activeCheckBox:checked~.cheboxContainer {
             background-color: #def1ff;
         }
 
-        </style>
+        .noselect {
+            -webkit-touch-callout: none;
+            /* iOS Safari */
+            -webkit-user-select: none;
+            /* Safari */
+            -khtml-user-select: none;
+            /* Konqueror HTML */
+            -moz-user-select: none;
+            /* Old versions of Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+                                                              supported by Chrome, Edge, Opera and Firefox */
+        }
+    </style>
 @endsection
 
 <script>
@@ -243,5 +287,3 @@
         });
     };
 </script>
-
-

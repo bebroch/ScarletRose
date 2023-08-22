@@ -9,7 +9,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware(['web'])->group(function(){
+Route::middleware(['auth'])->group(function(){
 
     // Создание и удаления картины
     Route::get('/CreateCard', [CreateCardController::class, 'create'])->name('createCard');
@@ -21,6 +21,7 @@ Route::middleware(['web'])->group(function(){
     // Добавить картину
     Route::get('/PersonalArea/AddMyPicture', [PersonalAreaController::class, 'showAddMyPictureForm'])->name('addPicture');
     Route::post('/PersonalArea/AddMyPicture/adderPicture_process', [PersonalAreaController::class, 'adderPicture'])->name('adderPicture');
+    // Удалить картину
     Route::get('/PersonalArea/AddMyPicture/{id}/deletePicture_process', [PersonalAreaController::class, 'deletePicture'])->name('deleteMyPicture');
     // Обновить информацию
     Route::get('/PersonalArea/UpdateMyInformation', [PersonalAreaController::class, 'showUpdateMyInformationForm'])->name('updateInformation');
@@ -71,7 +72,7 @@ Route::middleware(['web'])->group(function(){
 
 // Основная страница (Картины)
 Route::get('/pictures', [HomePageController::class, 'showPictures'])->name('home');
-Route::get('/pictures/{id}', [HomePageController::class, 'showPictures_id']);
+Route::get('/pictures/{id}', [HomePageController::class, 'showPictures_id'])->name('picture');
 // Новости
 Route::get('/news', [HomePageController::class, 'showNews'])->name('news');
 Route::get('/news/{id}', [HomePageController::class, 'showNews_id']);
