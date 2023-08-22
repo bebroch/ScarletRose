@@ -67,6 +67,11 @@
                                 <a class="nav-link" aria-current="page" href="{{ route('posters') }}"
                                     style="font-size: 20px;">Афиша</a>
                             </li>
+                            <!-- Выставки -->
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('exhibitions') }}"
+                                    style="font-size: 20px;">Выставка</a>
+                            </li>
                             <!-- Личный кабинет -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" role="button" style="font-size: 20px;"
@@ -93,8 +98,14 @@
                                         Админ панель
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
-                                        <li><a class="dropdown-item" href="{{ route('addNew') }}">Добавить новость</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('addPoster') }}">Добавить афишу</a>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('addNew') }}">Добавить новость</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('addPoster') }}">Добавить афишу</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('addExhibition') }}">Добавить выставку</a>
                                         </li>
                                         <li>
                                             <hr class="dropdown-divider">
@@ -110,10 +121,10 @@
 
                             <!-- Отступ -->
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"></a>
+                                <a class="nav-link" aria-current="page"></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"></a>
+                                <a class="nav-link" aria-current="page"></a>
                             </li>
 
                             <!-- Выйти -->
