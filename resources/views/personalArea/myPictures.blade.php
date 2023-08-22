@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row row-cols-1 row-cols-md-3 mt-1 g-3">
+        <div class="row row-cols-1 row-cols-md-3 m-5 mt-3 g-3">
             @foreach ($images as $image)
                 <div class="col">
                     <div class="card">

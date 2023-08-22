@@ -50,10 +50,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <form action="{{ route('deletePicture') }}">
-                        <input type="text" hidden value="{{ $image->id }}" name="image">
-                        <input class="btn btn-danger" type="submit" value="Удалить картину">
-                    </form>
+                    <a class="btn btn-danger" href="{{route('deletePicture', ['id' => $image->id])}}">Удалить картину</a>
                 </div>
             </div>
         </div>

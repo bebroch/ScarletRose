@@ -16,6 +16,7 @@ use App\Models\under_categories;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -179,10 +180,10 @@ class AdminController extends Controller
     }
 
     // Удаление картины
-    public function deletePicture(Request $request)
+    public function deletePicture($id)
     {
-
-        Pictures::find($request->image)->delete();
+        Storage::delete(Pictures::find($id)->imagePath);
+        Pictures::find($id)->delete();
         return redirect(route('home'));
     }
 }
