@@ -19,8 +19,8 @@
                             <option value="name">Название картины</option>
                             <option value="about">О картине</option>
                             <option value="size">Размер</option>
-                            <option value="material">Материалы</option>
                             <option value="category">Категории</option>
+                            <option value="under_category">Теги</option>
                             <!-- Добавьте другие опции по мере необходимости -->
                         </select>
                     </div>
@@ -31,7 +31,7 @@
             </form>
 
             @if (!$images->first() && !empty($query))
-                По запросу "{{ $query }}" ничего не удалось найти.
+                По запросу "{{ $query }}" ничего не удалось найти в разделе.
             @endif
         </div>
         <div id="search-results">

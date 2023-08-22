@@ -24,6 +24,7 @@ class HomePageController extends Controller
 
     public function showPictures_id($id)
     {
+
         $image = Pictures::find($id);
 
         if (!$image) {
@@ -32,22 +33,69 @@ class HomePageController extends Controller
 
         $user = User::find($image->user_id);
 
-        $under_categories = under_categories_pictures::where('picture_id', '=', $image->id)
+
+
+        $under_categories_id = under_categories_pictures::where('picture_id', '=', $image->id)
             ->get()
-            ->pluck('category_id')
+            ->pluck('under_category_id')
             ->toArray();
 
-        $categoriesFromUnder = Categories::whereIn('id', $under_categories)->get();
+        $under_categories = under_categories::whereIn('id', $under_categories_id)->get();
 
-        $categoriesFromPictures = Categories::whereIn('id', Categories_pictures::where('picture_id', '=', $image->id)
+
+        $categories = array();
+        foreach ($under_categories as $under_category) {
+            $cat = Categories::find($under_category->category_id)->name;
+            $un_cat = $under_category->name;
+            $categories += ["$cat" => "$un_cat"];
+        }
+
+
+        $categories[] = Categories::whereIn('id', Categories_pictures::where('picture_id', '=', $image->id)
             ->get()
             ->pluck('category_id')
             ->toArray())
             ->get();
 
-        $categories = $categoriesFromUnder->concat($categoriesFromPictures);
+
 
         return view('home.pictures.picture', compact('image', 'user', 'categories'));
+
+
+
+
+        //
+
+
+        /*
+                $image = Pictures::find($id);
+
+                if (!$image) {
+                    return abort(404);
+                }
+
+                $user = User::find($image->user_id);
+
+                $under_categories = under_categories_pictures::where('picture_id', '=', $image->id)
+                    ->get()
+                    ->pluck('category_id')
+                    ->toArray();
+
+                $categoriesFromUnder = Categories::whereIn('id', $under_categories)->get();
+
+                $categoriesFromPictures = Categories::whereIn('id', Categories_pictures::where('picture_id', '=', $image->id)
+                    ->get()
+                    ->pluck('category_id')
+                    ->toArray())
+                    ->get();
+
+                $categories = $categoriesFromUnder->concat($categoriesFromPictures);
+
+                dd($categories);
+
+                return view('home.pictures.picture', compact('image', 'user', 'categories')); */
+
+
     }
 
 
@@ -136,10 +184,10 @@ class HomePageController extends Controller
             case 'size':
                 $images = Pictures::searchSize($query);
                 break;
-            case 'material':
+            case 'category':
                 $images = Pictures::searchCategory($query);
                 break;
-            case 'category':
+            case 'under_category':
                 $images = Pictures::searchUnderCategory($query);
                 break;
         }
