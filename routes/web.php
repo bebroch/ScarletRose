@@ -84,6 +84,8 @@ Route::get('/exhibitions', [HomePageController::class, 'showExhibitions'])->name
 Route::get('/exhibitions/{id}', [HomePageController::class, 'showExhibition_id'])->name('exhibition');
 // Личная страница пользователя
 Route::get('/user/{id}', [HomePageController::class, 'userProfile'])->name('userProfile');
+// Поиск
+Route::get('/search', [HomePageController::class, 'search'])->name('search');
 
 // Регистрация
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -95,6 +97,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
 
 // Перенаправление
-Route::post('/', function(){
-    return route('home');
+Route::get('/', function(){
+    return redirect(route('home'));
 });
