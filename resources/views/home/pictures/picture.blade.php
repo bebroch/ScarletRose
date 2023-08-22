@@ -72,6 +72,16 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+                            <!-- Размер -->
+                            <div class="col-lg">
+                                <h3>Размеры</h3>
+                                <h5><a style="font-weight: bold">Высота: </a>{{$image->height}}</h5>
+                                <h5><a style="font-weight: bold">Ширина: </a>{{$image->width}}</h5>
+
+                            </div>
                         </div>
                     </div>
 

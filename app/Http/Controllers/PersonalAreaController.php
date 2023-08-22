@@ -43,7 +43,6 @@ class PersonalAreaController extends Controller
 
     public function adderPicture(addMyPictureRequest $request)
     {
-
         // Путь до картинки, размеры картинки
         $path = $request->file('uploadPicture')->store("public/images/");
 
@@ -95,6 +94,11 @@ class PersonalAreaController extends Controller
         return redirect(route('myPictures'));
     }
 
+    // Редактировать картину
+    public function editMyPicture($id){
+        return view('personalArea.editMyPicture');
+    }
+
     // Изменить информацию
     public function showUpdateMyInformationForm()
     {
@@ -103,7 +107,6 @@ class PersonalAreaController extends Controller
 
     public function updateMyInformationForm_process(Request $request)
     {
-
         $data = [
             'login' => $request->login ? $request->login : "",
             'firstname' => $request->firstname ? $request->firstname : "",

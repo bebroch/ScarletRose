@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function(){
     // Добавить картину
     Route::get('/PersonalArea/AddMyPicture', [PersonalAreaController::class, 'showAddMyPictureForm'])->name('addPicture');
     Route::post('/PersonalArea/AddMyPicture/adderPicture_process', [PersonalAreaController::class, 'adderPicture'])->name('adderPicture');
+    // Изменить картину
+    Route::get('/PersonalArea/MyPictures/{id}/editPicture', [PersonalAreaController::class, 'editMyPicture'])->name('editMyPicture');
     // Удалить картину
     Route::get('/PersonalArea/AddMyPicture/{id}/deletePicture_process', [PersonalAreaController::class, 'deletePicture'])->name('deleteMyPicture');
     // Обновить информацию

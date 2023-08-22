@@ -43,7 +43,6 @@ class Pictures extends Model
         }
 
 
-
         return $this->where([
             ['width', 'LIKE', '%' . $data[0] . '%'],
             ['height', 'LIKE', '%' . $data[1] . '%'],
