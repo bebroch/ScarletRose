@@ -9,7 +9,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
 
     // Создание и удаления картины
     Route::get('/CreateCard', [CreateCardController::class, 'create'])->name('createCard');
@@ -18,6 +18,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/PersonalArea', [PersonalAreaController::class, 'showPersonalArea'])->name('personalArea');
     // Мои картины
     Route::get('/PersonalArea/MyPictures', [PersonalAreaController::class, 'showMyPictureForm'])->name('myPictures');
+    // Поиск
+    Route::get('/PersonalArea/MyPictures/search', [PersonalAreaController::class, 'search'])->name('searchMyPictures');
     // Добавить картину
     Route::get('/PersonalArea/AddMyPicture', [PersonalAreaController::class, 'showAddMyPictureForm'])->name('addPicture');
     Route::post('/PersonalArea/AddMyPicture/adderPicture_process', [PersonalAreaController::class, 'adderPicture'])->name('adderPicture');
@@ -30,7 +32,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/PersonalArea/UpdateMyInformation/UpdateMyInformation_process', [PersonalAreaController::class, 'updateMyInformationForm_process'])->name('updateInformation_process');
 
     // Админ панель
-    Route::group(['middleware' => ['auth', 'isadmin']], function(){
+    Route::group(['middleware' => ['auth', 'isadmin']], function () {
         // Добавить новость
         Route::get('/AdminPanel', [AdminController::class, 'index'])->name('admin');
         Route::get('/AdminPanel/AddNew', [AdminController::class, 'showAddNew'])->name('addNew');
@@ -99,6 +101,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
 
 // Перенаправление
-Route::get('/', function(){
+Route::get('/', function () {
     return redirect(route('home'));
 });

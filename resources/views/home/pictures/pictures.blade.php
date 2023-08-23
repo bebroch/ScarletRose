@@ -4,6 +4,7 @@
     Картины
 @endsection
 
+
 @section('content')
     <div class="container-fluid">
         <div class="container mt-3 g-3" style="width: 30%">
@@ -30,8 +31,8 @@
                 </div>
             </form>
 
-            @if (!$images->first() && !empty($query))
-                По запросу "{{ $query }}" ничего не удалось найти в разделе.
+            @if (empty($images->first()) && !empty($query))
+                По запросу "{{ $query }}" ничего не удалось найти.
             @endif
         </div>
         <div id="search-results">
@@ -51,16 +52,18 @@
                             </a>
                             @auth('web')
                                 @if (Auth::user()->is_admin)
-                                    <!-- Кнопка-триггер модального окна -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#{{$image->id}}">
-                                        Удалить картину
-                                    </button>
+                                    <div class="card-footer d-flex justify-content-between">
+                                        <!-- Кнопка-триггер модального окна -->
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#{{ $image->id }}">
+                                            Удалить картину
+                                        </button>
+                                    </div>
                                 @endif
                             @endauth
                         </div>
                         <!-- Модальное окно -->
-                        <div class="modal fade" id="{{$image->id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                        <div class="modal fade" id="{{ $image->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
                             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">

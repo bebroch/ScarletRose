@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="m-5">
+<div class="container mt-4">
     @foreach ($news as $new)
     <div class="card w-100 mb-3">
         <div class="card-body">

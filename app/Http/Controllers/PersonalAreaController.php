@@ -34,6 +34,15 @@ class PersonalAreaController extends Controller
         return view('personalArea.myPictures', compact('images'));
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $images = Pictures::search($query, $request->filter, Auth::user()->id);
+
+        return view('personalArea.myPictures', ['images' => $images, 'query' => $query]); // Поменять
+    }
+
     // Добавить картину
     public function showAddMyPictureForm()
     {
@@ -96,7 +105,8 @@ class PersonalAreaController extends Controller
     }
 
     // Редактировать картину
-    public function editMyPicture($id){
+    public function editMyPicture($id)
+    {
         return view('personalArea.editMyPicture');
     }
 

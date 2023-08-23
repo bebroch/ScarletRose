@@ -24,8 +24,8 @@
 
                             <!-- Кто нарисовал -->
                             <div class="col">
-                                <h2>Автор</h2>
-                                <h5><a href="{{ route('userProfile', ['id' => $user->id], false) }}">{{ $user->login }}</a>
+                                <h2 style="font-weight: bold">Автор</h2>
+                                <h5><a class="link-info link-underline-opacity-0" href="{{ route('userProfile', ['id' => $user->id], false) }}">{{ $user->login }}</a>
                                 </h5>
 
                             </div>
@@ -36,11 +36,11 @@
 
 
                                 @if (DB::table('exhibitions_pictures')->where('picture_id', '=', $image->id)->get()->first())
-                                    <h3>Участие в выставках:</h3>
+                                    <h3 style="font-weight: bold">Участие в выставках:</h3>
                                 @endif
                                 @foreach (DB::table('exhibitions_pictures')->where('picture_id', '=', $image->id)->get() as $exhibition)
                                     <h5>
-                                        <a href="{{ route('exhibition', ['id' => $exhibition->exhibition_id]) }}">
+                                        <a class="link-info link-underline-opacity-0" href="{{ route('exhibition', ['id' => $exhibition->exhibition_id]) }}">
                                             {{ DB::table('exhibitions')->find($exhibition->exhibition_id)->title }}
                                         </a>
                                     </h5>
@@ -53,7 +53,7 @@
                             <!-- Категории -->
                             <div class="col">
                                 @if ($categories)
-                                    <h3>Теги:</h3>
+                                    <h3 style="font-weight: bold">Теги:</h3>
                                 @endif
                                 <div class="container-fluid justify-content-center">
                                     <div class="row row-cols-1">
@@ -77,7 +77,7 @@
 
                             <!-- Размер -->
                             <div class="col-lg">
-                                <h3>Размеры</h3>
+                                <h3 style="font-weight: bold">Размеры</h3>
                                 <h5><a style="font-weight: bold">Высота: </a>{{$image->height}}</h5>
                                 <h5><a style="font-weight: bold">Ширина: </a>{{$image->width}}</h5>
 
@@ -87,7 +87,7 @@
 
 
                     <!-- О картине -->
-                    <h3>О картине:</h3>
+                    <h3 style="font-weight: bold">О картине:</h3>
                     <h3>{{ $image->about }}</h3>
 
                     <!-- Стоимость -->

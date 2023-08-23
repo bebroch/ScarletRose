@@ -196,25 +196,9 @@ class HomePageController extends Controller
     {
         $query = $request->input('query');
 
-        switch ($request->filter) {
-            case 'name':
-                $images = Pictures::searchName($query);
-                break;
-            case 'about':
-                $images = Pictures::searchAbout($query);
-                break;
-            case 'size':
-                $images = Pictures::searchSize($query);
-                break;
-            case 'category':
-                $images = Pictures::searchCategory($query);
-                break;
-            case 'under_category':
-                $images = Pictures::searchUnderCategory($query);
-                break;
-        }
+        $images = Pictures::search($query, $request->filter, 0);
 
 
-        return view('home.pictures.pictures', ['images' => $images, 'query' => $query]); // Поменять
+        return view('home.pictures.pictures', ['images' => $images, 'query' => $query]);
     }
 }
