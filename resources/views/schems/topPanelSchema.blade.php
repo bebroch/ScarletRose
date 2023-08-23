@@ -67,6 +67,11 @@
                                 <a class="nav-link" aria-current="page" href="{{ route('posters') }}"
                                     style="font-size: 20px;">Афиша</a>
                             </li>
+                            <!-- Выставки -->
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{{ route('exhibitions') }}"
+                                    style="font-size: 20px;">Выставка</a>
+                            </li>
                             <!-- Личный кабинет -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" role="button" style="font-size: 20px;"
@@ -93,27 +98,31 @@
                                         Админ панель
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
-                                        <li><a class="dropdown-item" href="{{ route('addNew') }}">Добавить новость</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('addPoster') }}">Добавить афишу</a>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('addNew') }}">Добавить новость</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('addPoster') }}">Добавить афишу</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('addExhibition') }}">Добавить выставку</a>
                                         </li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li><a class="dropdown-item" href="{{ route('AdminSearch') }}">Поиск</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('AdminUsers') }}">Редактировать
-                                                пользователей</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('addCategory') }}">Редактирование
-                                                категорий</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('AdminUsers') }}">Пользователи</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('addCategory') }}">Категории</a></li>
                                     </ul>
                                 </li>
                             @endif
 
                             <!-- Отступ -->
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"></a>
+                                <a class="nav-link" aria-current="page"></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"></a>
+                                <a class="nav-link" aria-current="page"></a>
                             </li>
 
                             <!-- Выйти -->

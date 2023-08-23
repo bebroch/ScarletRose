@@ -1,21 +1,119 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-Афиши
+    Афиши
 @endsection
 
 @section('content')
+    <div class="container mt-4">
 
-<div class="m-5">
-    @foreach ($posters as $poster)
-    <div class="card w-100 mb-3">
-        <div class="card-body">
-            <h5 class="card-title">{{$poster->name}}</h5>
-            <p class="card-text">{{$poster->about}}</p>
-            <a href="{{route('posters')}}/{{$poster->id}}" class="btn btn-primary">Смотреть</a>
+        <div class="d-flex align-items-start">
+            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-future"
+                    type="button" role="tab" aria-controls="v-pills-future" aria-selected="false">Будущие</button>
+                <button class="nav-link active" id="v-pills-active-tab" data-bs-toggle="pill"
+                    data-bs-target="#v-pills-active" type="button" role="tab" aria-controls="v-pills-active"
+                    aria-selected="true">Активные</button>
+                <button class="nav-link" id="v-pills-passive-tab" data-bs-toggle="pill" data-bs-target="#v-pills-passive"
+                    type="button" role="tab" aria-controls="v-pills-passive" aria-selected="false">Прошедшие</button>
+
+            </div>
+            <div class="tab-content" id="v-pills-tabContent" style="width:100%">
+                <div class="tab-pane fade" id="v-pills-future" role="tabpanel" aria-labelledby="v-pills-future-tab">
+
+                    <div class="row row-cols-1 row-cols-md-2 m-5">
+                        @foreach ($postersF as $poster)
+                            <div class="card-deck">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title" style="font-weight: bold">{{ $poster->name }}</h3>
+                                        <p class="card-text">
+                                        <h5>{{ $poster->about }}</h5>
+                                        </p>
+                                        <a href="{{ route('posters') }}/{{ $poster->id }}"
+                                            class="btn btn-primary">Смотреть</a>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">
+                                            @if (!empty($poster->date))
+                                                Афиша начнётся
+                                                {{ Carbon\Carbon::parse($poster->timeEventStart)->diffForHumans() }}
+                                            @else
+                                                Афиша начнётся
+                                                {{ Carbon\Carbon::parse($poster->timeEventDay)->diffForHumans() }}
+                                            @endif
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                </div>
+
+                <div class="tab-pane fade show active" id="v-pills-active" role="tabpanel"
+                    aria-labelledby="v-pills-active-tab">
+
+                    <div class="row row-cols-1 row-cols-md-2 m-5">
+                        @foreach ($postersA as $poster)
+                            <div class="card-deck">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title" style="font-weight: bold">{{ $poster->name }}</h3>
+                                        <p class="card-text">
+                                        <h5>{{ $poster->about }}</h5>
+                                        </p>
+                                        <a href="{{ route('posters') }}/{{ $poster->id }}"
+                                            class="btn btn-primary">Смотреть</a>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">
+                                            @if (!empty($poster->timeEventStart))
+                                                Афиша началась
+                                                {{ Carbon\Carbon::parse($poster->timeEventStart)->diffForHumans() }}
+                                            @elseif (!empty($poster->timeEventDay))
+                                                Афиша началась
+                                                {{ Carbon\Carbon::parse($poster->timeEventDay)->diffForHumans() }}
+                                            @endif
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="v-pills-passive" role="tabpanel" aria-labelledby="v-pills-passive-tab">
+                    <div class="row row-cols-1 row-cols-md-2 m-5">
+                        @foreach ($postersP as $poster)
+                            <div class="card-deck">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title" style="font-weight: bold">{{ $poster->name }}</h3>
+                                        <p class="card-text">
+                                        <h5>{{ $poster->about }}</h5>
+                                        </p>
+                                        <a href="{{ route('posters') }}/{{ $poster->id }}"
+                                            class="btn btn-primary">Смотреть</a>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">
+                                            @if (!empty($poster->timeEventEnd))
+                                                Афиша закончилась
+                                                {{ Carbon\Carbon::parse($poster->timeEventEnd)->diffForHumans() }}
+                                            @elseif (!empty($poster->timeEventDay))
+                                                Афиша закончилась
+                                                {{ Carbon\Carbon::parse($poster->timeEventDay)->diffForHumans() }}
+                                            @endif
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    @endforeach
-</div>
 
+    </div>
 @endsection

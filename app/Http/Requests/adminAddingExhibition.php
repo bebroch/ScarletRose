@@ -3,19 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class adminAddingPosterRequest extends FormRequest
+class adminAddingExhibition extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        if (Auth::user()->is_admin) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
@@ -26,9 +22,10 @@ class adminAddingPosterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:255',
-            'about' => 'required'
+            'title' => 'required|string',
+            'start_at' => 'required|before_or_equal:end_at',
+            'end_at' => 'required|after_or_equal:start_at',
+            'about' => 'required',
         ];
-
     }
 }

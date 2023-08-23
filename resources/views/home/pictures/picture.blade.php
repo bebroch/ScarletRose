@@ -1,63 +1,133 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-{{$image->name}}
+    {{ $image->name }}
 @endsection
 
+
+
 @section('content')
+    <div class="card m-3">
+        <div class="row g-0">
+            <div class="col-md">
+                <img src="{{ Storage::url("$image->imagePath") }}" class="img-fluid rounded-start">
+            </div>
+            <div class="col-md">
+                <div class="card-body">
+                    <!-- Имя картины -->
+                    <div class="text-center">
+                        <h1>{{ $image->name }}</h1>
+                    </div>
 
-<div style="margin: 40px">
-    <img style="float: left" width="400" src="{{Storage::url("$image->imagePath")}}">
-    <div>
-        <h1>{{$image->name}}</h1>
-        <h3><a href="{{ route("userProfile", ['id' => $user->id], false) }}">{{$user->login}}</a></h3>
-        @if (DB::table('under_categories_pictures')->where('picture_id', '=', $image->id)->get()->first())
-            <h3>Категории:
-        @endif
-        @foreach (DB::table('under_categories_pictures')->where('picture_id', '=', $image->id)->get() as $category)
-            {{DB::table('under_categories')->find($category->under_category_id )->name}},
-        @endforeach
-        <h3>О картине:</h3>
-        <h4>{{$image->about}}</h4>
-        @if ($image->price)
-            <h4>Стоимость: {{$image->price}}&#8381;</h4>
-        @endif
-        @auth('web')
-            @if (Auth::user()->is_admin)
-                <form action="{{route('deletePicture')}}">
-                    <input type="text" hidden value="{{$image->id}}" name="image">
-                    <input type="submit" value="Удалить картину">
-                </form>
-            @endif
-        @endauth
+                    <div class="container-fluid text-center">
+                        <div class="row row-cols-1 row-cols-md-3 mt-0 g-3">
+
+                            <!-- Кто нарисовал -->
+                            <div class="col">
+                                <h2>Автор</h2>
+                                <h5><a href="{{ route('userProfile', ['id' => $user->id], false) }}">{{ $user->login }}</a>
+                                </h5>
+
+                            </div>
+
+
+                            <!-- Участвует в выставках -->
+                            <div class="col">
+
+
+                                @if (DB::table('exhibitions_pictures')->where('picture_id', '=', $image->id)->get()->first())
+                                    <h3>Участие в выставках:</h3>
+                                @endif
+                                @foreach (DB::table('exhibitions_pictures')->where('picture_id', '=', $image->id)->get() as $exhibition)
+                                    <h5>
+                                        <a href="{{ route('exhibition', ['id' => $exhibition->exhibition_id]) }}">
+                                            {{ DB::table('exhibitions')->find($exhibition->exhibition_id)->title }}
+                                        </a>
+                                    </h5>
+                                @endforeach
+
+                            </div>
+
+
+
+                            <!-- Категории -->
+                            <div class="col">
+                                @if ($categories)
+                                    <h3>Теги:</h3>
+                                @endif
+                                <div class="container-fluid justify-content-center">
+                                    <div class="row row-cols-1">
+                                        @foreach ($categories as $category => $under_category)
+                                            @if (!empty($category))
+                                                <div class="col">
+                                                    @if (!empty($under_category))
+                                                        <h5><a style="font-weight: bold;">{{ $category }}:
+                                                            </a>{{ $under_category }}</h5>
+                                                    @else
+                                                        <h5><a style="font-weight: bold;">{{ $category }}: </a></h5>
+                                                    @endif
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- Размер -->
+                            <div class="col-lg">
+                                <h3>Размеры</h3>
+                                <h5><a style="font-weight: bold">Высота: </a>{{$image->height}}</h5>
+                                <h5><a style="font-weight: bold">Ширина: </a>{{$image->width}}</h5>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- О картине -->
+                    <h3>О картине:</h3>
+                    <h3>{{ $image->about }}</h3>
+
+                    <!-- Стоимость -->
+                    @if ($image->price)
+                        <h4>Стоимость: {{ $image->price }}&#8381;</h4>
+                    @endif
+
+                    <!-- Удалить картину -->
+                    @auth('web')
+                        @if (Auth::user()->is_admin)
+                            <!-- Кнопка-триггер модального окна -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">
+                                Удалить картину
+                            </button>
+                        @endif
+                    @endauth
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-
-<!-- Кнопка-триггер модального окна -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Запустить модальное окно со статическим фоном
-  </button>
-
-  <!-- Модальное окно -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Заголовок модального окна</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+    <!-- Модальное окно -->
+    <div class="modal fade" id="{{ $image->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Удаление картины</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    Вы действительно хотите удалить - {{ $image->name }}?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <a class="btn btn-danger" href="{{ route('deletePicture', ['id' => $image->id]) }}">Удалить
+                        картину</a>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-          <button type="button" class="btn btn-primary">Понял</button>
-        </div>
-      </div>
     </div>
-  </div>
-
-
-
 @endsection

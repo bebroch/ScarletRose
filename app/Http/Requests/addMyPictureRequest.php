@@ -2,17 +2,18 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PriceOrExhibitionRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class adminAddingPosterRequest extends FormRequest
+class addMyPictureRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        if (Auth::user()->is_admin) {
+        if(!empty(Auth::user())){
             return true;
         }
         return false;
@@ -26,9 +27,11 @@ class adminAddingPosterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:255',
-            'about' => 'required'
+            'uploadPicture' => 'required|image:jpg, jpeg, png',
+            'namePicture' => 'required|string',
+            'aboutPicture' => 'required|string',
+            'price' => 'integer|gt:0|lt:4294967295|required_without:exhibitions',
+            'exhibitions' => 'required_without:price',
         ];
-
     }
 }
