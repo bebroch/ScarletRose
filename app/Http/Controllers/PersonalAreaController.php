@@ -75,10 +75,11 @@ class PersonalAreaController extends Controller
             }
         }
 
-        if (!empty($request->technology)) {
-            foreach ($request->technology as $technique) {
+
+        if (!empty($request->under_categories)) {
+            foreach ($request->under_categories as $under_category) {
                 under_categories_pictures::create([
-                    'under_category_id' => under_categories::find($technique)->id,
+                    'under_category_id' => under_categories::find($under_category)->id,
                     'picture_id' => $image->id,
                 ]);
             }

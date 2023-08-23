@@ -11,6 +11,7 @@ use App\Models\Posters;
 use App\Models\under_categories;
 use App\Models\under_categories_pictures;
 use App\Models\User;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomePageController extends Controller
@@ -118,8 +119,29 @@ class HomePageController extends Controller
     // Показ афиш
     public function showPosters()
     {
-        $posters = Posters::all();
-        return view('home.posters.posters', compact('posters'));
+
+        $postersF = Posters::where(function ($query) {
+            $timeNow = Carbon::now()->format('Y-m-d');
+            $query->where([
+                ['timeEventStart', '>', $timeNow],
+            ])->orWhere('timeEventDay', '>', $timeNow);
+        })->get();
+
+        $postersA = Posters::where(function ($query) {
+            $timeNow = Carbon::now()->format('Y-m-d');
+            $query->where([
+                ['timeEventStart', '<', $timeNow],
+                ['timeEventEnd', '>', $timeNow],
+            ])->orWhere('timeEventDay', '=', $timeNow);
+        })->get();
+
+        $postersP = Posters::where(function ($query) {
+            $timeNow = Carbon::now()->format('Y-m-d');
+            $query->where('timeEventDay', '<', $timeNow)
+                ->orWhere('timeEventEnd', '<', $timeNow);
+        })->get();
+
+        return view('home.posters.posters', compact('postersA', 'postersP', 'postersF'));
     }
 
     public function showPosters_id($id)

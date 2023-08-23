@@ -121,7 +121,7 @@
                                                 <label>
                                                     <li class="list-group-item">
                                                         <input style="width: 15px" type="checkbox"
-                                                            id="{{ $category->name }}" name="technology[]"
+                                                            id="{{ $category->name }}" name="under_categories[]"
                                                             value="{{ $item->id }}"
                                                             onclick="onlyOne(this, '{{ $category->name }}')">
                                                         {{ $item->name }}

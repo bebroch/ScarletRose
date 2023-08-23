@@ -54,13 +54,37 @@ class AdminController extends Controller
 
     public function addingPoster(adminAddingPosterRequest $request)
     {
+        if($request->dayOrSpanDays === 'spanDays'){
+            $request->validate([
+                'dateStart' => 'before_or_equal:dateEnd',
+                'dateEnd' => 'after_or_equal:dateStart',
+            ]);
+        }
+        else{
+            dump('day');
+            $request->validate([
+                'date' => 'required'
+            ]);
+        }
 
-        Posters::create([
-            'name' => $request->title,
-            'timeSpending' => $request->date,
-            'location' => $request->location,
-            'about' => $request->about,
-        ]);
+
+        if($request->dayOrSpanDays === 'day'){
+            Posters::create([
+                'name' => $request->title,
+                'timeEventDay' => $request->date,
+                'location' => $request->location,
+                'about' => $request->about,
+            ]);
+        }
+        else if($request->dayOrSpanDays === 'spanDays'){
+            Posters::create([
+                'name' => $request->title,
+                'timeEventStart' => $request->dateStart,
+                'timeEventEnd' => $request->dateEnd,
+                'location' => $request->location,
+                'about' => $request->about,
+            ]);
+        }
 
         return redirect(route('posters'));
     }
