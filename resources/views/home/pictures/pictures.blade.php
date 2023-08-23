@@ -11,10 +11,9 @@
             <form id="search-form" action="{{ route('search') }}" method="GET">
                 <div class="container-sm input-group">
 
-
                     <div class="input-group-append" style="width:100%">
-                        <input name="query" id="search-query" type="text" class="form-control rounded" placeholder="Поиск"
-                            aria-label="Search" aria-describedby="search-addon">
+                        <input name="query" id="search-query" type="text" class="form-control rounded"
+                            placeholder="Поиск" aria-label="Search" aria-describedby="search-addon">
                         <select class="form-select" name="filter">
                             <option value="name">Название картины</option>
                             <option value="about">О картине</option>
@@ -113,24 +112,26 @@
             display: block;
             /* Переключаем на блочный элемент */
         }
-        .form-select{
+
+        .form-select {
             max-width: 190px;
 
         }
     }
+
     @media (min-width: 577px) {
         .input-group-append {
-            display:flex;
+            display: flex;
             width: 100%;
             /* Переключаем на блочный элемент */
         }
 
-        .form-select{
+        .form-select {
             max-width: 190px;
 
         }
 
-        .form-control{
+        .form-control {
             width: 100%;
         }
     }

@@ -199,6 +199,6 @@ class HomePageController extends Controller
         $images = Pictures::search($query, $request->filter, 0);
 
 
-        return view('home.pictures.pictures', ['images' => $images, 'query' => $query]);
+        return view('home.pictures.pictures', ['images' => $images, 'query' => $query])->render();
     }
 }

@@ -5,7 +5,8 @@
 @endsection
 
 @section('content')
-    <div class="container mt-4" style="width: 30em;">
+    <div class="container card p-3 mt-4" style="max-width: 23rem;">
+        <h3>Добавление афиши</h3>
         <form action="{{ route('addingPoster') }}">
             @csrf
 
@@ -26,14 +27,16 @@
                 <li class="nav-item" role="presentation">
                     <label class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
                         role="tab" aria-controls="pills-home" aria-selected="true">
-                        <input style="appearance: none;" type="radio" name="dayOrSpanDays" value="day" checked> Один
+                        <input style="appearance: none;" type="radio" name="dayOrSpanDays" value="day" checked>
+                        Один
                         день
                     </label>
                 </li>
                 <li class="nav-item" role="presentation">
                     <label class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
                         role="tab" aria-controls="pills-profile" aria-selected="false">
-                        <input style="appearance: none;" type="radio" name="dayOrSpanDays" value="spanDays"> Промежуток
+                        <input style="appearance: none;" type="radio" name="dayOrSpanDays" value="spanDays">
+                        Промежуток
                     </label>
                 </li>
             </ul>
