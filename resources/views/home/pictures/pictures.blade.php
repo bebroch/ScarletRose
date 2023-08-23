@@ -7,15 +7,14 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="container mt-3 g-3" style="width: 30%">
+        <div class="container mt-3 g-3">
             <form id="search-form" action="{{ route('search') }}" method="GET">
-                <div class="input-group">
+                <div class="container-sm input-group">
 
-                    <input name="query" id="search-query" type="text" class="form-control rounded" placeholder="Поиск"
-                        aria-label="Search" aria-describedby="search-addon" />
 
-                    <!-- Вставьте выпадающий список сюда -->
-                    <div class="input-group-append">
+                    <div class="input-group-append" style="width:100%">
+                        <input name="query" id="search-query" type="text" class="form-control rounded" placeholder="Поиск"
+                            aria-label="Search" aria-describedby="search-addon">
                         <select class="form-select" name="filter">
                             <option value="name">Название картины</option>
                             <option value="about">О картине</option>
@@ -23,11 +22,9 @@
                             <option value="category">Категории</option>
                             <option value="under_category">Теги</option>
                             <!-- Добавьте другие опции по мере необходимости -->
+                            <input type="submit" class="btn btn-outline-primary" value="Поиск">
                         </select>
                     </div>
-                    <!-- Конец выпадающего списка -->
-
-                    <input type="submit" class="btn btn-outline-primary" value="Поиск">
                 </div>
             </form>
 
@@ -36,7 +33,7 @@
             @endif
         </div>
         <div id="search-results">
-            <div class="row row-cols-1 row-cols-md-3 m-5 mt-0 g-3">
+            <div class="row row-cols-1 row-cols-md-3 mt-0 g-3">
                 @foreach ($images as $image)
                     <div class="col">
                         <div class="card">
@@ -108,3 +105,33 @@
         }
     });
 </script>
+
+<style>
+    /* Добавляем медиа-запрос для экранов шириной до 576px */
+    @media (max-width: 576px) {
+        .input-group-append {
+            display: block;
+            /* Переключаем на блочный элемент */
+        }
+        .form-select{
+            max-width: 190px;
+
+        }
+    }
+    @media (min-width: 577px) {
+        .input-group-append {
+            display:flex;
+            width: 100%;
+            /* Переключаем на блочный элемент */
+        }
+
+        .form-select{
+            max-width: 190px;
+
+        }
+
+        .form-control{
+            width: 100%;
+        }
+    }
+</style>
