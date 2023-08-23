@@ -35,31 +35,29 @@
                         @endauth
                     </div>
                 </div>
+
+                <!-- Модальное окно -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Удаление картины</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Закрыть"></button>
+                            </div>
+                            <div class="modal-body">
+                                Вы действительно хотите удалить - {{ $image->name }}?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                <a class="btn btn-danger" href="{{ route('deletePicture', ['id' => $image->id]) }}">Удалить
+                                    картину</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
-        </div>
-    </div>
-
-
-    <!-- Модальное окно -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Удаление картины</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить - {{ $image->name }}?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <form action="{{ route('deletePicture') }}">
-                        <input type="text" hidden value="{{ $image->id }}" name="image">
-                        <input class="btn btn-danger" type="submit" value="Удалить картину">
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 @endsection

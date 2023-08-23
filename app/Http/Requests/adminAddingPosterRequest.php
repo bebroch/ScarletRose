@@ -12,7 +12,7 @@ class adminAddingPosterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if(Auth::user()->is_admin){
+        if (Auth::user()->is_admin) {
             return true;
         }
         return false;
@@ -25,11 +25,10 @@ class adminAddingPosterRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
             'title' => 'required|max:255',
-            'date' => 'required',
             'about' => 'required'
         ];
+
     }
 }

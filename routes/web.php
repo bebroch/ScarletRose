@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function(){
     // Добавить картину
     Route::get('/PersonalArea/AddMyPicture', [PersonalAreaController::class, 'showAddMyPictureForm'])->name('addPicture');
     Route::post('/PersonalArea/AddMyPicture/adderPicture_process', [PersonalAreaController::class, 'adderPicture'])->name('adderPicture');
+    // Изменить картину
+    Route::get('/PersonalArea/MyPictures/{id}/editPicture', [PersonalAreaController::class, 'editMyPicture'])->name('editMyPicture');
     // Удалить картину
     Route::get('/PersonalArea/AddMyPicture/{id}/deletePicture_process', [PersonalAreaController::class, 'deletePicture'])->name('deleteMyPicture');
     // Обновить информацию
@@ -84,6 +86,8 @@ Route::get('/exhibitions', [HomePageController::class, 'showExhibitions'])->name
 Route::get('/exhibitions/{id}', [HomePageController::class, 'showExhibition_id'])->name('exhibition');
 // Личная страница пользователя
 Route::get('/user/{id}', [HomePageController::class, 'userProfile'])->name('userProfile');
+// Поиск
+Route::get('/search', [HomePageController::class, 'search'])->name('search');
 
 // Регистрация
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
@@ -95,6 +99,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
 
 // Перенаправление
-Route::post('/', function(){
-    return route('home');
+Route::get('/', function(){
+    return redirect(route('home'));
 });

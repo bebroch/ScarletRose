@@ -111,10 +111,8 @@
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li><a class="dropdown-item" href="{{ route('AdminSearch') }}">Поиск</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('AdminUsers') }}">Редактировать
-                                                пользователей</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('addCategory') }}">Редактирование
-                                                категорий</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('AdminUsers') }}">Пользователи</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('addCategory') }}">Категории</a></li>
                                     </ul>
                                 </li>
                             @endif

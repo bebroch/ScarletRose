@@ -29,12 +29,12 @@
 
                         <div class="col text-center">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-outline-success mt-3 mb-2" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-outline-success mt-3 mb-2 disabled" data-bs-toggle="modal"
                                 data-bs-target="#techniqueWindow">
                                 Выбрать технику
                             </button>
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-outline-info mt-3 mb-2" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-outline-info mt-3 mb-2 disabled" data-bs-toggle="modal"
                                 data-bs-target="#exhibitionWindow">
                                 Выбрать выставку
                             </button>
@@ -62,7 +62,7 @@
 
 
                         <label>О картине</label><br>
-                        <textarea name="aboutPicture" style="width: 100%; height:100px; max-height: 300px" cols="1" rows="10"></textarea>
+                        <textarea name="aboutPicture" disabled style="width: 100%; height:100px; max-height: 300px" cols="1" rows="10"></textarea>
                         @error('aboutPicture')
                             <a>{{ $message }}</a>
                         @enderror
@@ -121,7 +121,7 @@
                                                 <label>
                                                     <li class="list-group-item">
                                                         <input style="width: 15px" type="checkbox"
-                                                            id="{{ $category->name }}" name="under_categories[]"
+                                                            id="{{ $category->name }}" name="technology[]"
                                                             value="{{ $item->id }}"
                                                             onclick="onlyOne(this, '{{ $category->name }}')">
                                                         {{ $item->name }}
