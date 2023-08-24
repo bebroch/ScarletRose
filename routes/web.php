@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
-Route::group(['middleware' => ['auth', 'isadmin', 'verified']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Создание и удаления картины
     Route::get('/CreateCard', [CreateCardController::class, 'create'])->name('createCard');
