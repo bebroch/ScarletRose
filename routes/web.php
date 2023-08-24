@@ -5,6 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CreateCardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PersonalAreaController;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -107,3 +110,5 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
+
+

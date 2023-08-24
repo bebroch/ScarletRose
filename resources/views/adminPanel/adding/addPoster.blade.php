@@ -50,7 +50,7 @@
                                 class="form-control @error('date') is-invalid @enderror">
                             @error('date')
                                 <div class="invalid-feedback">
-                                    {{ $message }}
+                                    {{ trans($message) }}
                                 </div>
                             @enderror
                         </div>
@@ -68,7 +68,7 @@
                                 class="form-control @error('dateStart') is-invalid @enderror">
                             @error('dateStart')
                                 <div class="invalid-feedback">
-                                    {{ $message }}
+                                    {{ trans($message) }}
                                 </div>
                             @enderror
                         </div>
@@ -80,7 +80,7 @@
                                 class="form-control @error('dateEnd') is-invalid @enderror">
                             @error('dateEnd')
                                 <div class="invalid-feedback">
-                                    {{ $message }}
+                                    {{ trans($message) }}
                                 </div>
                             @enderror
                         </div>

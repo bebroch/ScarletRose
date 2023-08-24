@@ -61,7 +61,6 @@ class AdminController extends Controller
             ]);
         }
         else{
-            dump('day');
             $request->validate([
                 'date' => 'required'
             ]);
@@ -142,8 +141,6 @@ class AdminController extends Controller
 
     public function addingExhibition(adminAddingExhibition $request)
     {
-        dd($request);
-
         Exhibitions::create([
             'title' => $request->title,
             'start_at' => $request->start_at,

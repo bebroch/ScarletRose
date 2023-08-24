@@ -16,7 +16,12 @@
             @endif
             <h1 class="card-title">{{ $user->login }}</h1>
             <h2 class="card-title">{{ $user->firstname }} {{ $user->lastname }}</h2>
-            <h4 class="card-title">{{ $user->email }}</h4>
+            <h4 class="card-title">{{ $user->email }}
+            @if (!empty($user->email_verified_at))
+            ✅
+            @else
+            ❌
+            @endif</h4>
             <h4 class="card-title">{{ $user->phone }}</h4>
             <h3 class="card-text">{{ $user->about }}</h3>
         </div>
