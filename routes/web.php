@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
-Route::middleware(['auth'])->group(function () {
+Route::group(['middleware' => ['auth', 'isadmin', 'verified']], function () {
 
     // Создание и удаления картины
     Route::get('/CreateCard', [CreateCardController::class, 'create'])->name('createCard');
@@ -111,4 +111,16 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
+Route::get('/aa', function () {
+    User::where('email', '=', 'xyusose@yandex.ru')->delete();
 
+    $user = User::create([
+        'login' => 'asdasdas',
+        'email' => 'xyusose@yandex.ru',
+        'password' => bcrypt('asdsadasdgashjg'),
+    ]);
+
+    return event(new Registered($user));
+
+
+});

@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container mt-4">
         <h1>{{ $exhibition->title }}</h1>
         <h6>{{ $exhibition->start_at }} {{ $exhibition->end_at }}</h6>
         <p>{{ $exhibition->about }}</p>
