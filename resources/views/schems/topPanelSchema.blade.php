@@ -15,20 +15,16 @@
 
 <body>
     <nav class="navbar navbar-dark" style="background-color: #405b48;"> <!-- Заменен bg-dark на bg-success -->
-        <div class="container-fluid">
+        <div class="container">
             <!-- Главное меню -->
-            <nav class="navbar navbar-dark" style="background-color: #405b48;"> <!-- Заменен bg-dark на bg-success -->
-                <div class="container-fluid">
-                    <a class="navbar-brand fs-1" href="{{ route('home') }}">
-                        <img src="{{ asset('imagesAsset/rose.png') }}" height="53px"
-                            class="d-inline-block align-text-top">
-                        Арт клуб "Алая роза"
-                    </a>
-                </div>
 
-            </nav>
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('imagesAsset/logo.png') }}" height="70px" class="d-inline-block align-text-top">
+            </a>
+
+
             @guest('web')
-                <a class="navbar-brand" href="{{route('login')}}" style="font-size: 28px;">Войти</a>
+                <a class="navbar-brand" href="{{ route('login') }}" style="font-size: 28px;">Войти</a>
             @endguest
             <!-- End Главное меню -->
             @auth('web')
@@ -105,13 +101,15 @@
                                             <a class="dropdown-item" href="{{ route('addPoster') }}">Добавить афишу</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('addExhibition') }}">Добавить выставку</a>
+                                            <a class="dropdown-item" href="{{ route('addExhibition') }}">Добавить
+                                                выставку</a>
                                         </li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li><a class="dropdown-item" href="{{ route('AdminSearch') }}">Поиск</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('AdminUsers') }}">Пользователи</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('AdminUsers') }}">Пользователи</a>
+                                        </li>
                                         <li><a class="dropdown-item" href="{{ route('addCategory') }}">Категории</a></li>
                                     </ul>
                                 </li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -44,11 +45,16 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email'
         ]);
 
+
         $user = User::create([
             'login' => $data['login'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+
+
+        event(new Registered($user));
 
         if($user){
             auth('web')->login($user);

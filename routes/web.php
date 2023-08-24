@@ -7,7 +7,8 @@ use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PersonalAreaController;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['auth'])->group(function () {
 
@@ -104,3 +105,5 @@ Route::post('/login_process', [AuthController::class, 'login'])->name('login_pro
 Route::get('/', function () {
     return redirect(route('home'));
 });
+
+Auth::routes(['verify' => true]);
