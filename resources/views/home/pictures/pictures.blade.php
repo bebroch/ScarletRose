@@ -30,6 +30,92 @@
             @if (empty($images->first()) && !empty($query))
                 По запросу "{{ $query }}" ничего не удалось найти.
             @endif
+
+
+            <!-- Пример отдельной кнопки danger -->
+            <div class="btn-group mt-2">
+                {{-- Картины --}}
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Картины
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">На продажу</a></li>
+                    <li><a class="dropdown-item" href="#">Без цены</a></li>
+                </ul>
+            </div>
+
+
+            <div class="btn-group mt-2">
+
+                {{-- По автору --}}
+                <button type="button" class="btn btn-primary">По автору</button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">От А до Я</a></li>
+                    <li><a class="dropdown-item" href="#">От Я до А</a></li>
+                </ul>
+
+            </div>
+
+            {{-- По технике --}}
+            <div class="btn-group mt-2">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    По технике
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Действие</a></li>
+                    <li><a class="dropdown-item" href="#">Другое действие</a></li>
+                    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Отделенная ссылка</a></li>
+                </ul>
+            </div>
+
+
+            {{-- По размеру --}}
+            <div class="btn-group mt-2">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    По размеру
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Действие</a></li>
+                    <li><a class="dropdown-item" href="#">Другое действие</a></li>
+                    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Отделенная ссылка</a></li>
+                </ul>
+            </div>
+
+
+            {{-- По году --}}
+            <div class="btn-group mt-2">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    По году
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Действие</a></li>
+                    <li><a class="dropdown-item" href="#">Другое действие</a></li>
+                    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Отделенная ссылка</a></li>
+                </ul>
+            </div>
+
+
+
         </div>
         <div id="search-results">
             <div class="row row-cols-1 row-cols-md-3 mt-0 g-3">
@@ -59,8 +145,9 @@
                             @endauth
                         </div>
                         <!-- Модальное окно -->
-                        <div class="modal fade" id="{{ $image->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
-                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="{{ $image->id }}" data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">

@@ -12,7 +12,7 @@ use App\Models\under_categories;
 use App\Models\under_categories_pictures;
 use App\Models\User;
 use Carbon\Carbon;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 
 class HomePageController extends Controller
 {
@@ -61,41 +61,6 @@ class HomePageController extends Controller
 
 
         return view('home.pictures.picture', compact('image', 'user', 'categories'));
-
-
-
-
-        //
-
-
-        /*
-                $image = Pictures::find($id);
-
-                if (!$image) {
-                    return abort(404);
-                }
-
-                $user = User::find($image->user_id);
-
-                $under_categories = under_categories_pictures::where('picture_id', '=', $image->id)
-                    ->get()
-                    ->pluck('category_id')
-                    ->toArray();
-
-                $categoriesFromUnder = Categories::whereIn('id', $under_categories)->get();
-
-                $categoriesFromPictures = Categories::whereIn('id', Categories_pictures::where('picture_id', '=', $image->id)
-                    ->get()
-                    ->pluck('category_id')
-                    ->toArray())
-                    ->get();
-
-                $categories = $categoriesFromUnder->concat($categoriesFromPictures);
-
-                dd($categories);
-
-                return view('home.pictures.picture', compact('image', 'user', 'categories')); */
-
 
     }
 
