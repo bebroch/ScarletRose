@@ -14,7 +14,7 @@
                         <h3>Добавление Картины</h3>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Фото</label>
-                            <input class="form-control" type="file" id="formFile"
+                            <input @if ($isFull) disable @endif class="form-control" type="file" id="formFile"
                                 accept="image/png, image/jpeg, image/jpg" name="uploadPicture" onchange="loadFile(event)">
                             @error('uploadPicture')
                                 <br><a>{{ $message }}</a>

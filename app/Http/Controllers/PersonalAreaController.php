@@ -46,8 +46,13 @@ class PersonalAreaController extends Controller
     // Добавить картину
     public function showAddMyPictureForm()
     {
+        $isFull = false;
         $categories = Categories::all();
-        return view('personalArea.createCard', compact('categories'));
+        if (Pictures::where('user_id', '=', Auth::user()->id) > 5){
+            $isFull = true;
+        }
+
+        return view('personalArea.createCard', compact('categories', 'isFull'));
     }
 
     public function adderPicture(addMyPictureRequest $request)
