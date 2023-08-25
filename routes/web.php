@@ -13,6 +13,167 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
+
+
+/*
+
+// Перенаправление
+Route::get('/', function () {
+    return redirect(route('home'));
+});
+
+// Вход и регистрация
+Route::group(['namespace' => 'Auth', 'prefix' => 'Auth'], function(){
+
+    // Вход
+    Route::group(['namespace' => 'Login', 'prefix' => 'Login'], function(){
+        Route::get('/', 'LoginController')->name('login');
+        Route::get('/logout', 'LoginController')->name('logout');
+        Route::get('/login_process', 'LoginController')->name('login_process');
+    });
+
+    // Регистрация
+    Route::group(['namespace' => 'Registr', 'prefix' => 'Registr'], function(){
+        Route::get('/', 'RegisterController')->name('register');
+        Route::get('/register_proccess', 'RegisterController')->name('register_proccess');
+    });
+});
+
+// Главная страница
+Route::group(['namespace' => 'Home', 'prefix' => 'Home'], function(){
+
+    // Картины
+    Route::group(['namespace' => 'Pictures', 'prefix' => 'Pictures'], function(){
+        Route::get('/', 'PicturesController')->name('pictures');
+        Route::get('/{id}', 'PicturesController')->name('picture');
+    });
+
+    // Новости
+    Route::group(['namespace' => 'News', 'prefix' => 'News'], function(){
+        Route::get('/', 'NewsController')->name('news');
+        Route::get('/{id}', 'NewsController')->name('new');
+    });
+
+    // Афиша
+    Route::group(['namespace' => 'Posters', 'prefix' => 'Posters'], function(){
+        Route::get('/', 'PostersController')->name('posters');
+        Route::get('/{id}', 'PostersController')->name('poster');
+    });
+
+    // Выставка
+    Route::group(['namespace' => 'Exhibitions', 'prefix' => 'Exhibibtions'], function(){
+        Route::get('/', 'ExhibitionsController')->name('exhibibtions');
+        Route::get('/{id}', 'ExhibitionsController')->name('exhibibtion');
+    });
+});
+
+// Личный кабинет
+Route::group(['namespace' => 'Profile', 'middleware' => ['auth', 'verified'], 'prefix' => 'Profile'], function(){
+
+    // Мои картины
+    Route::group(['namespace' => 'MyPictures', 'prefix' => 'MyPictures'], function(){
+        Route::get('/', 'MyPicturesController')->name('myPictures');
+        Route::get('/SearchMyPictures', 'SearchController')->name('searchMyPictures');
+
+        // Добавить свою картину
+        Route::group(['namespace' => 'CreatePicture', 'prefix' => 'CreatePicture'], function(){
+            Route::get('/', 'CreatePictureController')->name('CreatePicture');
+            Route::get('/CreatePicture_process', 'CreatePictureController')->name('CreatePicture_process');
+        });
+
+        // Изменить свою картину
+        Route::group(['namespace' => 'EditPicture', 'prefix' => 'EditPicture'], function(){
+            Route::get('/', 'EditPictureController')->name('EditPicture');
+            Route::get('/EditPicture_process', 'EditPictureController')->name('EditPicture_process');
+        });
+
+        // Удалить свою картину
+        Route::group(['namespace' => 'DeletePicture', 'prefix' => 'DeletePicture'], function(){
+            Route::get('/', 'DeletePictureController')->name('DeletePicture');
+            Route::get('/DeletePicture_process', 'DeletePictureController')->name('DeletePicture_process');
+        });
+    });
+
+    // Обо мне
+    Route::group(['namespace' => 'About', 'prefix' => 'About'], function(){
+        Route::get('/', 'AboutController')->name('about');
+    });
+
+    // -------------------------------------------------------
+
+    // Изменить информацию
+    Route::group(['namespace' => 'UpdateMyInformation', 'prefix' => 'UpdateMyInformation'], function(){
+        Route::get('/', 'UpdateMyInformationController')->name('updateInfo');
+        Route::get('/UpdateMyInformation_process', 'UpdateMyInformationController')->name('updateInfo_process');
+    });
+
+});
+
+// Админ панель
+Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'isadmin', 'verified'], 'prefix' => 'AdminPanel'], function(){
+
+    // Добавить новость
+    Route::group(['namespace' => 'AddingNews', 'prefix' => 'AddNews'], function(){
+        Route::get('/', 'NewsController')->name('addNews');
+        Route::get('/AddNews_process', 'NewsController')->name('addNews_process');
+    });
+
+    // Добавить Афишу
+    Route::group(['namespace' => 'AddPoster', 'prefix' => 'AddPoster'], function(){
+        Route::get('/', 'AddPosterController')->name('addPoster');
+        Route::get('/AddPoster_process', 'AddPosterController')->name('addPoster_process');
+    });
+
+    // Добавить Выставку
+    Route::group(['namespace' => 'AddExhibition', 'prefix' => 'Exhibition'], function(){
+        Route::get('/Create', 'ExhibitionController')->name('addExhibition');
+        Route::get('/Create_process', 'ExhibitionController')->name('addExhibition_process');
+        Route::get('/Edit', 'ExhibitionController')->name('editExhibition');
+        Route::get('/Edit_process', 'ExhibitionController')->name('editExhibition_process');
+        Route::get('/Delete', 'ExhibitionController')->name('deleteExhibition_process');
+    });
+
+    // -------------------------------------------------------
+
+    // Модерация картин
+    Route::group(['namespace' => 'ModerationPicture', 'prefix' => 'Moderation'], function(){
+        Route::get('/', 'ModerationPictureController')->name('moderationPictures');
+        Route::get('/PictureAccept', 'ModerationPictureController')->name('pictureAccept');
+        Route::get('/PictureDelete', 'DeletePictureController')->name('pictureDelete');
+    });
+
+    // Пользователи
+    Route::group(['namespace' => 'Users', 'prefix' => 'Users'], function(){
+        Route::get('/', 'UsersController')->name('AdminUsers');
+        Route::get('/{id}', 'UsersController')->name('AdminUser');
+        Route::get('/{id}/DeleteUser', 'DeleteUserController')->name('DeleteUser');
+    });
+
+    // Категории
+    Route::group(['namespace' => 'Categories', 'prefix' => 'Categories'], function(){
+        Route::get('/', 'CategoryController')->name('categories');
+        Route::get('/AddCategory', 'CategoryController')->name('AddCategory');
+        Route::get('/AddUnderCategory', 'UnderCategoryController')->name('AddUnderCategory');
+        Route::get('/DeleteCategory', 'CategoryController')->name('DeleteCategory');
+        Route::get('/DeleteUnderCategory', 'UnderCategoryController')->name('DeleteUnderCategory');
+    });
+
+    // Установка Storage:link
+    Route::get('/linkstorage', function () {
+        Artisan::call('storage:link');
+    });
+});
+
+*/
+
+
+
+
+
+
+
+
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // Создание и удаления картины
