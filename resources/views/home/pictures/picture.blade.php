@@ -7,7 +7,7 @@
 
 
 @section('content')
-    <div class="card m-3">
+    <div class="container-fliud card mt-4" style="margin-inline: 5%;">
         <div class="row g-0">
             <div class="col-md">
                 <img src="{{ Storage::url("$image->imagePath") }}" class="img-fluid rounded-start">
@@ -20,7 +20,7 @@
                     </div>
 
                     <div class="container-fluid text-center">
-                        <div class="row row-cols-1 row-cols-md-3 mt-0 g-3">
+                        <div class="row row-cols-1 row-cols-md-2 mt-0 g-3">
 
                             <!-- Кто нарисовал -->
                             <div class="col">

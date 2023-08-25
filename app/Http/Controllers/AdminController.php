@@ -54,28 +54,26 @@ class AdminController extends Controller
 
     public function addingPoster(adminAddingPosterRequest $request)
     {
-        if($request->dayOrSpanDays === 'spanDays'){
+        if ($request->dayOrSpanDays === 'spanDays') {
             $request->validate([
                 'dateStart' => 'before_or_equal:dateEnd',
                 'dateEnd' => 'after_or_equal:dateStart',
             ]);
-        }
-        else{
+        } else {
             $request->validate([
                 'date' => 'required'
             ]);
         }
 
 
-        if($request->dayOrSpanDays === 'day'){
+        if ($request->dayOrSpanDays === 'day') {
             Posters::create([
                 'name' => $request->title,
                 'timeEventDay' => $request->date,
                 'location' => $request->location,
                 'about' => $request->about,
             ]);
-        }
-        else if($request->dayOrSpanDays === 'spanDays'){
+        } else if ($request->dayOrSpanDays === 'spanDays') {
             Posters::create([
                 'name' => $request->title,
                 'timeEventStart' => $request->dateStart,
@@ -173,11 +171,20 @@ class AdminController extends Controller
         return redirect(route('exhibitions'));
     }
 
-    // Поиск
-    public function showSearch()
+    // Проверка картин
+    public function pictureVerification()
     {
+        $images = Pictures::where('status', '=', 0)->get();
 
-        return view('adminPanel.AdminSearch');
+        return view('adminPanel.AdminPictureVerification', compact('images'));
+    }
+
+    public function pictureAccepting($id)
+    {
+        $picture = Pictures::find($id);
+        $picture->status = 1;
+        $picture->save();
+        return back();
     }
 
     // Пользователи
@@ -205,6 +212,6 @@ class AdminController extends Controller
     {
         Storage::delete(Pictures::find($id)->imagePath);
         Pictures::find($id)->delete();
-        return redirect(route('home'));
+        return back();
     }
 }

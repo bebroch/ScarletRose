@@ -63,8 +63,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/AdminPanel/editExhibition_process', [AdminController::class, 'showEditExhibition_process'])->name('editExhibition_process');
         Route::get('/AdminPanel/deleteExhibition_process/{id}', [AdminController::class, 'deletingExhibition'])->name('deletingExhibition');
 
-        // Страница Поиска
-        Route::get('/AdminPanel/Search', [AdminController::class, 'showSearch'])->name('AdminSearch');
+        // Модерация картин
+        Route::get('/AdminPanel/PictureVerification', [AdminController::class, 'pictureVerification'])->name('AdminPictureVerification');
+        Route::get('/AdminPanel/PictureVerification/PictureAccepting/{id}', [AdminController::class, 'pictureAccepting'])->name('pictureAccepting');
+
 
         // Пользователи
         Route::get('/AdminPanel/Users', [AdminController::class, 'showUsers'])->name('AdminUsers');

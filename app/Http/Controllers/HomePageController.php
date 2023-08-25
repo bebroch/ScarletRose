@@ -19,7 +19,7 @@ class HomePageController extends Controller
     // Показ картин
     public function showPictures()
     {
-        $images = Pictures::all();
+        $images = Pictures::inRandomOrder()->where('status', '=', 1)->get();
         return view('home.pictures.pictures', compact('images'));
     }
 

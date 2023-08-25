@@ -1,20 +1,24 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-    Мои картины
+    Картины
 @endsection
 
 
 @section('content')
     <div class="container-fluid">
         <div class="container mt-3 g-3">
-            <form id="search-form" action="{{ route('searchMyPictures') }}" method="GET">
+            @if (Session::has('status'))
+                <div class="alert alert-success">
+                    {{ Session::get('status') }}
+                </div>
+            @endif
+            <form id="search-form" action="{{ route('search') }}" method="GET">
                 <div class="container-sm input-group">
 
-
                     <div class="input-group-append" style="width:100%">
-                        <input name="query" id="search-query" type="text" class="form-control rounded" placeholder="Поиск"
-                            aria-label="Search" aria-describedby="search-addon">
+                        <input name="query" id="search-query" type="text" class="form-control rounded"
+                            placeholder="Поиск" aria-label="Search" aria-describedby="search-addon">
                         <select class="form-select" name="filter">
                             <option value="name">Название картины</option>
                             <option value="about">О картине</option>
@@ -31,14 +35,18 @@
             @if (empty($images->first()) && !empty($query))
                 По запросу "{{ $query }}" ничего не удалось найти.
             @endif
+
+
         </div>
-        <div id="search-results">
-            <div class="row row-cols-1 row-cols-md-3 mt-0 g-3">
+        <div class="container" id="search-results">
+            <div class="row row-cols-1 row-cols-md-3 mt-0 m-5 g-3">
                 @foreach ($images as $image)
-                    <div class="col">
-                        <div class="card">
+                    <div class="card-group">
+                        <div class="card rounded"
+                            style="display: flex; flex-direction: column; justify-content: space-between;">
                             <a class="nav-link" href="{{ route('home') }}/{{ $image->id }}">
-                                <img src="{{ Storage::url("$image->imagePath") }}" class="card-img-top">
+                                <img src="{{ Storage::url("$image->imagePath") }}" class="card-img-top rounded"
+                                    style="object-fit: cover; max-height: 30vh">
                                 <div class="card-body">
                                     <h3 class="card-title">{{ $image->name }}</h3>
                                     <p class="card-text">{{ Str::limit($image->about, 100, '...') }}</p>
@@ -48,16 +56,14 @@
                                 </div>
                             </a>
                             @auth('web')
-                                @if (Auth::user()->is_admin)
-                                    <div class="card-footer d-flex justify-content-between">
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#{{ $image->id }}">
-                                            Удалить картину
-                                        </button>
-
-                                        <a class="btn btn-warning" href="{{route('editMyPicture', ['id' => $image->id])}}">Редактировать информацию</a>
-                                    </div>
-                                @endif
+                                <div class="card-footer">
+                                    <a class="btn btn-warning" href="{{route('editMyPicture', ['id' => $image->id])}}">Редактировать запись</a>
+                                    <!-- Кнопка-триггер модального окна -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#{{ $image->id }}">
+                                        Удалить картину
+                                    </button>
+                                </div>
                             @endauth
                         </div>
                         <!-- Модальное окно -->
@@ -114,24 +120,26 @@
             display: block;
             /* Переключаем на блочный элемент */
         }
-        .form-select{
+
+        .form-select {
             max-width: 190px;
 
         }
     }
+
     @media (min-width: 577px) {
         .input-group-append {
-            display:flex;
+            display: flex;
             width: 100%;
             /* Переключаем на блочный элемент */
         }
 
-        .form-select{
+        .form-select {
             max-width: 190px;
 
         }
 
-        .form-control{
+        .form-control {
             width: 100%;
         }
     }

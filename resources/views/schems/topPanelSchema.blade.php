@@ -156,9 +156,18 @@
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
-                                            <li><a class="dropdown-item" href="{{ route('AdminSearch') }}">Поиск</a></li>
-                                            <li><a class="dropdown-item"
-                                                    href="{{ route('AdminUsers') }}">Пользователи</a>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('AdminPictureVerification') }}">
+                                                    Картины на проверке
+                                                    <span
+                                                        class="badge bg-primary rounded-pill">{{ DB::table('pictures')->where('status', '=', 0)->count() }}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('AdminUsers') }}">
+                                                    Пользователи
+                                                    <span class="badge bg-primary rounded-pill">{{ DB::table('users')->count() }}</span>
+                                                </a>
                                             </li>
                                             <li><a class="dropdown-item" href="{{ route('addCategory') }}">Категории</a>
                                             </li>

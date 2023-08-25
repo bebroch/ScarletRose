@@ -60,7 +60,7 @@ class AuthController extends Controller
             auth('web')->login($user);
         }
 
-        session()->flash('status', 'Регистрация успешна! Пожалуйста, подтвердите свой адрес электронной почты.');
+        session()->flash('status', 'Регистрация прошла успешно! Пожалуйста, подтвердите свой адрес электронной почты.');
 
         return redirect(route('home'));
     }

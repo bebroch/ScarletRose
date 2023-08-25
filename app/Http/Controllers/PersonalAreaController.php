@@ -40,6 +40,8 @@ class PersonalAreaController extends Controller
 
         $images = Pictures::search($query, $request->filter, Auth::user()->id);
 
+
+
         return view('personalArea.myPictures', ['images' => $images, 'query' => $query]); // Поменять
     }
 
@@ -48,7 +50,7 @@ class PersonalAreaController extends Controller
     {
         $isFull = false;
         $categories = Categories::all();
-        if (Pictures::where('user_id', '=', Auth::user()->id) > 5){
+        if (Pictures::where('user_id', '=', Auth::user()->id)->count() > 5){
             $isFull = true;
         }
 
