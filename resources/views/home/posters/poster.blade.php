@@ -3,8 +3,13 @@
 
 @section('content')
 
-<div style="margin: 40px">
-    <div>
+
+
+
+<div class="container mt-3">
+    @include('schems.backbutton')
+
+    <div class="card p-4">
         <h1>{{$poster->name}}</h1>
         <h5>{{$poster->timeSpending}}</h5>
         <h4>{{$poster->about}}</h4>

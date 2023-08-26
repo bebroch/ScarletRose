@@ -89,9 +89,9 @@
             <div class="col-md-9">
                 <div class="row">
                     @foreach ($categories as $category)
-                        <div class="col">
+                        <div class="col g-3">
                             <ul class="list-group">
-                                <li class="list-group p-0" aria-current="true">
+                                <li class="list-group" aria-current="true">
                                     <button class="btn btn-outline-info" style="width: 100%"
                                         onclick="selection('{{ $category->name }}')">{{ $category->name }}</button>
                                 </li>

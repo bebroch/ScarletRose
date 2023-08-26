@@ -50,7 +50,11 @@ class PersonalAreaController extends Controller
     {
         $isFull = false;
         $categories = Categories::all();
-        if (Pictures::where('user_id', '=', Auth::user()->id)->count() > 5){
+        if (Pictures::where([
+            ['user_id', '=', Auth::user()->id],
+            ['status', '=', 0]
+            ])
+            ->count() > 5){
             $isFull = true;
         }
 
