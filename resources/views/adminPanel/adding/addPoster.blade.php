@@ -115,7 +115,7 @@
                         class="form-control @error('about') is-invalid @enderror"></textarea>
                     @error('about')
                         <div class="invalid-feedback">
-                            фывфывфы{{ $message }}
+                            {{ $message }}
                         </div>
                     @enderror
                 </div>

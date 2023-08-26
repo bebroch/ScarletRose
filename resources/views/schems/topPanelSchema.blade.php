@@ -159,14 +159,18 @@
                                             <li>
                                                 <a class="dropdown-item" href="{{ route('AdminPictureVerification') }}">
                                                     Картины на проверке
-                                                    <span
-                                                        class="badge bg-primary rounded-pill">{{ DB::table('pictures')->where('status', '=', 0)->count() }}</span>
+                                                    @if (DB::table('pictures')->where('status', '=', 0)->count())
+                                                        <span
+                                                            class="badge bg-primary rounded-pill">{{ DB::table('pictures')->where('status', '=', 0)->count() }}</span>
+                                                    @endif
+
                                                 </a>
                                             </li>
                                             <li>
                                                 <a class="dropdown-item" href="{{ route('AdminUsers') }}">
                                                     Пользователи
-                                                    <span class="badge bg-primary rounded-pill">{{ DB::table('users')->count() }}</span>
+                                                    <span
+                                                        class="badge bg-primary rounded-pill">{{ DB::table('users')->count() }}</span>
                                                 </a>
                                             </li>
                                             <li><a class="dropdown-item" href="{{ route('addCategory') }}">Категории</a>

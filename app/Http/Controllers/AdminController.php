@@ -96,9 +96,8 @@ class AdminController extends Controller
 
     public function addingCategory(adminAddingCategoryRequest $request)
     {
-
         Categories::create([
-            'name' => $request->nameCategory,
+            'name' => $request->Category,
         ]);
 
         return redirect(route('addCategory'));
@@ -107,9 +106,10 @@ class AdminController extends Controller
     public function addingUnderCategory(adminAddingUnderCategoryRequest $request)
     {
 
+
         under_categories::create([
-            'name' => $request->nameUnderCategory,
-            'category_id' => Categories::where('name', '=', $request->category)->first()->id,
+            'name' => $request->underCategory,
+            'category_id' => Categories::where('name', '=', $request->category_for_underCategory)->first()->id,
         ]);
 
         return redirect(route('addCategory'));
@@ -117,7 +117,6 @@ class AdminController extends Controller
 
     public function deleteCategory(Request $request)
     {
-
         Categories::where('name', '=', $request->category)->delete();
 
         return redirect(route('addCategory'));
@@ -125,7 +124,6 @@ class AdminController extends Controller
 
     public function deleteUnderCategory(Request $request)
     {
-
         under_categories::where('name', '=', $request->under_category)->delete();
 
         return redirect(route('addCategory'));
