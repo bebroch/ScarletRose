@@ -153,8 +153,9 @@ class HomePageController extends Controller
     public function userProfile($id)
     {
         $user = User::find($id);
+        $images = Pictures::where('user_id', '=', $id)->get();
 
-        return view('home.users', compact('user'));
+        return view('home.users', compact('user', 'images'));
     }
 
     // Поиск

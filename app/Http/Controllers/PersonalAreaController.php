@@ -23,7 +23,8 @@ class PersonalAreaController extends Controller
     // Юзер панель
     public function showPersonalArea()
     {
-        return view('personalArea.personalArea');
+        $images = Pictures::where('user_id', '=', Auth::user()->id)->get();
+        return view('personalArea.personalArea', compact('images'));
     }
 
     // Мои Картины
