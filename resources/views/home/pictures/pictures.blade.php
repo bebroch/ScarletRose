@@ -1,12 +1,13 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-    Картины
+Галерея
 @endsection
 
 
 @section('content')
     <div class="container-fluid mt-3">
+        @include('schems.alerts', ['alterStatus' => 'seccues'])
 
         @include('schems.topName', ['name' => 'Галерея'])
         @include('schems.search', ['search' => 'search'])

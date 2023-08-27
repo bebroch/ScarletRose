@@ -15,7 +15,7 @@
                     <div class="card">
                         <img src="" class="card-img-top">
                         <div class="card-body">
-                            <a href="{{ route('AdminUser', ['id' => $user->id]) }}">
+                            <a class="nav-link" href="{{ route('AdminUser', ['id' => $user->id]) }}">
                                 <h2 class="card-title">{{ $user->login }}</h2>
                                 <h4 class="card-title">{{ $user->firstname }} {{ $user->lastname }}</h4>
                                 <h6 class="card-title">{{ $user->email }}</h6>

@@ -1,11 +1,11 @@
-<div class="row row-cols-1 row-cols-md-3 mt-0 g-3">
+<div class="row row-cols-1 row-cols-md-3 mb-3 mt-0 g-3">
     @foreach ($images as $image)
         <div class="card-group">
             <div class="card rounded" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <a class="nav-link" href="{{ route('home') }}/{{ $image->id }}">
                     <img src="{{ Storage::url("$image->imagePath") }}" class="card-img-top rounded"
                         style="object-fit: cover; max-height: 40vh">
-                    <div class="card-body">
+                    <div class="card-body" style="overflow: hidden;">
                         <h3 class="card-title">{{ $image->name }}</h3>
                         <p class="card-text">{{ Str::limit($image->about, 100, '...') }}</p>
                         @if ($image->price)

@@ -6,9 +6,16 @@
 
 @section('content')
     <div class="container mt-3">
-        @include('schems.alerts')
+        @include('schems.alerts', ['alterStatus' => 'seccues'])
 
         @include('schems.topName', ['name' => 'Модерация картин'])
+
+
+        @if (empty($images->first()))
+            <div class="container-fluid text-center">
+                Пока что ничего нет.
+            </div>
+        @endif
 
         <div class="row row-cols-1 row-cols-md-3 mt-0 g-3 mb-3">
             @foreach ($images as $image)

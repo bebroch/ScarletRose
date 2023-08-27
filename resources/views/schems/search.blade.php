@@ -1,8 +1,5 @@
 <div class="container mt-3 g-3">
 
-    @include('schems.alerts')
-
-
     <form id="search-form" action="{{ route("$search") }}" method="GET">
         <div class="container-sm input-group">
 
