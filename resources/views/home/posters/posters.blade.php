@@ -1,7 +1,7 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-    Афиши
+    Афиша
 @endsection
 
 @section('content')
