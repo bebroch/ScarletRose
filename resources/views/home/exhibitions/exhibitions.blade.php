@@ -5,273 +5,126 @@
 @endsection
 
 @section('content')
-    <div class="container pt-3">
-        <div class="card text-center ">
+    <div class="container mt-3">
+        <div class="card-header mb-3">
             <div class="card-header">
+                @include('schems.topName', ['name' => "Выставки"])
                 <ul class="nav nav-pills card-header-pills">
                     <li class="nav-item">
-                        <a class="nav-link future" href="#" id="future">Будущие</a>
+                        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-future" type="button" role="tab" aria-controls="v-pills-future"
+                            aria-selected="false">Будущие</button>
                     </li>
                     <li class="nav-item ms-2">
-                        <a class="nav-link active" href="#" aria-current="true" id="active">Активные</a>
+                        <button class="nav-link active" id="v-pills-active-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-active" type="button" role="tab" aria-controls="v-pills-active"
+                            aria-selected="true">Активные</button>
                     </li>
                     <li class="nav-item ms-2">
-                        <a class="nav-link passive" href="#" id="passive">Прошедшие</a>
+                        <button class="nav-link" id="v-pills-passive-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-passive" type="button" role="tab" aria-controls="v-pills-passive"
+                            aria-selected="false">Прошедшие</button>
                     </li>
                 </ul>
             </div>
-            <div class="card-group p-4" style="display: none" id="firstBlock">
-                <div class="container-fluid">
-                    <div class="row row-cols-3">
+
+
+            <div class="tab-content" id="v-pills-tabContent" style="width:100%">
+                <div class="tab-pane fade" id="v-pills-future" role="tabpanel" aria-labelledby="v-pills-future-tab">
+
+                    <div class="row row-cols-1 row-cols-md-3">
                         @foreach ($exhibitionsFuture as $exhibition)
-                            <div class="container-fluid">
-                                <div class="col">
-                                    <div class="card">
-                                        <a class="nav-link" href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
-                                            <img src="..." class="card-img-top">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ $exhibition->title }}</h5>
-                                                <p class="card-text">{{ $exhibition->about }}</p>
-                                            </div>
-                                        </a>
-                                        @auth('web')
-                                            @if (Auth::user()->is_admin)
+                            <div class="col mt-3">
+                                <div class="card">
+                                    <a class="nav-link" href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $exhibition->title }}</h5>
+                                            <p class="card-text">{{ $exhibition->about }}</p>
+                                        </div>
+                                    </a>
+                                    <div class="card-footer bg-transparent border-success">
+                                        {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }}
+                                        -
+                                        {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
+                                    </div>
+                                    @auth('web')
+                                        @if (Auth::user()->is_admin)
+                                            <div class="card-footer">
                                                 <a class="btn btn-warning"
                                                     href="{{ route('editExhibition', ['id' => $exhibition->id]) }}">Редактировать
                                                     запись</a>
-                                            @endif
-                                        @endauth
-                                        <div class="card-footer bg-transparent border-success">
-                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }}
-                                            -
-                                            {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
-                                        </div>
-                                    </div>
+                                            </div>
+                                        @endif
+                                    @endauth
                                 </div>
                             </div>
                         @endforeach
                     </div>
+
                 </div>
-            </div>
-            <div class="card-group p-4" id="secondBlock">
-                <div class="container-fluid">
-                    <div class="row row-cols-3">
+
+                <div class="tab-pane fade show active" id="v-pills-active" role="tabpanel"
+                    aria-labelledby="v-pills-active-tab">
+
+                    <div class="row row-cols-1 row-cols-md-3">
                         @foreach ($exhibitionsActive as $exhibition)
-                            <div class="container-fluid">
-                                <div class="col">
-                                    <div class="card">
-                                        <a class="nav-link" href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
-                                            <img src="..." class="card-img-top">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ $exhibition->title }}</h5>
-                                                <p class="card-text">{{ $exhibition->about }}</p>
-                                            </div>
-                                        </a>
-                                        @auth('web')
-                                            @if (Auth::user()->is_admin)
+                            <div class="col mt-3">
+                                <div class="card">
+                                    <a class="nav-link" href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $exhibition->title }}</h5>
+                                            <p class="card-text">{{ $exhibition->about }}</p>
+                                        </div>
+                                    </a>
+                                    <div class="card-footer bg-transparent border-success">
+                                        {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }}
+                                        -
+                                        {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
+                                    </div>
+                                    @auth('web')
+                                        @if (Auth::user()->is_admin)
+                                            <div class="card-footer">
                                                 <a class="btn btn-warning"
                                                     href="{{ route('editExhibition', ['id' => $exhibition->id]) }}">Редактировать
                                                     запись</a>
-                                            @endif
-                                        @endauth
-                                        <div class="card-footer bg-transparent border-success">
-                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }}
-                                            -
-                                            {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
-                                        </div>
-                                    </div>
+                                            </div>
+                                        @endif
+                                    @endauth
                                 </div>
                             </div>
                         @endforeach
                     </div>
-                </div>
 
-            </div>
-            <div class="card-group p-4" style="display: none" id="thirdBlock">
-                <div class="container-fluid">
-                    <div class="row row-cols-3">
+                </div>
+                <div class="tab-pane fade" id="v-pills-passive" role="tabpanel" aria-labelledby="v-pills-passive-tab">
+                    <div class="row row-cols-1 row-cols-md-3">
                         @foreach ($exhibitionsPassive as $exhibition)
-                            <div class="container-fluid">
-                                <div class="col">
-                                    <div class="card">
-                                        <a class="nav-link" href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
-                                            <img src="..." class="card-img-top">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ $exhibition->title }}</h5>
-                                                <p class="card-text">{{ $exhibition->about }}</p>
-                                            </div>
-                                        </a>
-                                        @auth('web')
-                                            @if (Auth::user()->is_admin)
+                            <div class="col mt-3">
+                                <div class="card">
+                                    <a class="nav-link" href="{{ route('exhibition', ['id' => $exhibition->id]) }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $exhibition->title }}</h5>
+                                            <p class="card-text">{{ $exhibition->about }}</p>
+                                        </div>
+                                    </a>
+                                    <div class="card-footer bg-transparent border-success">
+                                        {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }}
+                                        -
+                                        {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
+                                    </div>
+                                    @auth('web')
+                                        @if (Auth::user()->is_admin)
+                                            <div class="card-footer">
                                                 <a class="btn btn-warning"
                                                     href="{{ route('editExhibition', ['id' => $exhibition->id]) }}">Редактировать
                                                     запись</a>
-                                            @endif
-                                        @endauth
-                                        <div class="card-footer bg-transparent border-success">
-                                            {{ Carbon\Carbon::parse($exhibition->start_at)->isoFormat('D MMMM YYYY года') }}
-                                            -
-                                            {{ Carbon\Carbon::parse($exhibition->end_at)->isoFormat('D MMMM YYYY года') }}
-                                        </div>
-                                    </div>
+                                            </div>
+                                        @endif
+                                    @endauth
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-
-
-
-
-
-    <script>
-        function removeAttribute(future, active, passive) {
-            future.classList.remove("active");
-            future.classList.remove("passive");
-
-            active.classList.remove("active");
-            active.classList.remove("passive");
-
-            passive.classList.remove("active");
-            passive.classList.remove("passive");
-        }
-
-        document.getElementById("active").addEventListener("click", function() {
-            removeAttribute(document.getElementById("future"), this, document.getElementById("passive"));
-
-            future.classList.add("passive");
-            passive.classList.add("passive");
-            active.classList.add("active");
-        });
-
-        document.getElementById("passive").addEventListener("click", function() {
-            future = document.getElementById("future");
-            active = document.getElementById("active");
-            if (document.getElementById("future").className.indexOf("active") != -1) {
-                console.log(1);
-                removeAttribute(document.getElementById("future"), document.getElementById("active"), this);
-
-                active.style.backgroundPosition = "0% 100%";
-                active.classList.add("active");
-                future.classList.add("passive");
-                this.classList.add("passive");
-
-
-                setTimeout(() => {
-                    active.classList.remove("active");
-                    active.classList.add("passive");
-                    this.classList.remove("passive");
-                    this.classList.add("active");
-                    active.style.backgroundPosition = "100% 100%";
-                }, 500);
-
-            } else {
-                console.log(2);
-
-                removeAttribute(document.getElementById("future"), document.getElementById("active"), this);
-                active.style.backgroundPosition = "100% 100%";
-                active.classList.add("passive");
-                future.classList.add("passive");
-                this.classList.add("active");
-            }
-        });
-
-        document.getElementById("future").addEventListener("click", function() {
-            passive = document.getElementById("passive");
-            active = document.getElementById("active");
-            if (document.getElementById("passive").className.indexOf("active") != -1) {
-                console.log(3);
-                removeAttribute(this, document.getElementById("active"), document.getElementById("passive"));
-
-                active.style.backgroundPosition = "100% 100%";
-                active.classList.add("active");
-                passive.classList.add("passive");
-                this.classList.add("passive");
-
-                setTimeout(() => {
-                    active.classList.remove("active");
-                    active.classList.add("passive");
-                    this.classList.remove("passive");
-                    this.classList.add("active");
-
-                    active.style.backgroundPosition = "0% 100%";
-                }, 500);
-
-            } else {
-                console.log(4);
-
-                removeAttribute(this, document.getElementById("active"), document.getElementById("passive"));
-                active.style.backgroundPosition = "0% 100%";
-                active.classList.add("passive");
-                passive.classList.add("passive");
-                this.classList.add("active");
-            }
-        });
-
-
-        document.getElementById("future").addEventListener("click", function() {
-            document.getElementById("firstBlock").style.display = "block";
-            document.getElementById("secondBlock").style.display = "none";
-            document.getElementById("thirdBlock").style.display = "none";
-        });
-
-        document.getElementById("active").addEventListener("click", function() {
-            document.getElementById("firstBlock").style.display = "none";
-            document.getElementById("secondBlock").style.display = "block";
-            document.getElementById("thirdBlock").style.display = "none";
-        });
-
-        document.getElementById("passive").addEventListener("click", function() {
-            document.getElementById("firstBlock").style.display = "none";
-            document.getElementById("secondBlock").style.display = "none";
-            document.getElementById("thirdBlock").style.display = "block";
-        });
-    </script>
-
-    <style>
-        .passive,
-        .active {
-
-            border: 0;
-
-            background-repeat: no-repeat;
-            background-image: linear-gradient(to right, #dd50b3, #dd50b3);
-
-            background-color: transparent;
-            border-radius: 10px;
-
-            transition: background-size 0.5s, color 0.5s;
-            text-decoration: none;
-        }
-
-
-        #active {
-            background-position: 50% 50%;
-            background-color: transparent;
-        }
-
-        #passive {
-            background-position: 0% 50%;
-            background-color: transparent;
-        }
-
-        #future {
-            background-position: 100% 50%;
-            background-color: transparent;
-        }
-
-        .active {
-            background-size: 100% 100%;
-            transition: background-size 0.5s, color 0.5s;
-        }
-
-        .passive {
-            background-size: 0% 100%;
-            transition: background-size 0.5s, color 0.5s;
-        }
-    </style>
-@endsection
+        @endsection

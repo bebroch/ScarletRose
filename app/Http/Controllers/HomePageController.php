@@ -12,16 +12,19 @@ use App\Models\under_categories;
 use App\Models\under_categories_pictures;
 use App\Models\User;
 use Carbon\Carbon;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
 
 class HomePageController extends Controller
 {
     // Показ картин
     public function showPictures()
     {
-        $images = Pictures::all();
+        $images = Pictures::orderBy('created_at', 'desc') // Сортировка по убыванию даты создания
+            ->where('status', '=', 1)
+            ->get();
         return view('home.pictures.pictures', compact('images'));
     }
+
 
     public function showPictures_id($id)
     {
@@ -61,42 +64,6 @@ class HomePageController extends Controller
 
 
         return view('home.pictures.picture', compact('image', 'user', 'categories'));
-
-
-
-
-        //
-
-
-        /*
-                $image = Pictures::find($id);
-
-                if (!$image) {
-                    return abort(404);
-                }
-
-                $user = User::find($image->user_id);
-
-                $under_categories = under_categories_pictures::where('picture_id', '=', $image->id)
-                    ->get()
-                    ->pluck('category_id')
-                    ->toArray();
-
-                $categoriesFromUnder = Categories::whereIn('id', $under_categories)->get();
-
-                $categoriesFromPictures = Categories::whereIn('id', Categories_pictures::where('picture_id', '=', $image->id)
-                    ->get()
-                    ->pluck('category_id')
-                    ->toArray())
-                    ->get();
-
-                $categories = $categoriesFromUnder->concat($categoriesFromPictures);
-
-                dd($categories);
-
-                return view('home.pictures.picture', compact('image', 'user', 'categories')); */
-
-
     }
 
 
@@ -186,9 +153,9 @@ class HomePageController extends Controller
     public function userProfile($id)
     {
         $user = User::find($id);
+        $images = Pictures::where('user_id', '=', $id)->get();
 
-        return view('home.users', compact('user'));
-
+        return view('home.users', compact('user', 'images'));
     }
 
     // Поиск
@@ -196,25 +163,9 @@ class HomePageController extends Controller
     {
         $query = $request->input('query');
 
-        switch ($request->filter) {
-            case 'name':
-                $images = Pictures::searchName($query);
-                break;
-            case 'about':
-                $images = Pictures::searchAbout($query);
-                break;
-            case 'size':
-                $images = Pictures::searchSize($query);
-                break;
-            case 'category':
-                $images = Pictures::searchCategory($query);
-                break;
-            case 'under_category':
-                $images = Pictures::searchUnderCategory($query);
-                break;
-        }
+        $images = Pictures::search($query, $request->filter, 0);
 
 
-        return view('home.pictures.pictures', ['images' => $images, 'query' => $query]); // Поменять
+        return view('home.pictures.pictures', ['images' => $images, 'query' => $query])->render();
     }
 }

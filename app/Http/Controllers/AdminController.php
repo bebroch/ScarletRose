@@ -45,6 +45,12 @@ class AdminController extends Controller
         return redirect(route('news'));
     }
 
+    public function deleteNew_process($id){
+        News::find($id)->delete();
+        session()->flash('status', 'Новость успешно удалена.');
+        return back();
+    }
+
     // Афиша
     public function showAddPoster()
     {
@@ -54,29 +60,26 @@ class AdminController extends Controller
 
     public function addingPoster(adminAddingPosterRequest $request)
     {
-        if($request->dayOrSpanDays === 'spanDays'){
+        if ($request->dayOrSpanDays === 'spanDays') {
             $request->validate([
                 'dateStart' => 'before_or_equal:dateEnd',
                 'dateEnd' => 'after_or_equal:dateStart',
             ]);
-        }
-        else{
-            dump('day');
+        } else {
             $request->validate([
                 'date' => 'required'
             ]);
         }
 
 
-        if($request->dayOrSpanDays === 'day'){
+        if ($request->dayOrSpanDays === 'day') {
             Posters::create([
                 'name' => $request->title,
                 'timeEventDay' => $request->date,
                 'location' => $request->location,
                 'about' => $request->about,
             ]);
-        }
-        else if($request->dayOrSpanDays === 'spanDays'){
+        } else if ($request->dayOrSpanDays === 'spanDays') {
             Posters::create([
                 'name' => $request->title,
                 'timeEventStart' => $request->dateStart,
@@ -89,19 +92,23 @@ class AdminController extends Controller
         return redirect(route('posters'));
     }
 
+    public function deletePoster_process($id){
+        Posters::find($id)->delete();
+        session()->flash('status', 'Афиша успешно удалена.');
+        return back();
+    }
+
     // Категории
     public function showAddCategory()
     {
-
         $categories = Categories::all();
         return view('adminPanel.adding.addCategory', compact('categories'));
     }
 
     public function addingCategory(adminAddingCategoryRequest $request)
     {
-
         Categories::create([
-            'name' => $request->nameCategory,
+            'name' => $request->Category,
         ]);
 
         return redirect(route('addCategory'));
@@ -109,10 +116,9 @@ class AdminController extends Controller
 
     public function addingUnderCategory(adminAddingUnderCategoryRequest $request)
     {
-
         under_categories::create([
-            'name' => $request->nameUnderCategory,
-            'category_id' => Categories::where('name', '=', $request->category)->first()->id,
+            'name' => $request->underCategory,
+            'category_id' => Categories::where('name', '=', $request->category_for_underCategory)->first()->id,
         ]);
 
         return redirect(route('addCategory'));
@@ -120,7 +126,6 @@ class AdminController extends Controller
 
     public function deleteCategory(Request $request)
     {
-
         Categories::where('name', '=', $request->category)->delete();
 
         return redirect(route('addCategory'));
@@ -128,7 +133,6 @@ class AdminController extends Controller
 
     public function deleteUnderCategory(Request $request)
     {
-
         under_categories::where('name', '=', $request->under_category)->delete();
 
         return redirect(route('addCategory'));
@@ -142,8 +146,6 @@ class AdminController extends Controller
 
     public function addingExhibition(adminAddingExhibition $request)
     {
-        dd($request);
-
         Exhibitions::create([
             'title' => $request->title,
             'start_at' => $request->start_at,
@@ -176,11 +178,20 @@ class AdminController extends Controller
         return redirect(route('exhibitions'));
     }
 
-    // Поиск
-    public function showSearch()
+    // Проверка картин
+    public function pictureVerification()
     {
+        $images = Pictures::where('status', '=', 0)->get();
 
-        return view('adminPanel.AdminSearch');
+        return view('adminPanel.AdminPictureVerification', compact('images'));
+    }
+
+    public function pictureAccepting($id)
+    {
+        $picture = Pictures::find($id);
+        $picture->status = 1;
+        $picture->save();
+        return back();
     }
 
     // Пользователи
@@ -208,6 +219,6 @@ class AdminController extends Controller
     {
         Storage::delete(Pictures::find($id)->imagePath);
         Pictures::find($id)->delete();
-        return redirect(route('home'));
+        return back();
     }
 }

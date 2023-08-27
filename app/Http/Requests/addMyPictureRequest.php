@@ -30,6 +30,8 @@ class addMyPictureRequest extends FormRequest
             'uploadPicture' => 'required|image:jpg, jpeg, png',
             'namePicture' => 'required|string',
             'aboutPicture' => 'required|string',
+            'width' => 'required|integer',
+            'height' => 'required|integer',
             'price' => 'integer|gt:0|lt:4294967295|required_without:exhibitions',
             'exhibitions' => 'required_without:price',
         ];

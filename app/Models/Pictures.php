@@ -13,6 +13,43 @@ class Pictures extends Model
 
     protected $guarded = false;
 
+    protected function search($query, $tag, $id)
+    {
+        if ($id === 0) {
+            switch ($tag) {
+                case 'name':
+                    return Pictures::searchName($query);
+                case 'about':
+                    return Pictures::searchAbout($query);
+                case 'size':
+                    return Pictures::searchSize($query);
+                case 'category':
+                    return Pictures::searchCategory($query);
+                case 'under_category':
+                    return Pictures::searchUnderCategory($query);
+            }
+        }
+
+        switch ($tag) {
+            case 'name':
+                return Pictures::searchName($query)
+                    ->where('user_id', '=', $id);
+            case 'about':
+                return Pictures::searchAbout($query)
+                    ->where('user_id', '=', $id);
+            case 'size':
+                return Pictures::searchSize($query)
+                    ->where('user_id', '=', $id);
+            case 'category':
+                return Pictures::searchCategory($query)
+                    ->where('user_id', '=', $id);
+            case 'under_category':
+                return Pictures::searchUnderCategory($query)
+                    ->where('user_id', '=', $id);
+        }
+    }
+
+
     protected function searchName($query)
     {
         return $this->where('name', 'LIKE', '%' . $query . '%')->get();
@@ -28,18 +65,16 @@ class Pictures extends Model
 
         if (Str::contains($query, ',')) {
             $data = explode(',', $query);
-        }
-
-        if (Str::contains($query, ' ')) {
+        } else if (Str::contains($query, ' ')) {
             $data = explode(' ', $query);
-        }
-
-        if (Str::contains($query, 'x')) {
+        } else if (Str::contains($query, 'x')) {
             $data = explode('x', $query);
-        }
-
-        if (Str::contains($query, 'х')) {
+        } else if (Str::contains($query, 'х')) {
             $data = explode('х', $query);
+        } else {
+            return $this->where('width', 'LIKE', '%' . $query . '%')
+                ->orWhere('height', 'LIKE', '%' . $query . '%')
+                ->get();
         }
 
 

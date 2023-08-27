@@ -22,8 +22,8 @@ class adminAddingUnderCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nameUnderCategory' => 'required|unique:under_categories,name',
-            'category' => 'required'
+            'underCategory' => 'required|unique:under_categories,name',
+            'category_for_underCategory' => 'required'
         ];
     }
 }

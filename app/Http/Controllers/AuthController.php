@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
@@ -44,15 +47,20 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email'
         ]);
 
+
         $user = User::create([
             'login' => $data['login'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
 
+        event(new Registered($user));
+
         if($user){
             auth('web')->login($user);
         }
+
+        session()->flash('status', 'Регистрация прошла успешно! Пожалуйста, подтвердите свой адрес электронной почты.');
 
         return redirect(route('home'));
     }

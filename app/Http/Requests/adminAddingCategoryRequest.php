@@ -26,7 +26,7 @@ class adminAddingCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nameCategory' => 'required|unique:categories,name'
+            'Category' => 'required|unique:categories,name'
         ];
     }
 }
