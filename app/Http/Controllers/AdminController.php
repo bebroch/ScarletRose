@@ -197,15 +197,16 @@ class AdminController extends Controller
     // Пользователи
     public function showUsers()
     {
-
         $users = User::all();
         return view('adminPanel.users.AdminUsers', compact('users'));
     }
 
     public function showUser($id)
     {
+        $images = Pictures::where('user_id', '=', $id)->get();
         $user = User::find($id);
-        return view('adminPanel.users.AdminUser', compact('user'));
+
+        return view('adminPanel.users.AdminUser', compact('user', 'images'));
     }
 
     public function deleteUser(Request $request)

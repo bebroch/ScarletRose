@@ -50,14 +50,11 @@ class PersonalAreaController extends Controller
     {
         $isFull = false;
         $categories = Categories::all();
-        if (
-            Pictures::where([
-                ['user_id', '=', Auth::user()->id],
-                ['status', '=', 0]
-            ])
-            ->count() > 5
-        ) {
+
+        $countPicture = Pictures::where([['user_id', '=', Auth::user()->id],['status', '=', 0]])->count();
+        if ($countPicture >= 5) {
             $isFull = true;
+            session()->flash('status', 'Вы уже отправили 5 картин на проверку');
         }
 
         return view('personalArea.createCard', compact('categories', 'isFull'));

@@ -78,7 +78,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col text-center">
-                        <button type="submit" style="width: 30%" class="btn btn-success">Добавить</button>
+                        <button type="submit" style="width: 35%" class="btn btn-success">Добавить</button>
                     </div>
                 </div>
             </div>
