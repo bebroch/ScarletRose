@@ -1,10 +1,11 @@
 @extends('schems.topPanelSchema')
 
+@section('title')
+{{$poster->name}}
+@endsection
+
 
 @section('content')
-
-
-
 
 <div class="container mt-3">
     @include('schems.backbutton')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\addMyPictureRequest;
+use App\Http\Requests\updateInfoMyPicture;
 use App\Models\Categories;
 use App\Models\categories_pictures;
 use App\Models\Exhibitions;
@@ -40,8 +41,6 @@ class PersonalAreaController extends Controller
 
         $images = Pictures::search($query, $request->filter, Auth::user()->id);
 
-
-
         return view('personalArea.myPictures', ['images' => $images, 'query' => $query]); // Поменять
     }
 
@@ -50,11 +49,13 @@ class PersonalAreaController extends Controller
     {
         $isFull = false;
         $categories = Categories::all();
-        if (Pictures::where([
-            ['user_id', '=', Auth::user()->id],
-            ['status', '=', 0]
+        if (
+            Pictures::where([
+                ['user_id', '=', Auth::user()->id],
+                ['status', '=', 0]
             ])
-            ->count() > 5){
+            ->count() > 5
+        ) {
             $isFull = true;
         }
 
@@ -105,6 +106,8 @@ class PersonalAreaController extends Controller
             }
         }
 
+        session()->flash('status', 'Ваша работа передана на проверку.');
+
         return redirect(route('home'));
     }
 
@@ -112,13 +115,49 @@ class PersonalAreaController extends Controller
     {
         Storage::delete(Pictures::find($id)->imagePath);
         Pictures::find($id)->delete();
+        session()->flash('status', 'Ваша картина успешно удалена');
         return redirect(route('myPictures'));
     }
 
     // Редактировать картину
     public function editMyPicture($id)
     {
-        return view('personalArea.editMyPicture');
+        $picture = Pictures::find($id);
+        return view('personalArea.editMyPicture', compact('picture'));
+    }
+
+    public function editMyPicture_process(updateInfoMyPicture $request)
+    {
+
+        $exhibitionsNew = $request->exhibitions;
+        $exhibitionsOld = Exhibitions_pictures::where('picture_id', '=', $request->id)->pluck('exhibition_id')->toArray();
+
+        foreach ($exhibitionsOld as $exhibition) {
+            if (!in_array($exhibition, $exhibitionsNew)) {
+                $exhibitionToDelete = Exhibitions_pictures::where('exhibition_id', '=', $exhibition)
+                    ->where('picture_id', '=', $request->id);
+                if ($exhibitionToDelete) {
+                    $exhibitionToDelete->delete();
+                }
+            } else {
+                $key = array_search($exhibition, $exhibitionsNew);
+                unset($exhibitionsNew[$key]);
+            }
+        }
+
+        foreach ($exhibitionsNew as $exhibitionNew) {
+            Exhibitions_pictures::create([
+                'exhibition_id' => $exhibitionNew,
+                'picture_id' => $request->id
+            ]);
+        }
+
+
+        Pictures::find($request->id)->update(['price' => $request->price]);
+
+        session()->flash('status', 'Ваша картина успешно изменена');
+
+        return redirect(route('myPictures'));
     }
 
     // Изменить информацию
@@ -137,7 +176,7 @@ class PersonalAreaController extends Controller
             'about' => $request->about ? $request->about : "",
         ];
 
-        User::where('id', '=', Auth::user()->id)->update($data);
+        User::find(Auth::user()->id)->update($data);
 
         return redirect(route('personalArea'));
     }

@@ -6,6 +6,8 @@
 
 @section('content')
     <div class="container mt-3 mb-3">
+
+        @include('schems.topName', ['name' => 'Пользователи'])
         <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach ($users as $user)
                 <div class="col">

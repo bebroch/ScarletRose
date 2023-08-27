@@ -1,6 +1,7 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
+{{ $exhibition->title }}
 @endsection
 
 @section('content')

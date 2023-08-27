@@ -1,11 +1,14 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-    Добавить Новость
+    Категории
 @endsection
 
 @section('content')
-    <div class="card container mt-4 p-4">
+    <div class="mt-3">
+        @include('schems.topName', ['name' => 'Категории'])
+    </div>
+    <div class="card container mt-3 p-3">
         <div class="row">
             <div class="col-md border-end">
                 <form action="{{ route('addingCategory') }}">
@@ -110,7 +113,7 @@
 
 
 
-{{--
+    {{--
 
 
 

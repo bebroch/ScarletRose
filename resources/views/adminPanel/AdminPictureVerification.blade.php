@@ -5,13 +5,10 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        @if (empty($images->first()))
-            <div class="container text-center mt-3">
-                В данный момент нет картин на проверку.
-            </div>
-        @endif
+    <div class="container mt-3">
+        @include('schems.alerts')
 
+        @include('schems.topName', ['name' => 'Модерация картин'])
 
         <div class="row row-cols-1 row-cols-md-3 mt-0 g-3 mb-3">
             @foreach ($images as $image)

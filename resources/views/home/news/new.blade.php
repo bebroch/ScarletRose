@@ -1,5 +1,9 @@
 @extends('schems.topPanelSchema')
 
+@section('title')
+{{$new->name}}
+@endsection
+
 
 @section('content')
 

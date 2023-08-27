@@ -190,6 +190,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/PersonalArea/AddMyPicture/adderPicture_process', [PersonalAreaController::class, 'adderPicture'])->name('adderPicture');
     // Изменить картину
     Route::get('/PersonalArea/MyPictures/{id}/editPicture', [PersonalAreaController::class, 'editMyPicture'])->name('editMyPicture');
+    Route::post('/PersonalArea/MyPictures/editPicture_process', [PersonalAreaController::class, 'editMyPicture_process'])->name('editMyPicture_process');
     // Удалить картину
     Route::get('/PersonalArea/AddMyPicture/{id}/deletePicture_process', [PersonalAreaController::class, 'deletePicture'])->name('deleteMyPicture');
     // Обновить информацию

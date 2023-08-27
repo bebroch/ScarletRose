@@ -8,10 +8,13 @@
 
 <div class="container mt-5">
     <div class="card p-3 pt-0 pb-0 mx-auto" style="max-width: 27rem;">
+        <div class="text-center pt-3" style="">
+            <h3>Изменить информацию</h3>
+        </div>
 
         <form action="{{route('updateInformation_process')}}" method="POST">
             @csrf
-            <div class="input-group mb-3 mt-3">
+            <div class="input-group mb-3 mt-2">
                 <label class="input-group-text" for="inputGroupSelect01">Логин</label>
                 <input name="login" value="{{Auth::user()->login}}" placeholder="Введите логин" type="text" aria-label="First name" class="form-control">
             </div>

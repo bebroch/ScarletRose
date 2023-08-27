@@ -19,9 +19,12 @@ class HomePageController extends Controller
     // Показ картин
     public function showPictures()
     {
-        $images = Pictures::inRandomOrder()->where('status', '=', 1)->get();
+        $images = Pictures::orderBy('created_at', 'desc') // Сортировка по убыванию даты создания
+            ->where('status', '=', 1)
+            ->get();
         return view('home.pictures.pictures', compact('images'));
     }
+
 
     public function showPictures_id($id)
     {
@@ -61,7 +64,6 @@ class HomePageController extends Controller
 
 
         return view('home.pictures.picture', compact('image', 'user', 'categories'));
-
     }
 
 
@@ -153,7 +155,6 @@ class HomePageController extends Controller
         $user = User::find($id);
 
         return view('home.users', compact('user'));
-
     }
 
     // Поиск
