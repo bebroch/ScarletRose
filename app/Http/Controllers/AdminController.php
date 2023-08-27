@@ -45,6 +45,12 @@ class AdminController extends Controller
         return redirect(route('news'));
     }
 
+    public function deleteNew_process($id){
+        News::find($id)->delete();
+        session()->flash('status', 'Новость успешно удалена.');
+        return back();
+    }
+
     // Афиша
     public function showAddPoster()
     {
@@ -86,10 +92,15 @@ class AdminController extends Controller
         return redirect(route('posters'));
     }
 
+    public function deletePoster_process($id){
+        Posters::find($id)->delete();
+        session()->flash('status', 'Афиша успешно удалена.');
+        return back();
+    }
+
     // Категории
     public function showAddCategory()
     {
-
         $categories = Categories::all();
         return view('adminPanel.adding.addCategory', compact('categories'));
     }
@@ -105,8 +116,6 @@ class AdminController extends Controller
 
     public function addingUnderCategory(adminAddingUnderCategoryRequest $request)
     {
-
-
         under_categories::create([
             'name' => $request->underCategory,
             'category_id' => Categories::where('name', '=', $request->category_for_underCategory)->first()->id,

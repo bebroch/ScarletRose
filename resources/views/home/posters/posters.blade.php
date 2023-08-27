@@ -8,7 +8,7 @@
     <div class="container mt-3">
         <div class="card-header mb-3">
 
-            @include('schems.topName', ['name' => "Афиша"])
+            @include('schems.topName', ['name' => 'Афиша'])
             <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
                     <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-future"
@@ -28,10 +28,10 @@
         </div>
 
 
-        <div class="tab-content" id="v-pills-tabContent" style="width:100%">
+        <div class="tab-content mb-3" id="v-pills-tabContent" style="width:100%">
             <div class="tab-pane fade" id="v-pills-future" role="tabpanel" aria-labelledby="v-pills-future-tab">
 
-                <div class="row row-cols-1 row-cols-md-2 mb-2">
+                <div class="row row-cols-1 g-3 row-cols-md-2">
                     @foreach ($postersF as $poster)
                         <div class="card-deck mt-2">
                             <div class="card">
@@ -41,9 +41,17 @@
                                         <p class="card-text">
                                         <h5>{{ $poster->about }}</h5>
                                         </p>
-                                        <button class="btn btn-primary">Смотреть</button>
                                     </div>
                                 </a>
+
+                                @auth('web')
+                                    @if (Auth::user()->is_admin)
+                                        <div class="card-footer">
+                                            <a class="btn btn-danger"
+                                                href="{{ route('deletePoster_process', ['id' => $poster->id]) }}">Удалить афишу</a>
+                                        </div>
+                                    @endif
+                                @endauth
                                 <div class="card-footer">
                                     <small class="text-muted">
                                         @if (!empty($poster->date))
@@ -64,7 +72,7 @@
 
             <div class="tab-pane fade show active" id="v-pills-active" role="tabpanel" aria-labelledby="v-pills-active-tab">
 
-                <div class="row row-cols-1 row-cols-md-2">
+                <div class="row row-cols-1 g-3 row-cols-md-2">
                     @foreach ($postersA as $poster)
                         <div class="card-deck mt-2">
                             <div class="card">
@@ -74,9 +82,16 @@
                                         <p class="card-text">
                                         <h5>{{ $poster->about }}</h5>
                                         </p>
-                                        <button class="btn btn-primary">Смотреть</button>
                                     </div>
                                 </a>
+                                @auth('web')
+                                    @if (Auth::user()->is_admin)
+                                        <div class="card-footer">
+                                            <a class="btn btn-danger"
+                                                href="{{ route('deletePoster_process', ['id' => $poster->id]) }}">Удалить афишу</a>
+                                        </div>
+                                    @endif
+                                @endauth
                                 <div class="card-footer">
                                     <small class="text-muted">
                                         @if (!empty($poster->timeEventStart))
@@ -95,9 +110,9 @@
 
             </div>
             <div class="tab-pane fade" id="v-pills-passive" role="tabpanel" aria-labelledby="v-pills-passive-tab">
-                <div class="row row-cols-1 row-cols-md-2">
+                <div class="row row-cols-1 g-3 row-cols-md-2">
                     @foreach ($postersP as $poster)
-                        <div class="card-deck mt-2">
+                        <div class="card-deck">
                             <div class="card">
                                 <a href="{{ route('posters') }}/{{ $poster->id }}" class="nav-link">
                                     <div class="card-body">
@@ -105,9 +120,16 @@
                                         <p class="card-text">
                                         <h5>{{ $poster->about }}</h5>
                                         </p>
-                                        <button class="btn btn-primary">Смотреть</button>
                                     </div>
                                 </a>
+                                @auth('web')
+                                    @if (Auth::user()->is_admin)
+                                        <div class="card-footer">
+                                            <a class="btn btn-danger"
+                                                href="{{ route('deletePoster_process', ['id' => $poster->id]) }}">Удалить афишу</a>
+                                        </div>
+                                    @endif
+                                @endauth
                                 <div class="card-footer">
                                     <small class="text-muted">
                                         @if (!empty($poster->timeEventEnd))

@@ -19,7 +19,7 @@
             <!-- Главное меню -->
 
             <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('imagesAsset/logo.png') }}" height="70px" class="d-inline-block align-text-top">
+                <img src="{{ asset('imagesAsset/logo.png') }}" height="75px" class="d-inline-block align-text-top">
             </a>
 
             @guest('web')

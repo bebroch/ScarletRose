@@ -14,9 +14,16 @@
                     <a href="{{ route('news') }}/{{ $new->id }}" class="nav-link">
                         <h5 class="card-title">{{ $new->name }}</h5>
                         <p class="card-text">{{ $new->about }}</p>
-                        <button class="btn btn-primary">Смотреть</button>
                     </a>
                 </div>
+                @auth('web')
+                    @if (Auth::user()->is_admin)
+                        <div class="card-footer">
+                            <a class="btn btn-danger"
+                                href="{{ route('deleteNew_process', ['id' => $new->id]) }}">Удалить новость</a>
+                        </div>
+                    @endif
+                @endauth
             </div>
         @endforeach
     </div>

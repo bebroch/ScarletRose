@@ -203,10 +203,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         Route::get('/AdminPanel', [AdminController::class, 'index'])->name('admin');
         Route::get('/AdminPanel/AddNew', [AdminController::class, 'showAddNew'])->name('addNew');
         Route::get('/AdminPanel/AddNew_process', [AdminController::class, 'addingNew'])->name('addingNew');
+        Route::get('/AdminPanel/{id}/deleteNew_process', [AdminController::class, 'deleteNew_process'])->name('deleteNew_process');
 
         // Добавить афишу
         Route::get('/AdminPanel/AddPoster', [AdminController::class, 'showAddPoster'])->name('addPoster');
         Route::get('/AdminPanel/AddPoster_process', [AdminController::class, 'addingPoster'])->name('addingPoster');
+        Route::get('/AdminPanel/{id}/DeletePoster_process', [AdminController::class, 'deletePoster_process'])->name('deletePoster_process');
 
         // Добавить категорию
         Route::get('/AdminPanel/AddCategory', [AdminController::class, 'showAddCategory'])->name('addCategory');
