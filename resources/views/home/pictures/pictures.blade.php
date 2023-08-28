@@ -12,7 +12,7 @@
         @include('schems.topName', ['name' => 'Галерея'])
         @include('schems.search', ['search' => 'search'])
 
-        <div class="container" id="search-results">
+        <div class="container mb-3" id="search-results">
             @include('home.pictures.formPictures')
         </div>
     </div>
