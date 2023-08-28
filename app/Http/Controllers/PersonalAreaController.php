@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateMyInfo;
+use Illuminate\Database\Console\DumpCommand;
 
 class PersonalAreaController extends Controller
 {
@@ -164,17 +166,18 @@ class PersonalAreaController extends Controller
         return view('personalArea.aboutRefactoring');
     }
 
-    public function updateMyInformationForm_process(Request $request)
+    public function updateMyInformationForm_process(UpdateMyInfo $request)
     {
-        $data = [
-            'login' => $request->login ? $request->login : "",
-            'firstname' => $request->firstname ? $request->firstname : "",
-            'lastname' => $request->lastname ? $request->lastname : "",
-            'phone' => $request->phone ? $request->phone : "",
-            'about' => $request->about ? $request->about : "",
-        ];
 
-        User::find(Auth::user()->id)->update($data);
+        $user = User::find(Auth::user()->id);
+
+        $user->login = $request->login ? $request->login : "";
+        $user->firstname = $request->firstname ? $request->firstname : "";
+        $user->lastname = $request->lastname ? $request->lastname : "";
+        $user->phone = $request->phone ? $request->phone : "";
+        $user->about = $request->about ? $request->about : "";
+
+        $user->save();
 
         return redirect(route('personalArea'));
     }

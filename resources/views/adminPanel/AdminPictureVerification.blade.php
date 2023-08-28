@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container mt-3">
-        @include('schems.alerts', ['alterStatus' => 'seccues'])
+        @include('schems.alerts', ['alterStatus' => 'success'])
 
         @include('schems.topName', ['name' => 'Модерация картин'])
 

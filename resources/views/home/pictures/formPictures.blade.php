@@ -1,4 +1,4 @@
-<div class="row row-cols-1 row-cols-md-3 mb-3 mt-0 g-3">
+<div class="row row-cols-1 row-cols-md-3 mt-0 g-3">
     @foreach ($images as $image)
         <div class="card-group">
             <div class="card rounded" style="display: flex; flex-direction: column; justify-content: space-between;">
