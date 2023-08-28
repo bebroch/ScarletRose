@@ -161,11 +161,9 @@ class HomePageController extends Controller
     // Поиск
     public function search(Request $request)
     {
-        $query = $request->input('query');
-
+        $query = $request->input('search');
         $images = Pictures::search($query, $request->filter, 0);
 
-
-        return view('home.pictures.pictures', ['images' => $images, 'query' => $query])->render();
+        return view('home.pictures.formPictures', ['images' => $images, 'query' => $query]);
     }
 }

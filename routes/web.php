@@ -7,6 +7,7 @@ use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PersonalAreaController;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -277,16 +278,16 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/aa', function () {
-    User::where('email', '=', 'xyusose@yandex.ru')->delete();
-
-    $user = User::create([
-        'login' => 'asdasdas',
-        'email' => 'xyusose@yandex.ru',
-        'password' => bcrypt('asdsadasdgashjg'),
-    ]);
-
-    return event(new Registered($user));
 
 
+
+Route::get('/bb', function(){
+    return view('testblade');
 });
+
+Route::get('/updatebb', function(Request $request) {
+    $search = $request->search;
+
+    return view('testbladeUpdate', compact('search'));
+});
+

@@ -1,3 +1,9 @@
+@if (empty($images->first()) && !empty($query))
+    <div class="container-fluid text-center mt-3">
+        По запросу "{{ $query }}" ничего не удалось найти.
+    </div>
+@endif
+
 <div class="row row-cols-1 row-cols-md-3 mt-0 g-3">
     @foreach ($images as $image)
         <div class="card-group">
@@ -13,6 +19,21 @@
                         @endif
                     </div>
                 </a>
+
+                @if ($isPersonalArea ?? false)
+                    @auth('web')
+                        <div class="card-footer">
+                            <a class="btn btn-warning"
+                                href="{{ route('editMyPicture', ['id' => $image->id]) }}">Редактировать запись</a>
+                            <!-- Кнопка-триггер модального окна -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#{{ $image->id }}">
+                                Удалить картину
+                            </button>
+                        </div>
+                    @endauth
+                @endif
+
                 @auth('web')
                     @if (Auth::user()->is_admin)
                         <div class="card-footer">

@@ -1,16 +1,16 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-Галерея
+    Галерея
 @endsection
 
 
 @section('content')
     <div class="container-fluid mt-3">
         @include('schems.alerts', ['alterStatus' => 'success'])
-
         @include('schems.topName', ['name' => 'Галерея'])
-        @include('schems.search', ['search' => 'search'])
+
+        @include('schems.search')
 
         <div class="container mb-3" id="search-results">
             @include('home.pictures.formPictures')
@@ -19,20 +19,25 @@
 @endsection
 
 <script>
-    const searchQuery = document.getElementById('search-query');
-    const searchResults = document.getElementById('search-results');
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('search-button').addEventListener('click', function() {
+            var xhr = new XMLHttpRequest();
 
-    searchQuery.addEventListener('input', function() {
-        const query = searchQuery.value;
-        if (query.length >= 3) { // Отправлять запрос после ввода хотя бы 3 символов
-            fetch(`{{ route('search') }}?query=${query}`)
-                .then(response => response.text())
-                .then(data => {
-                    searchResults.innerHTML = data;
-                });
-        } else {
-            searchResults.innerHTML = '';
-        }
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.getElementById('search-results').innerHTML = xhr.responseText;
+                } else {
+                    console.error('Ошибка при обновлении содержимого:', xhr.statusText);
+                }
+            };
+
+            var search = document.getElementById('search-query').value;
+            var route = '{{ route('search') }}';
+            var filter = document.getElementById('filter-query').value;
+
+            xhr.open('GET', route + '?search=' + search + '&filter=' + filter, true);
+            xhr.send();
+        });
     });
 </script>
 

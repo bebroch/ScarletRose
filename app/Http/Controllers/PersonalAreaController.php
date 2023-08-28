@@ -32,19 +32,18 @@ class PersonalAreaController extends Controller
     // Мои Картины
     public function showMyPictureForm()
     {
-        $images = Pictures::all()
-            ->where('user_id', '=', Auth::user()->id);
+        $images = Pictures::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
 
         return view('personalArea.myPictures', compact('images'));
     }
 
     public function search(Request $request)
     {
-        $query = $request->input('query');
+        $query = $request->input('search');
 
         $images = Pictures::search($query, $request->filter, Auth::user()->id);
 
-        return view('personalArea.myPictures', ['images' => $images, 'query' => $query]); // Поменять
+        return view('home.pictures.formPictures', ['images' => $images, 'query' => $query, 'isPersonalArea' => true]);
     }
 
     // Добавить картину

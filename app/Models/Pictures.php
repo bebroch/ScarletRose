@@ -15,6 +15,8 @@ class Pictures extends Model
 
     protected function search($query, $tag, $id)
     {
+
+
         if ($id === 0) {
             switch ($tag) {
                 case 'name':
@@ -29,6 +31,7 @@ class Pictures extends Model
                     return Pictures::searchUnderCategory($query);
             }
         }
+
 
         switch ($tag) {
             case 'name':
