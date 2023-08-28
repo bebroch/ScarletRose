@@ -10,7 +10,6 @@
         <div class="mt-3">
             @include('schems.topName')
         </div>
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 mb-3">
@@ -46,8 +45,9 @@
                     </div>
                 </div>
                 @if (!empty($images->first()))
-                    <div class="col-md">
-                        <div class="card p-3 pt-1">
+                    <div class="col-md mb-3">
+                        <div class="card p-3">
+                            @include('schems.topName', ['name' => 'Картины'])
                             @include('home.pictures.formPictures')
                         </div>
                     </div>

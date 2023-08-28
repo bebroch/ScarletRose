@@ -190,8 +190,11 @@
 
                             <!-- Выйти -->
                             <li class="nav-item">
-                                <a class="nav-link" style="font-size: 20px;" aria-current="page"
-                                    href="{{ route('logout') }}">Выйти</a>
+                                <form action="{{route('logout')}}" method="POST">
+                                    @csrf
+                                    <button class="nav-link" style="font-size: 20px;" type="text">Выйти</button>
+
+                                </form>
                             </li>
                         </ul>
                     </div>
