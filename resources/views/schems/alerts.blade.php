@@ -1,5 +1,5 @@
 @if (Session::has('status'))
-    <div class="alert alert-{{ $alterStatus }}">
+    <div class="container alert alert-{{ $alterStatus }}">
         {{ Session::get('status') }}
     </div>
 @endif

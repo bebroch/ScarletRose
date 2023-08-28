@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="container-fluid mt-3">
-        @include('schems.alerts', ['alterStatus' => 'seccues'])
+        @include('schems.alerts', ['alterStatus' => 'success'])
 
         @include('schems.topName', ['name' => 'Галерея'])
         @include('schems.search', ['search' => 'search'])

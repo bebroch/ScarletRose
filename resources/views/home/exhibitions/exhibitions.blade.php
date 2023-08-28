@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-    <div class="container mt-3">
+    <div class="container mt-3 mb-3">
         <div class="card-header mb-3">
             <div class="card-header">
-                @include('schems.topName', ['name' => "Выставка"])
+                @include('schems.topName', ['name' => 'Выставка'])
                 <ul class="nav nav-pills card-header-pills">
                     <li class="nav-item">
                         <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
@@ -127,4 +127,6 @@
                     </div>
                 </div>
             </div>
-        @endsection
+        </div>
+    </div>
+@endsection
