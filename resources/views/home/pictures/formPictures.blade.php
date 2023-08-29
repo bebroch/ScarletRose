@@ -8,7 +8,7 @@
     @foreach ($images as $image)
         <div class="card-group">
             <div class="card rounded" style="display: flex; flex-direction: column; justify-content: space-between;">
-                <a class="nav-link" href="{{ route('home') }}/{{ $image->id }}">
+                <a class="nav-link" href="{{ route('picture', ['id' => $image->id]) }}">
                     <img src="{{ Storage::url("$image->imagePath") }}" class="card-img-top rounded"
                         style="object-fit: cover; max-height: 40vh">
                     <div class="card-body" style="overflow: hidden;">
@@ -46,27 +46,8 @@
                     @endif
                 @endauth
             </div>
-            <!-- Модальное окно -->
-            <div class="modal fade" id="{{ $image->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Удаление картины</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Закрыть"></button>
-                        </div>
-                        <div class="modal-body">
-                            Вы действительно хотите удалить - {{ $image->name }}?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                            <a class="btn btn-danger" href="{{ route('deletePicture', ['id' => $image->id]) }}">Удалить
-                                картину</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            @include('schems.deletePictureModalWindow')
         </div>
     @endforeach
 </div>

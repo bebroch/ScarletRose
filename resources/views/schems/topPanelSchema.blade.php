@@ -36,11 +36,11 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li>
                                 <a class="nav-link" style="font-size: 25px"
-                                    href="{{ route('login') }}">{{ __('Вход') }}</a>
+                                    href="{{ route('login_process') }}">{{ __('Вход') }}</a>
                             </li>
                             <li>
                                 <a class="nav-link" style="font-size: 25px"
-                                    href="{{ route('register') }}">{{ __('Регистрация') }}</a>
+                                    href="{{ route('register_proccess') }}">{{ __('Регистрация') }}</a>
                             </li>
                     </div>
                     <!-- End Имя пользователя -->
@@ -49,7 +49,7 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <!-- Галерея -->
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('home') }}"
+                                <a class="nav-link" aria-current="page" href="{{ route('pictures') }}"
                                     style="font-size: 20px;">Галерея</a>
                             </li>
                             <!-- Новости -->
@@ -95,7 +95,7 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <!-- Галерея -->
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('home') }}"
+                                <a class="nav-link" aria-current="page" href="{{ route('pictures') }}"
                                     style="font-size: 20px;">Галерея</a>
                             </li>
                             <!-- Новости -->

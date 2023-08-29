@@ -1,32 +1,5 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
-
-use App\Http\Controllers\PicturesController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\PostersController;
-use App\Http\Controllers\ExhibitionsController;
-use App\Http\Controllers\UsersController;
-
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\MyPicturesController;
-use App\Http\Controllers\CreatePictureController;
-use App\Http\Controllers\EditPictureController;
-use App\Http\Controllers\DeletePictureController;
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\UpdateMyInformationController;
-
-use App\Http\Controllers\Admin\NewsController;
-use App\Http\Controllers\Admin\PosterController;
-use App\Http\Controllers\Admin\ExhibitionController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\UnderCategoryController;
-
-
-
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -54,18 +27,20 @@ Route::group(['controller' => AAcontroller::class, 'prefix' => 'AA', ], function
 // Перенаправление
 Route::get('/', function () {
     return redirect(route('pictures'));
-});
+})->name('home');
+
+route::group(['namespace' => 'App\Http\Controllers'], function(){
 
 // Вход и регистрация
 Route::group(['namespace' => 'Auth', 'prefix' => 'Auth'], function () {
 
     // Вход
-    Route::group(['controller' => LoginController::class, 'prefix' => 'Login', 'controllers' => 'LoginController'], function () {
+    Route::group(['controller' => App\Http\Controllers\Auth\LoginController::class, 'prefix' => 'Login', 'controllers' => 'LoginController'], function () {
         Route::get('/login_process', 'process')->name('login_process');
     });
 
     // Регистрация
-    Route::group(['controller' => RegisterController::class, 'prefix' => 'Registr'], function () {
+    Route::group(['controller' => App\Http\Controllers\Auth\RegisterController::class, 'prefix' => 'Registr'], function () {
         Route::get('/register_proccess', 'process')->name('register_proccess');
     });
 });
@@ -74,88 +49,82 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'Auth'], function () {
 Route::group(['namespace' => 'Home', 'prefix' => 'Home'], function () {
 
     // Картины
-    Route::group(['controller' => PicturesController::class, 'prefix' => 'Pictures'], function () {
-        Route::get('/', 'index')->name('pictures');
-        Route::get('/{id}', 'PicturesController')->name('picture');
+    Route::group(['controller' => App\Http\Controllers\Home\Pictures\PicturesController::class, 'prefix' => 'Pictures'], function () {
+        Route::get('/', 'showPictures')->name('pictures');
+        Route::get('/{id}', 'showPicture')->name('picture');
     });
 
     // Поиск по всем картинам
-    Route::group(['controller' => SearchController::class, 'prefix' => 'Search'], function () {
-        Route::get('/', 'index')->name('searchGalleryPicture');
+    Route::group(['controller' => App\Http\Controllers\Home\Pictures\SearchController::class, 'prefix' => 'Search'], function () {
+        Route::get('/', 'search_process')->name('searchGalleryPicture');
     });
 
     // Новости
-    Route::group(['controller' => NewsController::class, 'prefix' => 'News'], function () {
-        Route::get('/', 'index')->name('news');
-        Route::get('/{id}', 'NewsController')->name('theNews');
+    Route::group(['controller' => App\Http\Controllers\Home\News\NewsController::class, 'prefix' => 'News'], function () {
+        Route::get('/', 'showNews')->name('news');
+        Route::get('/{id}', 'showTheNews')->name('theNews');
     });
 
     // Афиша
-    Route::group(['controller' => PostersController::class, 'prefix' => 'Posters'], function () {
-        Route::get('/', 'index')->name('posters');
-        Route::get('/{id}', 'PostersController')->name('poster');
+    Route::group(['controller' => App\Http\Controllers\Home\Posters\PostersController::class, 'prefix' => 'Posters'], function () {
+        Route::get('/', 'showPosters')->name('posters');
+        Route::get('/{id}', 'showPoster')->name('poster');
     });
 
     // Выставка
-    Route::group(['controller' => ExhibitionsController::class, 'prefix' => 'Exhibibtions'], function () {
-        Route::get('/', 'index')->name('exhibibtions');
-        Route::get('/{id}', 'ExhibitionsController')->name('exhibibtion');
+    Route::group(['controller' => App\Http\Controllers\Home\Exhibitions\ExhibitionsController::class, 'prefix' => 'Exhibitions'], function () {
+        Route::get('/', 'showExhibitions')->name('exhibitions');
+        Route::get('/{id}', 'showExhibition')->name('exhibition');
     });
 
     // Пользователи
-    Route::group(['controller' => UsersController::class, 'prefix' => 'Users'], function () {
-        Route::get('/', 'index')->name('users');
-        Route::get('/{id}', 'UsersController')->name('user');
+    Route::group(['controller' => App\Http\Controllers\Home\Users\UsersController::class, 'prefix' => 'Users'], function () {
+        Route::get('/{id}', 'showUser')->name('user');
     });
 });
 
 // Личный кабинет
 Route::group(['namespace' => 'Profile', 'middleware' => ['auth', 'verified'], 'prefix' => 'Profile'], function () {
     // Личный кабинет
-    Route::group(['controller' => ProfileController::class], function () {
-        Route::get('/', 'index')->name('profile');
+    Route::group(['controller' => App\Http\Controllers\Profile\ProfileController::class], function () {
+        Route::get('/', 'showProfile')->name('profile');
     });
 
 
     // Мои картины
     Route::group(['namespace' => 'MyPictures', 'prefix' => 'MyPictures'], function () {
         // Мои картины
-        Route::group(['controller' => MyPicturesController::class], function () {
+        Route::group(['controller' => App\Http\Controllers\Profile\MyPictures\MyPicturesController::class], function () {
             Route::get('/', 'index')->name('myPictures');
         });
 
         // Поиск по моим картинам
-        Route::group(['controller' => SearchController::class], function () {
+        Route::group(['controller' => App\Http\Controllers\Profile\MyPictures\SearchController::class], function () {
             Route::get('/SearchMyPictures', 'index')->name('searchMyPictures');
         });
 
         // Добавить свою картину
-        Route::group(['controller' => CreatePictureController::class, 'prefix' => 'CreatePicture'], function () {
+        Route::group(['controller' => App\Http\Controllers\Profile\MyPictures\CreatePicture\CreatePictureController::class, 'prefix' => 'CreatePicture'], function () {
             Route::get('/', 'index')->name('createPicture');
             Route::get('/CreatePicture_process', 'process')->name('createPicture_process');
         });
 
         // Изменить свою картину
-        Route::group(['controller' => EditPictureController::class, 'prefix' => 'EditPicture'], function () {
+        Route::group(['controller' => App\Http\Controllers\Profile\MyPictures\EditPicture\EditPictureController::class, 'prefix' => 'EditPicture'], function () {
             Route::get('/', 'index')->name('editPicture');
             Route::get('/EditPicture_process', 'process')->name('editPicture_process');
         });
 
         // Удалить свою картину
-        Route::group(['controller' => DeletePictureController::class, 'prefix' => 'DeletePicture'], function () {
+        Route::group(['controller' => App\Http\Controllers\Profile\MyPictures\DeletePicture\DeletePictureController::class, 'prefix' => 'DeletePicture'], function () {
             Route::get('/DeletePicture_process', 'process')->name('deletePicture_process');
         });
-    });
-
-    // Обо мне
-    Route::group(['controller' => AboutController::class, 'prefix' => 'About'], function () {
-        Route::get('/', 'index')->name('about');
     });
 
     // -------------------------------------------------------
 
     // Изменить информацию
-    Route::group(['controller' => UpdateMyInformationController::class, 'prefix' => 'UpdateMyInformation'], function () {
+    Route::group(['controller' => App\Http\Controllers\Profile\UpdateMyInformation\UpdateMyInformationController::class, 'prefix' => 'UpdateMyInformation'], function () {
         Route::get('/', 'index')->name('updateInfo');
         Route::get('/UpdateMyInformation_process', 'process')->name('updateInfo_process');
     });
@@ -166,21 +135,21 @@ Route::group(['namespace' => 'Profile', 'middleware' => ['auth', 'verified'], 'p
 Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'isadmin', 'verified'], 'prefix' => 'AdminPanel'], function () {
 
     // Добавить новость
-    Route::group(['controller' => NewsController::class, 'prefix' => 'AddNews'], function () {
+    Route::group(['controller' => App\Http\Controllers\Admin\News\NewsController::class, 'prefix' => 'AddNews'], function () {
         Route::get('/', 'index')->name('addNews');
         Route::get('/AddNews_process', 'addProcess')->name('addNews_process');
         Route::get('/DeleteNews_process', 'deleteProcess')->name('deleteNews_process');
     });
 
     // Добавить Афишу
-    Route::group(['controller' => PosterController::class, 'prefix' => 'AddPoster'], function () {
+    Route::group(['controller' => App\Http\Controllers\Admin\Posters\PostersController::class, 'prefix' => 'AddPoster'], function () {
         Route::get('/', 'index')->name('addPoster');
         Route::get('/AddPoster_process', 'addProcess')->name('addPoster_process');
         Route::get('/Delete_process', 'deleteProcess')->name('deletePoster_process');
     });
 
     // Добавить Выставку
-    Route::group(['controller' => ExhibitionController::class, 'prefix' => 'Exhibition'], function () {
+    Route::group(['controller' => App\Http\Controllers\Admin\Exhibitions\ExhibitionsController::class, 'prefix' => 'Exhibition'], function () {
         Route::get('/Create', 'create')->name('addExhibition');
         Route::get('/Create_process', 'createProcess')->name('addExhibition_process');
         Route::get('/Edit', 'edit')->name('editExhibition');
@@ -191,14 +160,14 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'isadmin', 'verif
     // -------------------------------------------------------
 
     // Модерация картин
-    Route::group(['controller' => ModerationPictureController::class, 'prefix' => 'Moderation'], function () {
+    Route::group(['controller' => App\Http\Controllers\Admin\ModerationPicture\ModerationPictureController::class, 'prefix' => 'Moderation'], function () {
         Route::get('/', 'index')->name('moderationPictures');
         Route::get('/PictureAccept', 'accept')->name('pictureAccept');
         Route::get('/PictureDelete', 'delete')->name('pictureDelete');
     });
 
     // Пользователи
-    Route::group(['controller' => UsersController::class, 'prefix' => 'Users'], function () {
+    Route::group(['controller' => App\Http\Controllers\Admin\Users\UsersController::class, 'prefix' => 'Users'], function () {
         Route::get('/', 'index')->name('adminUsers');
         Route::get('/{id}', 'showUser')->name('adminUser');
         Route::get('/{id}_deleteProcess', 'deleteProcess')->name('deleteUser');
@@ -208,14 +177,14 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'isadmin', 'verif
     Route::group(['namespace' => 'Category', 'prefix' => 'Categories'], function () {
 
         //Категории
-        Route::group(['controller' => CategoryController::class, 'prefix' => 'Categories'], function () {
+        Route::group(['controller' => App\Http\Controllers\Admin\Categories\CategoriesController::class, 'prefix' => 'Categories'], function () {
             Route::get('/', 'index')->name('categories');
             Route::get('/AddCategory', 'addProcess')->name('addCategory');
             Route::get('/DeleteCategory', 'deleteProcess')->name('deleteCategory');
         });
 
         // Подкатегории
-        Route::group(['controller' => UnderCategoryController::class, 'prefix' => 'Categories'], function () {
+        Route::group(['controller' => App\Http\Controllers\Admin\Categories\UnderCategoriesController::class, 'prefix' => 'Categories'], function () {
             Route::get('/AddUnderCategory', 'addProcess')->name('addUnderCategory');
             Route::get('/DeleteUnderCategory', 'deleteProcess')->name('deleteUnderCategory');
         });
@@ -226,10 +195,12 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'isadmin', 'verif
         Artisan::call('storage:link');
     });
 });
+});
 
 
 
 
+/*
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
 
@@ -301,6 +272,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 });
 
+
 // Основная страница (Картины)
 Route::get('/pictures', [HomePageController::class, 'showPictures'])->name('home');
 Route::get('/pictures/{id}', [HomePageController::class, 'showPictures_id'])->name('picture');
@@ -346,3 +318,4 @@ Route::get('/updatebb', function (Request $request) {
 
     return view('testbladeUpdate', compact('search'));
 });
+ */
