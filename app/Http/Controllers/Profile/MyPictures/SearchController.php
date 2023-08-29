@@ -9,9 +9,8 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-
     // Поиск
-    public function search(Request $request)
+    public function process(Request $request)
     {
         $query = $request->input('search');
 

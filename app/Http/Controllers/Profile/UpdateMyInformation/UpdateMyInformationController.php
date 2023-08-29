@@ -11,12 +11,12 @@ use Illuminate\Http\Request;
 class UpdateMyInformationController extends Controller
 {
     // Изменить информацию
-    public function showUpdateMyInformationForm()
+    public function showUpdateMyInfo()
     {
         return view('personalArea.aboutRefactoring');
     }
 
-    public function updateMyInformationForm_process(UpdateMyInfo $request)
+    public function process(UpdateMyInfo $request)
     {
 
         $user = User::find(Auth::user()->id);
@@ -29,6 +29,6 @@ class UpdateMyInformationController extends Controller
 
         $user->save();
 
-        return redirect(route('personalArea'));
+        return redirect(route('profile'));
     }
 }

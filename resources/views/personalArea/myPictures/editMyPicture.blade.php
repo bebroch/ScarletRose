@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('editMyPicture_process') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('editPicture_process', ['id' => $picture->id]) }}" method="POST" enctype="multipart/form-data">
         <div class="container-fluid">
             <div class="row row-cols-1 row-cols-md-2 mt-1 g-3 justify-content-center">
                 <div class="col-1" style="max-width: 25rem; min-width:23rem;">
@@ -93,11 +93,11 @@
             <div class="modal-body">
                     <div class="text-center">
                         <label style="font-size: 18px; font-weight:bold">
-                            <input type="checkbox" name="checkPrice"
+                            <input type="checkbox" name="checkPrice" @if(!empty($picture->price)) checked @endif
                                 onclick="var input = document.getElementById('price'); if(this.checked){ input.disabled = false; input.focus();}else{input.disabled=true;}">
                             На продажу
                         </label>
-                        <input disabled name="price" id="price">
+                        <input @if(!empty($picture->price)) value="{{$picture->price}}" @else disabled @endif name="price" id="price">
                         <label for="price">&#8381;</label>
                     </div>
             </div>

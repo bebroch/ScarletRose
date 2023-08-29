@@ -29,123 +29,23 @@
 
 
         <div class="tab-content mb-3" id="v-pills-tabContent" style="width:100%">
-            <div class="tab-pane fade" id="v-pills-future" role="tabpanel" aria-labelledby="v-pills-future-tab">
+            <!--TODO Проверить работает ли афиши -->
+            @include('schems.posters.timePosterWindow', [
+                'posters' => $postersF,
+                'tab' => 'future',
+                'posterTimeText' => 'Афиша начнётся',
+            ])
+            @include('schems.posters.timePosterWindow', [
+                'posters' => $postersA,
+                'tab' => 'active',
+                'posterTimeText' => 'Афиша началась',
+            ])
+            @include('schems.posters.timePosterWindow', [
+                'posters' => $postersP,
+                'tab' => 'passive',
+                'posterTimeText' => 'Афиша закончилась',
+            ])
 
-                <div class="row row-cols-1 g-3 row-cols-md-2">
-                    @foreach ($postersF as $poster)
-                        <div class="card-deck mt-2">
-                            <div class="card">
-                                <a href="{{ route('posters') }}/{{ $poster->id }}" class="nav-link">
-                                    <div class="card-body">
-                                        <h3 class="card-title" style="font-weight: bold">{{ $poster->name }}</h3>
-                                        <p class="card-text">
-                                        <h5>{{ $poster->about }}</h5>
-                                        </p>
-                                    </div>
-                                </a>
-
-                                @auth('web')
-                                    @if (Auth::user()->is_admin)
-                                        <div class="card-footer">
-                                            <a class="btn btn-danger"
-                                                href="{{ route('deletePoster_process', ['id' => $poster->id]) }}">Удалить афишу</a>
-                                        </div>
-                                    @endif
-                                @endauth
-                                <div class="card-footer">
-                                    <small class="text-muted">
-                                        @if (!empty($poster->date))
-                                            Афиша начнётся
-                                            {{ Carbon\Carbon::parse($poster->timeEventStart)->diffForHumans() }}
-                                        @else
-                                            Афиша начнётся
-                                            {{ Carbon\Carbon::parse($poster->timeEventDay)->diffForHumans() }}
-                                        @endif
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-            </div>
-
-            <div class="tab-pane fade show active" id="v-pills-active" role="tabpanel" aria-labelledby="v-pills-active-tab">
-
-                <div class="row row-cols-1 g-3 row-cols-md-2">
-                    @foreach ($postersA as $poster)
-                        <div class="card-deck mt-2">
-                            <div class="card">
-                                <a href="{{ route('posters') }}/{{ $poster->id }}" class="nav-link">
-                                    <div class="card-body">
-                                        <h3 class="card-title" style="font-weight: bold">{{ $poster->name }}</h3>
-                                        <p class="card-text">
-                                        <h5>{{ $poster->about }}</h5>
-                                        </p>
-                                    </div>
-                                </a>
-                                @auth('web')
-                                    @if (Auth::user()->is_admin)
-                                        <div class="card-footer">
-                                            <a class="btn btn-danger"
-                                                href="{{ route('deletePoster_process', ['id' => $poster->id]) }}">Удалить афишу</a>
-                                        </div>
-                                    @endif
-                                @endauth
-                                <div class="card-footer">
-                                    <small class="text-muted">
-                                        @if (!empty($poster->timeEventStart))
-                                            Афиша началась
-                                            {{ Carbon\Carbon::parse($poster->timeEventStart)->diffForHumans() }}
-                                        @elseif (!empty($poster->timeEventDay))
-                                            Афиша началась
-                                            {{ Carbon\Carbon::parse($poster->timeEventDay)->diffForHumans() }}
-                                        @endif
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-            </div>
-            <div class="tab-pane fade" id="v-pills-passive" role="tabpanel" aria-labelledby="v-pills-passive-tab">
-                <div class="row row-cols-1 g-3 row-cols-md-2">
-                    @foreach ($postersP as $poster)
-                        <div class="card-deck">
-                            <div class="card">
-                                <a href="{{ route('posters') }}/{{ $poster->id }}" class="nav-link">
-                                    <div class="card-body">
-                                        <h3 class="card-title" style="font-weight: bold">{{ $poster->name }}</h3>
-                                        <p class="card-text">
-                                        <h5>{{ $poster->about }}</h5>
-                                        </p>
-                                    </div>
-                                </a>
-                                @auth('web')
-                                    @if (Auth::user()->is_admin)
-                                        <div class="card-footer">
-                                            <a class="btn btn-danger"
-                                                href="{{ route('deletePoster_process', ['id' => $poster->id]) }}">Удалить афишу</a>
-                                        </div>
-                                    @endif
-                                @endauth
-                                <div class="card-footer">
-                                    <small class="text-muted">
-                                        @if (!empty($poster->timeEventEnd))
-                                            Афиша закончилась
-                                            {{ Carbon\Carbon::parse($poster->timeEventEnd)->diffForHumans() }}
-                                        @elseif (!empty($poster->timeEventDay))
-                                            Афиша закончилась
-                                            {{ Carbon\Carbon::parse($poster->timeEventDay)->diffForHumans() }}
-                                        @endif
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
         </div>
 
     </div>

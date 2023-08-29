@@ -8,8 +8,8 @@ use Storage;
 
 class DeletePictureController extends Controller
 {
-    // Удаление картины
-    public function deletePicture_process($id)
+    // Процесс удаления картины
+    public function process($id)
     {
         Storage::delete(Pictures::find($id)->imagePath);
         Pictures::find($id)->delete();

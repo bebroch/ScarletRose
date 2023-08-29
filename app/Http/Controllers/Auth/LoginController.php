@@ -39,6 +39,10 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function showLogin(){
+        return view('auth.login');
+    }
+
     public function process(Request $request){
         $data = [
             'login' => $request->login,
@@ -46,7 +50,7 @@ class LoginController extends Controller
         ];
 
         if(auth('web')->attempt($data)){
-            return redirect(route('home'));
+            return redirect(route('pictures'));
         }
 
         return redirect(route('login'))->withErrors(['login' => 'Неверно указан логин или пароль.']);

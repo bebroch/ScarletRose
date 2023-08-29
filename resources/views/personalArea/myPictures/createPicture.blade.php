@@ -5,9 +5,10 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('adderPicture') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('createPicture_process') }}" method="POST" enctype="multipart/form-data">
         <div class="container-fluid mt-3">
             <div class="container">
+
                 @include('schems.alerts', ['alterStatus' => 'danger'])
             </div>
             <div class="row row-cols-1 row-cols-md-2 mt-1 g-3 justify-content-center">

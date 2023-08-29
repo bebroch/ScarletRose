@@ -15,6 +15,6 @@ class UsersController extends Controller
         $user = User::find($id);
         $images = Pictures::where('user_id', '=', $id)->get();
 
-        return view('home.users', compact('user', 'images'));
+        return view('home.user', compact('user', 'images'));
     }
 }

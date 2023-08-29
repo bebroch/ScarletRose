@@ -7,7 +7,7 @@
 @section('content')
     <div class="container card p-3 mt-4" style="max-width: 23rem;">
         <h3>Добавление афиши</h3>
-        <form action="{{ route('addingPoster') }}">
+        <form action="{{ route('createPoster_process') }}">
             @csrf
 
             <div class="form-row">

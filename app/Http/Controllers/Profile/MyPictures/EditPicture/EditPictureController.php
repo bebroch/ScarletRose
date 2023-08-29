@@ -11,13 +11,13 @@ use Illuminate\Http\Request;
 class EditPictureController extends Controller
 {
     // Редактировать картину
-    public function editMyPicture($id)
+    public function showEditPicture($id)
     {
         $picture = Pictures::find($id);
-        return view('personalArea.editMyPicture', compact('picture'));
+        return view('personalArea.myPictures.editMyPicture', compact('picture'));
     }
 
-    public function editMyPicture_process(updateInfoMyPicture $request)
+    public function process(updateInfoMyPicture $request)
     {
 
         $exhibitionsNew = $request->exhibitions;

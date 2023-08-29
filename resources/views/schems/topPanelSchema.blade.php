@@ -36,11 +36,11 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li>
                                 <a class="nav-link" style="font-size: 25px"
-                                    href="{{ route('login_process') }}">{{ __('Вход') }}</a>
+                                    href="{{ route('login') }}">{{ __('Вход') }}</a>
                             </li>
                             <li>
                                 <a class="nav-link" style="font-size: 25px"
-                                    href="{{ route('register_proccess') }}">{{ __('Регистрация') }}</a>
+                                    href="{{ route('register') }}">{{ __('Регистрация') }}</a>
                             </li>
                     </div>
                     <!-- End Имя пользователя -->
@@ -85,7 +85,7 @@
                     aria-labelledby="offcanvasDarkNavbarLabel">
                     <!-- Имя пользователя -->
                     <div class="offcanvas-header" style="background-color: #405b48;">
-                        <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><a class="nav-link" href="{{ route('personalArea') }}">{{ Auth::user()->login }}</a></h3>
+                        <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><a class="nav-link" href="{{ route('profile') }}">{{ Auth::user()->login }}</a></h3>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
                     </div>
@@ -122,14 +122,14 @@
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="{{ route('myPictures') }}">Мои картины</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('addPicture') }}">Добавить
+                                    <li><a class="dropdown-item" href="{{ route('createPicture') }}">Добавить
                                             картину</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('personalArea') }}">Обо мне</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Обо мне</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('updateInformation') }}">Изменить
+                                    <li><a class="dropdown-item" href="{{ route('updateInfo') }}">Изменить
                                             информацию</a></li>
                                 </ul>
                             </li>
@@ -143,22 +143,22 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('addNew') }}">Добавить
+                                            <a class="dropdown-item" href="{{ route('createNews') }}">Добавить
                                                 новость</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('addPoster') }}">Добавить
+                                            <a class="dropdown-item" href="{{ route('createPoster') }}">Добавить
                                                 афишу</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('addExhibition') }}">Добавить
+                                            <a class="dropdown-item" href="{{ route('createExhibition') }}">Добавить
                                                 выставку</a>
                                         </li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('AdminPictureVerification') }}">
+                                            <a class="dropdown-item" href="{{ route('moderationPictures') }}">
                                                 Картины на проверке
                                                 @if (DB::table('pictures')->where('status', '=', 0)->count())
                                                     <span
@@ -168,13 +168,13 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('AdminUsers') }}">
+                                            <a class="dropdown-item" href="{{ route('adminUsers') }}">
                                                 Пользователи
                                                 <span
                                                     class="badge bg-primary rounded-pill">{{ DB::table('users')->count() }}</span>
                                             </a>
                                         </li>
-                                        <li><a class="dropdown-item" href="{{ route('addCategory') }}">Категории</a>
+                                        <li><a class="dropdown-item" href="{{ route('categories') }}">Категории</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -23,31 +23,41 @@
                 @if ($isPersonalArea ?? false)
                     @auth('web')
                         <div class="card-footer">
-                            <a class="btn btn-warning"
-                                href="{{ route('editMyPicture', ['id' => $image->id]) }}">Редактировать запись</a>
+                            <a class="btn btn-warning" href="{{ route('editPicture', ['id' => $image->id]) }}">Редактировать
+                                запись</a>
                             <!-- Кнопка-триггер модального окна -->
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#{{ $image->id }}">
                                 Удалить картину
                             </button>
+                            @include('schems.deleteItemModalWindow', [
+                                'item' => $image,
+                                'route' => 'deletePicture_process',
+                                'nameShape1' => 'картины',
+                                'nameShape2' => 'картину',
+                            ])
                         </div>
                     @endauth
                 @endif
 
                 @auth('web')
-                    @if (Auth::user()->is_admin)
+                    @if (Auth::user()->is_admin && !($isPersonalArea ?? false))
                         <div class="card-footer">
                             <!-- Кнопка-триггер модального окна -->
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#{{ $image->id }}">
                                 Удалить картину
                             </button>
+                            @include('schems.deleteItemModalWindow', [
+                                'item' => $image,
+                                'route' => 'adminPictureDelete_process',
+                                'nameShape1' => 'картины',
+                                'nameShape2' => 'картину',
+                            ])
                         </div>
                     @endif
                 @endauth
             </div>
-
-            @include('schems.deletePictureModalWindow')
         </div>
     @endforeach
 </div>

@@ -29,7 +29,7 @@
                                 <div class="col">
                                     <h2 style="font-weight: bold">Автор</h2>
                                     <h5><a class="link-info link-underline-opacity-0"
-                                            href="{{ route('userProfile', ['id' => $user->id], false) }}">{{ $user->login }}</a>
+                                            href="{{ route('user', ['id' => $user->id], false) }}">{{ $user->login }}</a>
                                     </h5>
 
                                 </div>
@@ -116,5 +116,10 @@
         </div>
     </div>
 
-    @include('schems.deletePictureModalWindow')
+    @include('schems.deleteItemModalWindow', [
+        'item' => $image,
+        'route' => 'adminPictureDelete_process',
+        'nameShape1' => 'картины',
+        'nameShape2' => 'картину',
+    ])
 @endsection

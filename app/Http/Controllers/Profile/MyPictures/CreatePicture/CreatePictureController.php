@@ -16,7 +16,7 @@ use Auth;
 class CreatePictureController extends Controller
 {
     // Добавить картину
-    public function showAddMyPictureForm()
+    public function showCreaterPicture()
     {
         $isFull = false;
         $categories = Categories::all();
@@ -27,10 +27,10 @@ class CreatePictureController extends Controller
             session()->flash('status', 'Вы уже отправили 5 картин на проверку');
         }
 
-        return view('personalArea.createCard', compact('categories', 'isFull'));
+        return view('personalArea.myPictures.createPicture', compact('categories', 'isFull'));
     }
 
-    public function adderPicture(addMyPictureRequest $request)
+    public function process(addMyPictureRequest $request)
     {
         // Путь до картинки, размеры картинки
         $path = $request->file('uploadPicture')->store("public/images/");
@@ -76,6 +76,6 @@ class CreatePictureController extends Controller
 
         session()->flash('status', 'Ваша работа передана на проверку.');
 
-        return redirect(route('home'));
+        return redirect(route('pictures'));
     }
 }
