@@ -26,9 +26,9 @@ class UsersController extends Controller
     }
 
     // Процесс удаление пользователя
-    public function deleteProcess(Request $request)
+    public function deleteProcess($id)
     {
-        User::find($request->id)->delete();
-        return redirect(route('AdminUsers'));
+        User::find($id)->delete();
+        return back();
     }
 }

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -164,21 +163,21 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::group(['controller' => App\Http\Controllers\Admin\Users\UsersController::class, 'prefix' => 'Users'], function () {
             Route::get('/', 'showUsers')->name('adminUsers');
             Route::get('/{id}', 'showUser')->name('adminUser');
-            Route::get('/{id}_deleteProcess', 'deleteProcess')->name('deleteUser_process');
+            Route::get('/{id}/deleteProcess', 'deleteProcess')->name('deleteUser_process');
         });
 
         // Категории
         Route::group(['namespace' => 'Category', 'prefix' => 'Categories'], function () {
 
             //Категории
-            Route::group(['controller' => App\Http\Controllers\Admin\Categories\CategoriesController::class, 'prefix' => 'Categories'], function () {
+            Route::group(['controller' => App\Http\Controllers\Admin\Categories\CategoriesController::class], function () {
                 Route::get('/', 'showCategories')->name('categories');
                 Route::get('/AddCategory', 'addProcess')->name('addCategory_process');
                 Route::get('/DeleteCategory', 'deleteProcess')->name('deleteCategory_process');
             });
 
             // Подкатегории
-            Route::group(['controller' => App\Http\Controllers\Admin\Categories\UnderCategoriesController::class, 'prefix' => 'Categories'], function () {
+            Route::group(['controller' => App\Http\Controllers\Admin\Categories\UnderCategoriesController::class], function () {
                 Route::get('/AddUnderCategory', 'addProcess')->name('addUnderCategory_process');
                 Route::get('/DeleteUnderCategory', 'deleteProcess')->name('deleteUnderCategory_process');
             });
@@ -190,5 +189,3 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
     });
 });
-
-

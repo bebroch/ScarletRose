@@ -74,10 +74,11 @@
 
             <div class="row">
                 <div class="col d-flex justify-content-around">
-                    <button type="submit" style="width: 55%" class="btn btn-warning">Обновить запись</button>
-                    <!-- Кнопка-триггер модального окна -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropLabel">
-                        Удалить Запись
+                    <button type="submit" style="width: 46%" class="btn btn-warning">Обновить запись</button>
+
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#{{ $exhibition->id }}">
+                        Удалить картину
                     </button>
                 </div>
             </div>

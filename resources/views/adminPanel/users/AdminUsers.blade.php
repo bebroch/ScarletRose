@@ -13,35 +13,34 @@
                 <div class="col">
 
                     <div class="card">
-                        <img src="" class="card-img-top">
                         <div class="card-body">
-                            <a class="nav-link" href="{{ route('AdminUser', ['id' => $user->id]) }}">
+                            <a class="nav-link" href="{{ route('adminUser', ['id' => $user->id]) }}">
                                 <h2 class="card-title">{{ $user->login }}</h2>
                                 <h4 class="card-title">{{ $user->firstname }} {{ $user->lastname }}</h4>
                                 <h6 class="card-title">{{ $user->email }}</h6>
                                 <h6 class="card-title">{{ $user->phone }}</h6>
                                 <p class="card-text">{{ Str::limit($user->about, 50, '...') }}</p>
                             </a>
-                            @if (!$user->is_admin)
+                        </div>
+                        @if (!$user->is_admin)
+                            <div class="card-footer">
                                 <!-- Кнопка-триггер модального окна -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop">
+                                    data-bs-target="#{{ $user->id }}">
                                     Удалить пользователя
                                 </button>
-                            @endif
-                        </div>
-                    </div>
+                            </div>
 
+                            @include('schems.deleteItemModalWindow', [
+                                'item' => $user,
+                                'route' => 'deleteUser_process',
+                                'nameShape1' => 'пользователя',
+                                'nameShape2' => 'пользователя',
+                            ])
+                        @endif
+                    </div>
                 </div>
             @endforeach
         </div>
     </div>
-
-
-    @include('schems.deleteItemModalWindow', [
-        'item' => $user,
-        'route' => 'deleteUser',
-        'nameShape1' => 'пользователя',
-        'nameShape2' => 'пользователя',
-    ])
 @endsection
