@@ -18,8 +18,11 @@
         <div class="container">
             <!-- Главное меню -->
 
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('imagesAsset/logo.png') }}" height="75px" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="{{ route('pictures') }}">
+
+                <img id="responsive-image" src="{{ asset('imagesAsset/logoSmall.png') }}" height="75px"
+                    class="d-inline-block align-text-top">
+
             </a>
 
             @guest('web')
@@ -49,7 +52,7 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <!-- Галерея -->
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('home') }}"
+                                <a class="nav-link" aria-current="page" href="{{ route('pictures') }}"
                                     style="font-size: 20px;">Галерея</a>
                             </li>
                             <!-- Новости -->
@@ -85,7 +88,8 @@
                     aria-labelledby="offcanvasDarkNavbarLabel">
                     <!-- Имя пользователя -->
                     <div class="offcanvas-header" style="background-color: #405b48;">
-                        <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><a class="nav-link" href="{{ route('personalArea') }}">{{ Auth::user()->login }}</a></h3>
+                        <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><a class="nav-link"
+                                href="{{ route('profile') }}">{{ Auth::user()->login }}</a></h3>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
                     </div>
@@ -95,7 +99,7 @@
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <!-- Галерея -->
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('home') }}"
+                                <a class="nav-link" aria-current="page" href="{{ route('pictures') }}"
                                     style="font-size: 20px;">Галерея</a>
                             </li>
                             <!-- Новости -->
@@ -122,14 +126,14 @@
                                 <ul class="dropdown-menu dropdown-menu-dark">
                                     <li><a class="dropdown-item" href="{{ route('myPictures') }}">Мои картины</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('addPicture') }}">Добавить
+                                    <li><a class="dropdown-item" href="{{ route('createPicture') }}">Добавить
                                             картину</a>
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('personalArea') }}">Обо мне</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile') }}">Обо мне</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="{{ route('updateInformation') }}">Изменить
+                                    <li><a class="dropdown-item" href="{{ route('updateInfo') }}">Изменить
                                             информацию</a></li>
                                 </ul>
                             </li>
@@ -143,22 +147,22 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('addNew') }}">Добавить
+                                            <a class="dropdown-item" href="{{ route('createNews') }}">Добавить
                                                 новость</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('addPoster') }}">Добавить
+                                            <a class="dropdown-item" href="{{ route('createPoster') }}">Добавить
                                                 афишу</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('addExhibition') }}">Добавить
+                                            <a class="dropdown-item" href="{{ route('createExhibition') }}">Добавить
                                                 выставку</a>
                                         </li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('AdminPictureVerification') }}">
+                                            <a class="dropdown-item" href="{{ route('moderationPictures') }}">
                                                 Картины на проверке
                                                 @if (DB::table('pictures')->where('status', '=', 0)->count())
                                                     <span
@@ -168,13 +172,13 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('AdminUsers') }}">
+                                            <a class="dropdown-item" href="{{ route('adminUsers') }}">
                                                 Пользователи
                                                 <span
                                                     class="badge bg-primary rounded-pill">{{ DB::table('users')->count() }}</span>
                                             </a>
                                         </li>
-                                        <li><a class="dropdown-item" href="{{ route('addCategory') }}">Категории</a>
+                                        <li><a class="dropdown-item" href="{{ route('categories') }}">Категории</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -190,7 +194,7 @@
 
                             <!-- Выйти -->
                             <li class="nav-item">
-                                <form action="{{route('logout')}}" method="POST">
+                                <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button class="nav-link" style="font-size: 20px;" type="text">Выйти</button>
 
@@ -210,5 +214,30 @@
     @yield('content')
 
 </body>
+
+<script>
+    // Функция для замены src атрибута изображения
+    function changeImageSource(newSource) {
+        const imgElement = document.getElementById('responsive-image');
+        if (imgElement) {
+            imgElement.src = newSource;
+        }
+    }
+
+    // Функция для определения размеров экрана и замены картинки
+    function updateImageBasedOnScreenSize() {
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth < 768) {
+            changeImageSource('{{ asset('imagesAsset/logoSmall.png') }}');
+        } else {
+            changeImageSource('{{ asset('imagesAsset/logoNoraml.png') }}');
+        }
+    }
+
+    // Вызов функции при загрузке страницы и при изменении размеров окна
+    updateImageBasedOnScreenSize();
+    window.addEventListener('resize', updateImageBasedOnScreenSize);
+</script>
 
 </html>

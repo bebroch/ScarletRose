@@ -32,7 +32,7 @@
             };
 
             var search = document.getElementById('search-query').value;
-            var route = '{{ route('search') }}';
+            var route = '{{ route('searchGalleryPicture_process') }}';
             var filter = document.getElementById('filter-query').value;
 
             xhr.open('GET', route + '?search=' + search + '&filter=' + filter, true);

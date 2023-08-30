@@ -59,25 +59,12 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Удаление пользователя</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить пользователя - {{ $user->login }}?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <form action="{{ route('deleteUser', ['id' => $user->id]) }}">
-                        <input class="btn btn-primary" type="submit" name="userName"
-                            value="Удалить пользователя - {{ $user->login }}">
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+    @include('schems.deleteItemModalWindow', [
+        'item' => $user,
+        'route' => 'deleteUser_process',
+        'nameShape1' => 'пользователя',
+        'nameShape2' => 'пользователя',
+    ])
 @endsection

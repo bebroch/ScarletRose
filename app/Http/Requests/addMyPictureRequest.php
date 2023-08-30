@@ -27,7 +27,7 @@ class addMyPictureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'uploadPicture' => 'required|image:jpg, jpeg, png',
+            'uploadPicture' => 'required',
             'namePicture' => 'required|string',
             'aboutPicture' => 'required|string',
             'width' => 'required|integer',
