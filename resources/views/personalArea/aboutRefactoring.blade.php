@@ -12,7 +12,7 @@
             <h3>Изменить информацию</h3>
         </div>
 
-        <form action="{{route('updateInformation_process')}}" method="POST">
+        <form action="{{route('updateInfo_process')}}" method="GET">
             @csrf
             <div class="input-group mb-3 mt-2">
                 <label class="input-group-text" for="inputGroupSelect01">Логин</label>

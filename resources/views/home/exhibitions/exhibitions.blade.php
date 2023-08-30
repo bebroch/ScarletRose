@@ -51,7 +51,7 @@
                                         @if (Auth::user()->is_admin)
                                             <div class="card-footer">
                                                 <a class="btn btn-warning"
-                                                    href="{{ route('editExhibition', ['id' => $exhibition->id]) }}">Редактировать
+                                                    href="{{ route('showEditExhibition', ['id' => $exhibition->id]) }}">Редактировать
                                                     запись</a>
                                             </div>
                                         @endif
@@ -85,7 +85,7 @@
                                         @if (Auth::user()->is_admin)
                                             <div class="card-footer">
                                                 <a class="btn btn-warning"
-                                                    href="{{ route('editExhibition', ['id' => $exhibition->id]) }}">Редактировать
+                                                    href="{{ route('showEditExhibition', ['id' => $exhibition->id]) }}">Редактировать
                                                     запись</a>
                                             </div>
                                         @endif
@@ -116,7 +116,7 @@
                                         @if (Auth::user()->is_admin)
                                             <div class="card-footer">
                                                 <a class="btn btn-warning"
-                                                    href="{{ route('editExhibition', ['id' => $exhibition->id]) }}">Редактировать
+                                                    href="{{ route('showEditExhibition', ['id' => $exhibition->id]) }}">Редактировать
                                                     запись</a>
                                             </div>
                                         @endif

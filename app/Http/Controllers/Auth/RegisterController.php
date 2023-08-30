@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -56,18 +58,34 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+
+    public function showRegister(){
+        return view('auth.register');
+    }
+
+    public function process(Request $req){
+
+        $data = $req->validate([
+            'login' => 'required|max:255|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:5|max:255|confirmed',
         ]);
+
+
+        $user = User::create([
+            'login' => $data['login'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+
+        event(new Registered($user));
+
+        if($user){
+            auth('web')->login($user);
+        }
+
+        session()->flash('status', 'Регистрация прошла успешно! Пожалуйста, подтвердите свой адрес электронной почты.');
+
+        return redirect(route('pictures'));
     }
 }
