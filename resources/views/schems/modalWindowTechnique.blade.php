@@ -13,7 +13,7 @@
                             <div>
                                 @if (!DB::table('under_categories')->where('category_id', '=', $category->id)->get()->first())
                                     <label style="font-size: 18px; font-weight:bold">
-                                        <input type="checkbox" name="categories[]" value="{{ $category->id }}">
+                                        <input hidden type="checkbox" name="categories[]" value="{{ $category->id }}">
                                         {{ $category->name }}</label><br>
                                 @else
                                     <label style="font-size: 18px; font-weight:bold">{{ $category->name }}</label><br>
@@ -24,10 +24,11 @@
                                     <ul class="list-group mt-1">
 
                                         <label>
-                                            <li class="list-group-item">
-                                                <input style="width: 15px" type="checkbox" id="{{ $category->name }}"
-                                                    name="under_categories[]" value="{{ $item->id }}"
-                                                    onclick="onlyOne(this, '{{ $category->name }}')">
+                                            <input class="activeCheckBox" hidden style="width: 15px" type="checkbox"
+                                                id="{{ $category->name }}" name="under_categories[]"
+                                                value="{{ $item->id }}"
+                                                onclick="onlyOne(this, '{{ $category->name }}')">
+                                            <li class="list-group-item cheboxContainer">
                                                 {{ $item->name }}
                                             </li>
 
