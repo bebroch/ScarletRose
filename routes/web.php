@@ -40,7 +40,7 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
     // Главная страница
     Route::group(['namespace' => 'Home', 'prefix' => 'Home'], function () {
 
-        // Картины //TODO: отдельные картины
+        // Картины
         Route::group(['controller' => App\Http\Controllers\Home\Pictures\PicturesController::class, 'prefix' => 'Pictures'], function () {
             Route::get('/', 'showPictures')->name('pictures');
             Route::get('/{id}', 'showPicture')->name('picture');
@@ -51,19 +51,19 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
             Route::get('/', 'process')->name('searchGalleryPicture_process');
         });
 
-        // Новости //TODO: отдельные новости
+        // Новости
         Route::group(['controller' => App\Http\Controllers\Home\News\NewsController::class, 'prefix' => 'News'], function () {
             Route::get('/', 'showNews')->name('news');
             Route::get('/{id}', 'showTheNews')->name('theNews');
         });
 
-        // Афиша //TODO: отдельные афиши
+        // Афиша
         Route::group(['controller' => App\Http\Controllers\Home\Posters\PostersController::class, 'prefix' => 'Posters'], function () {
             Route::get('/', 'showPosters')->name('posters');
             Route::get('/{id}', 'showPoster')->name('poster');
         });
 
-        // Выставка //TODO: отдельные выставки
+        // Выставка
         Route::group(['controller' => App\Http\Controllers\Home\Exhibitions\ExhibitionsController::class, 'prefix' => 'Exhibitions'], function () {
             Route::get('/', 'showExhibitions')->name('exhibitions');
             Route::get('/{id}', 'showExhibition')->name('exhibition');
@@ -84,7 +84,7 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
 
-        // Мои картины //TODO: отдельно не робит
+        // Мои картины
         Route::group(['namespace' => 'MyPictures', 'prefix' => 'MyPictures'], function () {
             // Мои картины
             Route::group(['controller' => App\Http\Controllers\Profile\MyPictures\MyPicturesController::class], function () {
@@ -96,7 +96,7 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
                 Route::get('/', 'process')->name('searchMyPictures');
             });
 
-            // Добавить свою картину //TODO: отдельно не робит
+            // Добавить свою картину
             Route::group(['controller' => App\Http\Controllers\Profile\MyPictures\CreatePicture\CreatePictureController::class, 'prefix' => 'CreatePicture'], function () {
                 Route::get('/', 'showCreaterPicture')->name('createPicture');
                 Route::post('/CreatePicture_process', 'process')->name('createPicture_process');
@@ -116,7 +116,7 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         // -------------------------------------------------------
 
-        // Изменить информацию //TODO: отдельно не робит
+        // Изменить информацию
         Route::group(['controller' => App\Http\Controllers\Profile\UpdateMyInformation\UpdateMyInformationController::class, 'prefix' => 'UpdateMyInformation'], function () {
             Route::get('/', 'showUpdateMyInfo')->name('updateInfo');
             Route::get('/UpdateMyInformation_process', 'process')->name('updateInfo_process');
@@ -167,9 +167,9 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         // Категории
-        Route::group(['namespace' => 'Category', 'prefix' => 'Categories'], function () {
+        Route::group(['namespace' => 'Categories', 'prefix' => 'Categories'], function () {
 
-            //Категории
+            //Категории //TODO проблема с роутом categories
             Route::group(['controller' => App\Http\Controllers\Admin\Categories\CategoriesController::class], function () {
                 Route::get('/', 'showCategories')->name('categories');
                 Route::get('/AddCategory', 'addProcess')->name('addCategory_process');

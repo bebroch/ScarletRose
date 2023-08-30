@@ -18,16 +18,20 @@ class CreatePictureController extends Controller
     // Добавить картину
     public function showCreaterPicture()
     {
-        $isFull = false;
+        $isDisable = false;
         $categories = Categories::all();
 
         $countPicture = Pictures::where([['user_id', '=', Auth::user()->id],['status', '=', 0]])->count();
         if ($countPicture >= 5) {
-            $isFull = true;
+            $isDisable = true;
             session()->flash('status', 'Вы уже отправили 5 картин на проверку');
         }
+        if(empty(Auth::user()->firstname) && empty(Auth::user()->lastname)){
+            $isDisable = true;
+            session()->flash('status', 'Введите ФИО в вашем личном кабинете перед тем, как выложить картину.');
+        }
 
-        return view('personalArea.myPictures.createPicture', compact('categories', 'isFull'));
+        return view('personalArea.myPictures.createPicture', compact('categories', 'isDisable'));
     }
 
     public function process(addMyPictureRequest $request)

@@ -19,7 +19,7 @@
                         <h3>Добавить картину</h3>
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Фото</label>
-                            <input @if ($isFull) disabled @endif class="form-control" type="file"
+                            <input @if ($isDisable) disabled @endif class="form-control" type="file"
                                 id="formFile" accept="image/png, image/jpeg, image/jpg" name="uploadPicture"
                                 onchange="loadFile(event)">
                             @error('uploadPicture')
@@ -28,7 +28,7 @@
                         </div>
 
                         <label for="namePicture">Название</label><br>
-                        <textarea @if ($isFull) disabled @endif name="namePicture" style="width: 100%; max-height: 65px"
+                        <textarea @if ($isDisable) disabled @endif name="namePicture" style="width: 100%; max-height: 65px"
                             cols="1" rows="3"></textarea>
                         @error('namePicture')
                             <br><a>{{ $message }}</a>
@@ -36,13 +36,13 @@
 
                         <div class="col text-center">
                             <!-- Button trigger modal -->
-                            <button @if ($isFull) disabled @endif type="button"
+                            <button @if ($isDisable) disabled @endif type="button"
                                 class="btn btn-outline-success mt-3 mb-2" data-bs-toggle="modal"
                                 data-bs-target="#techniqueWindow">
                                 Выбрать технику
                             </button>
                             <!-- Button trigger modal -->
-                            <button @if ($isFull) disabled @endif type="button"
+                            <button @if ($isDisable) disabled @endif type="button"
                                 class="btn btn-outline-info mt-3 mb-2" data-bs-toggle="modal"
                                 data-bs-target="#exhibitionWindow">
                                 Выбрать выставку
@@ -53,7 +53,7 @@
                             <tr>
                                 <td>
                                     <label>Высота<br>
-                                        <input @if ($isFull) disabled @endif name="height"
+                                        <input @if ($isDisable) disabled @endif name="height"
                                             style="width: 80%">см</label>
                                     @error('height')
                                         <a>{{ $message }}</a>
@@ -61,7 +61,7 @@
                                 </td>
                                 <td>
                                     <label>Ширина<br>
-                                        <input @if ($isFull) disabled @endif name="width"
+                                        <input @if ($isDisable) disabled @endif name="width"
                                             style="width: 80%">см</label>
                                     @error('width')
                                         <a>{{ $message }}</a>
@@ -73,7 +73,7 @@
 
 
                         <label>О картине</label><br>
-                        <textarea @if ($isFull) disabled @endif name="aboutPicture"
+                        <textarea @if ($isDisable) disabled @endif name="aboutPicture"
                             style="width: 100%; height:100px; max-height: 300px" cols="1" rows="10"></textarea>
                         @error('aboutPicture')
                             <a>{{ $message }}</a>
@@ -89,7 +89,7 @@
                         @enderror
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <input @if ($isFull) disabled @endif class="btn btn-primary mt-3"
+                            <input @if ($isDisable) disabled @endif class="btn btn-primary mt-3"
                                 type="submit">
                         </div>
                     </div>

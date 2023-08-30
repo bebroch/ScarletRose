@@ -10,12 +10,20 @@
             <div class="card rounded" style="display: flex; flex-direction: column; justify-content: space-between;">
                 <a class="nav-link" href="{{ route('picture', ['id' => $image->id]) }}">
                     <img src="{{ Storage::url("$image->imagePath") }}" class="card-img-top rounded"
-                        style="object-fit: cover; max-height: 40vh">
+                        style="object-fit: cover; height: 40vh">
                     <div class="card-body" style="overflow: hidden;">
                         <h3 class="card-title">{{ $image->name }}</h3>
-                        <p class="card-text">{{ Str::limit($image->about, 100, '...') }}</p>
+
+                        @foreach (DB::table('under_categories_pictures')->where('picture_id', '=', $image->id)->get() as $item)
+                            {{ DB::table('under_categories')->find($item->under_category_id)->name }},
+                        @endforeach
+
+                        {{ $image->width }}x{{ $image->height }}, {{ $image->DateCreate }}г.,
+                        <?php $user = DB::table('users')->find($image->user_id) ?>
+                        {{ $user->firstname . " " . $user->lastname }}
+
                         @if ($image->price)
-                            <p>Стоимость: {{ $image->price }}&#8381;</p>
+                            <p><a style="font-weight: 700">Стоимость:</a> {{ number_format($image->price, 0, ',', ' ') }}&#8381;</p>
                         @endif
                     </div>
                 </a>

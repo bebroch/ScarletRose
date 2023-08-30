@@ -11,7 +11,7 @@
     <div class="card container mt-3 p-3">
         <div class="row">
             <div class="col-md border-end">
-                <form action="{{ route('addingCategory') }}">
+                <form action="{{ route('addCategory_process') }}">
                     <h4>Создать категорию</h4>
                     <div class="input-group mb-3">
                         <input type="text" name="Category" class="form-control @error('Category') is-invalid @enderror"
@@ -28,7 +28,7 @@
 
 
                 <h4>Создать подкатегорию</h4>
-                <form action="{{ route('addingUnderCategory') }}">
+                <form action="{{ route('addUnderCategory_process') }}">
                     <label for="text" id="lbl">Выберите категорию</label>
                     <input hidden id="inp" type="category" name="category_for_underCategory">
                     <div class="input-group mb-3">
@@ -47,7 +47,7 @@
 
                 <h4>Удалить категорию</h4>
                 <div class="input-group mb-3">
-                    <form action="{{ route('deleteCategory') }}" style="width: 100%">
+                    <form action="{{ route('deleteCategory_process') }}" style="width: 100%">
                         <div class="btn-group" role="group" style="width: 100%">
                             <select name="category" class="form-select" aria-label="Default select example">
                                 <option selected>Выберите категорию</option>
@@ -67,7 +67,7 @@
 
                 <h4>Удалить подкатегорию</h4>
                 <div class="input-group mb-3">
-                    <form action="{{ route('deleteUnderCategory') }}" style="width: 100%">
+                    <form action="{{ route('deleteUnderCategory_process') }}" style="width: 100%">
                         <div class="btn-group" role="group" style="width: 100%">
                             <select name="under_category" class="form-select" aria-label="Default select example">
                                 <option selected>Выберите подкатегорию</option>

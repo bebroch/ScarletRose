@@ -18,8 +18,11 @@
         <div class="container">
             <!-- Главное меню -->
 
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('imagesAsset/logo.png') }}" height="75px" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="{{ route('pictures') }}">
+
+                <img id="responsive-image" src="{{ asset('imagesAsset/logoSmall.png') }}" height="75px"
+                    class="d-inline-block align-text-top">
+
             </a>
 
             @guest('web')
@@ -85,7 +88,8 @@
                     aria-labelledby="offcanvasDarkNavbarLabel">
                     <!-- Имя пользователя -->
                     <div class="offcanvas-header" style="background-color: #405b48;">
-                        <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><a class="nav-link" href="{{ route('profile') }}">{{ Auth::user()->login }}</a></h3>
+                        <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel"><a class="nav-link"
+                                href="{{ route('profile') }}">{{ Auth::user()->login }}</a></h3>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
                     </div>
@@ -190,7 +194,7 @@
 
                             <!-- Выйти -->
                             <li class="nav-item">
-                                <form action="{{route('logout')}}" method="POST">
+                                <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <button class="nav-link" style="font-size: 20px;" type="text">Выйти</button>
 
@@ -210,5 +214,30 @@
     @yield('content')
 
 </body>
+
+<script>
+    // Функция для замены src атрибута изображения
+    function changeImageSource(newSource) {
+        const imgElement = document.getElementById('responsive-image');
+        if (imgElement) {
+            imgElement.src = newSource;
+        }
+    }
+
+    // Функция для определения размеров экрана и замены картинки
+    function updateImageBasedOnScreenSize() {
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth < 768) {
+            changeImageSource('{{ asset('imagesAsset/logoSmall.png') }}');
+        } else {
+            changeImageSource('{{ asset('imagesAsset/logoNoraml.png') }}');
+        }
+    }
+
+    // Вызов функции при загрузке страницы и при изменении размеров окна
+    updateImageBasedOnScreenSize();
+    window.addEventListener('resize', updateImageBasedOnScreenSize);
+</script>
 
 </html>
