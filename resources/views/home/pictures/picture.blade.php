@@ -1,7 +1,7 @@
 @extends('schems.topPanelSchema')
 
 @section('title')
-    {{ $image->name }}
+    {{ $picture->name }}
 @endsection
 
 
@@ -13,13 +13,13 @@
         <div class="card">
             <div class="row g-0">
                 <div class="col-md">
-                    <img src="{{ Storage::url("$image->imagePath") }}" class="img-fluid rounded-start">
+                    <img src="{{ Storage::url("$picture->imagePath") }}" class="img-fluid rounded-start">
                 </div>
                 <div class="col-md">
                     <div class="card-body">
                         <!-- Имя картины -->
                         <div class="text-center">
-                            <h1>{{ $image->name }}</h1>
+                            <h1>{{ $picture->name }}</h1>
                         </div>
 
                         <div class="container-fluid text-center">
@@ -39,10 +39,10 @@
                                 <div class="col">
 
 
-                                    @if (DB::table('exhibitions_pictures')->where('picture_id', '=', $image->id)->get()->first())
+                                    @if (DB::table('exhibitions_pictures')->where('picture_id', '=', $picture->id)->get()->first())
                                         <h3 style="font-weight: bold">Участие в выставках:</h3>
                                     @endif
-                                    @foreach (DB::table('exhibitions_pictures')->where('picture_id', '=', $image->id)->get() as $exhibition)
+                                    @foreach (DB::table('exhibitions_pictures')->where('picture_id', '=', $picture->id)->get() as $exhibition)
                                         <h5>
                                             <a class="link-info link-underline-opacity-0"
                                                 href="{{ route('exhibition', ['id' => $exhibition->exhibition_id]) }}">
@@ -83,8 +83,8 @@
                                 <!-- Размер -->
                                 <div class="col-lg">
                                     <h3 style="font-weight: bold">Размеры</h3>
-                                    <h5><a style="font-weight: bold">Высота: </a>{{ $image->height }}</h5>
-                                    <h5><a style="font-weight: bold">Ширина: </a>{{ $image->width }}</h5>
+                                    <h5><a style="font-weight: bold">Высота: </a>{{ $picture->height }}</h5>
+                                    <h5><a style="font-weight: bold">Ширина: </a>{{ $picture->width }}</h5>
 
                                 </div>
                             </div>
@@ -93,11 +93,11 @@
 
                         <!-- О картине -->
                         <h3 style="font-weight: bold">О картине:</h3>
-                        <h3>{{ $image->about }}</h3>
+                        <h3>{{ $picture->about }}</h3>
 
                         <!-- Стоимость -->
-                        @if ($image->price)
-                            <h4>Стоимость: {{ $image->price }}&#8381;</h4>
+                        @if ($picture->price)
+                            <h4>Стоимость: {{ $picture->price }}&#8381;</h4>
                         @endif
 
                         <!-- Удалить картину -->
@@ -117,7 +117,7 @@
     </div>
 
     @include('schems.deleteItemModalWindow', [
-        'item' => $image,
+        'item' => $picture,
         'route' => 'adminPictureDelete_process',
         'nameShape1' => 'картины',
         'nameShape2' => 'картину',

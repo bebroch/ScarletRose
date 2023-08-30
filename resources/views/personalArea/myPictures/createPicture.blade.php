@@ -27,9 +27,9 @@
                             @enderror
                         </div>
 
-                        <label for="namePicture">Название</label><br>
+                        <label for="namePicture">Название</label>
                         <textarea @if ($isDisable) disabled @endif name="namePicture" style="width: 100%; max-height: 65px"
-                            cols="1" rows="3"></textarea>
+                            cols="1" rows="3" placeholder="Название картины"></textarea>
                         @error('namePicture')
                             <br><a>{{ $message }}</a>
                         @enderror
@@ -68,16 +68,25 @@
                                     @enderror
                                 </td>
                             </tr>
-
                         </table>
 
+                        <div class="mt-2 text-center">
+                            <label>Год написания картины<br>
+                                <input type="number" min="1900" max="2150" step="1" value="{{now()->format('Y')}}" @if ($isDisable) disabled @endif name="yearCreate"
+                                    style="width: 40%">г.</label>
+                            @error('yearCreate')
+                                <a>{{ $message }}</a>
+                            @enderror
+                        </div>
 
-                        <label>О картине</label><br>
-                        <textarea @if ($isDisable) disabled @endif name="aboutPicture"
-                            style="width: 100%; height:100px; max-height: 300px" cols="1" rows="10"></textarea>
-                        @error('aboutPicture')
-                            <a>{{ $message }}</a>
-                        @enderror
+                        <div class="mt-2">
+                            <label>О картине</label>
+                            <textarea @if ($isDisable) disabled @endif name="aboutPicture" placeholder="Расскажите о чём ваша картина"
+                                style="width: 100%; height:100px; max-height: 300px" cols="1" rows="10"></textarea>
+                            @error('aboutPicture')
+                                <a>{{ $message }}</a>
+                            @enderror
+                        </div>
 
 
                         @error('price')
