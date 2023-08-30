@@ -12,8 +12,8 @@ class MyPicturesController extends Controller
     // Мои Картины
     public function showMyPicture()
     {
-        $images = Pictures::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $pictures = Pictures::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
 
-        return view('personalArea.myPictures', compact('images'));
+        return view('personalArea.myPictures', compact('pictures'));
     }
 }

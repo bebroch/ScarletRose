@@ -15,25 +15,24 @@ class PicturesController extends Controller
     // Показ картин
     public function showPictures()
     {
-        $images = Pictures::orderBy('created_at', 'desc') // Сортировка по убыванию даты создания
+        $pictures = Pictures::orderBy('created_at', 'desc') // Сортировка по убыванию даты создания
             ->where('status', '=', 1)
             ->get();
-        return view('home.pictures.pictures', compact('images'));
+        return view('home.pictures.pictures', compact('pictures'));
     }
 
     public function showPicture($id)
     {
+        $picture = Pictures::find($id);
 
-        $image = Pictures::find($id);
-
-        if (!$image) {
+        if (!$picture) {
             return abort(404);
         }
 
-        $user = User::find($image->user_id);
+        $user = User::find($picture->user_id);
 
 
-        $under_categories_id = under_categories_pictures::where('picture_id', '=', $image->id)
+        $under_categories_id = under_categories_pictures::where('picture_id', '=', $picture->id)
             ->get()
             ->pluck('under_category_id')
             ->toArray();
@@ -49,7 +48,7 @@ class PicturesController extends Controller
         }
 
 
-        $categories[] = Categories::whereIn('id', Categories_pictures::where('picture_id', '=', $image->id)
+        $categories[] = Categories::whereIn('id', Categories_pictures::where('picture_id', '=', $picture->id)
             ->get()
             ->pluck('category_id')
             ->toArray())
@@ -57,6 +56,6 @@ class PicturesController extends Controller
 
 
 
-        return view('home.pictures.picture', compact('image', 'user', 'categories'));
+        return view('home.pictures.picture', compact('picture', 'user', 'categories'));
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Home\Exhibitions;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exhibitions;
+use App\Models\Exhibitions_pictures;
+use App\Models\Pictures;
 use Illuminate\Http\Request;
 
 class ExhibitionsController extends Controller
@@ -30,7 +32,15 @@ class ExhibitionsController extends Controller
     public function showExhibition($id)
     {
         $exhibition = Exhibitions::find($id);
+        $pictures_id = Exhibitions_pictures::where('exhibition_id', '=', $exhibition->id)
+            ->get()
+            ->pluck('picture_id')
+            ->toArray();
 
-        return view('home.exhibitions.exhibition', compact('exhibition'));
+        $pictures = Pictures::whereIn('id', $pictures_id)
+            ->where('status', 1)
+            ->get();
+
+        return view('home.exhibitions.exhibition', compact('exhibition', 'pictures'));
     }
 }

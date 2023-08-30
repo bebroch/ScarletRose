@@ -12,8 +12,8 @@ class SearchController extends Controller
     public function process(Request $request)
     {
         $query = $request->search;
-        $images = Pictures::search($query, $request->filter, 0);
+        $pictures = Pictures::search($query, $request->filter, 0);
 
-        return view('home.pictures.formPictures', ['images' => $images, 'query' => $query]);
+        return view('home.pictures.formPictures', ['pictures' => $pictures, 'query' => $query]);
     }
 }

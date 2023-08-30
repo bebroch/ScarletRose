@@ -14,8 +14,8 @@ class SearchController extends Controller
     {
         $query = $request->input('search');
 
-        $images = Pictures::search($query, $request->filter, Auth::user()->id);
+        $pictures = Pictures::search($query, $request->filter, Auth::user()->id);
 
-        return view('home.pictures.formPictures', ['images' => $images, 'query' => $query, 'isPersonalArea' => true]);
+        return view('home.pictures.formPictures', ['pictures' => $pictures, 'query' => $query, 'isPersonalArea' => true]);
     }
 }

@@ -12,9 +12,9 @@ class ModerationPictureController extends Controller
     // Показ окна для проверки картин
     public function showModerationPicture()
     {
-        $images = Pictures::where('status', '=', 0)->get();
+        $pictures = Pictures::where('status', '=', 0)->get();
 
-        return view('adminPanel.AdminPictureVerification', compact('images'));
+        return view('adminPanel.AdminPictureVerification', compact('pictures'));
     }
 
     // Процесс принятия картины

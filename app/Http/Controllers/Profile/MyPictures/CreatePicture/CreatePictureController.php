@@ -40,10 +40,11 @@ class CreatePictureController extends Controller
         $path = $request->file('uploadPicture')->store("public/images/");
 
         // картинка идёт в ДБ
-        $image = Pictures::create([
+        $pictures = Pictures::create([
             'name' => $request->namePicture,
             'imagePath' => $path,
             'about' => $request->aboutPicture,
+            'DateCreate' => $request->yearCreate,
             'user_id' => Auth::user()->id,
             'width' => $request->width,
             'height' => $request->height,
@@ -54,7 +55,7 @@ class CreatePictureController extends Controller
             foreach ($request->exhibitions as $exhibition) {
                 Exhibitions_pictures::create([
                     'exhibition_id' => Exhibitions::find($exhibition)->id,
-                    'picture_id' => $image->id,
+                    'picture_id' => $pictures->id,
                 ]);
             }
         }
@@ -63,7 +64,7 @@ class CreatePictureController extends Controller
             foreach ($request->categories as $category) {
                 Categories_pictures::create([
                     'category_id' => Categories::find($category)->id,
-                    'picture_id' => $image->id,
+                    'picture_id' => $pictures->id,
                 ]);
             }
         }
@@ -73,7 +74,7 @@ class CreatePictureController extends Controller
             foreach ($request->under_categories as $under_category) {
                 under_categories_pictures::create([
                     'under_category_id' => under_categories::find($under_category)->id,
-                    'picture_id' => $image->id,
+                    'picture_id' => $pictures->id,
                 ]);
             }
         }

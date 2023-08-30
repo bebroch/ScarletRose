@@ -13,8 +13,8 @@ class UsersController extends Controller
     public function showUser($id)
     {
         $user = User::find($id);
-        $images = Pictures::where('user_id', '=', $id)->get();
+        $pictures = Pictures::where('user_id', '=', $id)->get();
 
-        return view('home.user', compact('user', 'images'));
+        return view('home.user', compact('user', 'pictures'));
     }
 }

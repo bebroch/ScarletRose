@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container mt-3">
+    <div class="container mt-3 mb-3">
         <div class="card-header mb-3">
 
             @include('schems.topName', ['name' => 'Афиша'])

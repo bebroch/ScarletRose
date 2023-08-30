@@ -19,10 +19,10 @@ class UsersController extends Controller
     // Показ одного пользователей
     public function showUser($id)
     {
-        $images = Pictures::where('user_id', '=', $id)->get();
+        $pictures = Pictures::where('user_id', '=', $id)->get();
         $user = User::find($id);
 
-        return view('adminPanel.users.AdminUser', compact('user', 'images'));
+        return view('adminPanel.users.AdminUser', compact('user', 'pictures'));
     }
 
     // Процесс удаление пользователя
