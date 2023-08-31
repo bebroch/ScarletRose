@@ -10,21 +10,24 @@
                 <div class="row row-cols-1 row-cols-md-3 g-1">
                     @foreach ($categories as $category)
                         <div>
+
+                            <?php
+                            $under_categories = DB::table('under_categories')
+                                ->where('category_id', '=', $category->id)
+                                ->get();
+                            ?>
+
                             <div>
-                                @if (!DB::table('under_categories')->where('category_id', '=', $category->id)->get()->first())
-                                    <label style="font-size: 18px; font-weight:bold">
-                                        <input hidden type="checkbox" name="categories[]" value="{{ $category->id }}">
-                                        {{ $category->name }}</label><br>
-                                @else
+                                @if (!empty($under_categories))
                                     <label style="font-size: 18px; font-weight:bold">{{ $category->name }}</label><br>
                                 @endif
                             </div>
                             <div>
-                                @foreach (DB::table('under_categories')->where('category_id', '=', $category->id)->get() as $item)
+                                @foreach ($under_categories as $item)
                                     <ul class="list-group mt-1">
 
                                         <label>
-                                            <input class="activeCheckBox" hidden style="width: 15px" type="checkbox"
+                                            <input class="activeCheckBox" hidden type="checkbox"
                                                 id="{{ $category->name }}" name="under_categories[]"
                                                 value="{{ $item->id }}"
                                                 onclick="onlyOne(this, '{{ $category->name }}')">

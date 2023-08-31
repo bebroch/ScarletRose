@@ -13,6 +13,10 @@ use App\Models\User;
 class PicturesController extends Controller
 {
     // Показ картин
+    /**
+     * Summary of showPictures
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function showPictures()
     {
         $pictures = Pictures::orderBy('created_at', 'desc') // Сортировка по убыванию даты создания
@@ -46,15 +50,6 @@ class PicturesController extends Controller
             $un_cat = $under_category->name;
             $categories += ["$cat" => "$un_cat"];
         }
-
-
-        $categories[] = Categories::whereIn('id', Categories_pictures::where('picture_id', '=', $picture->id)
-            ->get()
-            ->pluck('category_id')
-            ->toArray())
-            ->get();
-
-
 
         return view('home.pictures.picture', compact('picture', 'user', 'categories'));
     }

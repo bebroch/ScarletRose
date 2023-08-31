@@ -26,8 +26,6 @@
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     document.getElementById('search-results').innerHTML = xhr.responseText;
-                } else {
-                    console.error('Ошибка при обновлении содержимого:', xhr.statusText);
                 }
             };
 
