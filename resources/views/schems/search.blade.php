@@ -16,19 +16,14 @@
             </select>
 
             <button id="search-button" class="btn btn-outline-primary">Поиск</button>
+            <button id="search-button" data-bs-toggle="offcanvas" data-bs-target="#filters"
+                class="btn btn-outline-primary">фильтры</button>
 
 
         </div>
-        <div class="btn-group mt-2">
-            <button type="button" class="btn btn-danger">По автору</button>
-            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">От А до Я</a></li>
-                <li><a class="dropdown-item" href="#">От Я до А</a></li>
-            </ul>
-        </div>
+
+
+        @include('schems.pictures.sortPictures')
+
     </div>
 </div>
