@@ -19,16 +19,5 @@
 
 
         </div>
-        <div class="btn-group mt-2">
-            <button type="button" class="btn btn-danger">По автору</button>
-            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">От А до Я</a></li>
-                <li><a class="dropdown-item" href="#">От Я до А</a></li>
-            </ul>
-        </div>
     </div>
 </div>
