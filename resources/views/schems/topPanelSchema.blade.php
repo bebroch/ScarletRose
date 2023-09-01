@@ -20,8 +20,7 @@
 
             <a class="navbar-brand" href="{{ route('pictures') }}">
 
-                <img id="responsive-image" src="{{ asset('imagesAsset/logoSmall.png') }}" height="75px"
-                    class="d-inline-block align-text-top">
+                <img id="responsive-image" height="75px" class="d-inline-block align-text-top">
 
             </a>
 

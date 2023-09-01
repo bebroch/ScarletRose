@@ -15,8 +15,6 @@ class Pictures extends Model
 
     protected function search($query, $tag, $id)
     {
-
-
         if ($id === 0) {
             switch ($tag) {
                 case 'name':

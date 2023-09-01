@@ -7,7 +7,7 @@
 
 
 @section('content')
-    <div class="container-fliud mt-4" style="margin-inline: 5%;">
+    <div class="container-fliud mt-3 mb-3 " style="margin-inline: 5%;">
         @include('schems.backbutton')
 
         <div class="card">
@@ -29,7 +29,7 @@
                                 <div class="col">
                                     <h2 style="font-weight: bold">Автор</h2>
                                     <h5><a class="link-info link-underline-opacity-0"
-                                            href="{{ route('user', ['id' => $user->id], false) }}">{{ $user->login }}</a>
+                                            href="{{ route('user', ['id' => $user->id], false) }}">{{ $user->firstname . ' ' . $user->lastname }}</a>
                                     </h5>
 
                                 </div>

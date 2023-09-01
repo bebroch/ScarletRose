@@ -6,5 +6,5 @@
 
 
 @section('content')
-@include('schems.profile', ['user' => Auth::user(), 'name' => 'Личная страница'])
+    @include('schems.profile', ['user' => Auth::user(), 'name' => 'Личная страница'])
 @endsection
