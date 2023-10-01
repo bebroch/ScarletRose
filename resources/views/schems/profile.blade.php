@@ -6,10 +6,7 @@
 
 
 @section('content')
-    <div class="container-fluid">
-        <div class="mt-3">
-            @include('schems.topName')
-        </div>
+    <div class="container-fluid mt-3">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 mb-3">
@@ -39,7 +36,7 @@
                                 @if (!$user->is_admin)
                                     <div class="mx-auto">
                                         <button type="button" class="btn btn-danger" style="width: 100%" data-bs-toggle="modal"
-                                            data-bs-target="#staticBackdrop">
+                                            data-bs-target="#{{ $user->id }}">
                                             Удалить пользователя
                                         </button>
                                     </div>

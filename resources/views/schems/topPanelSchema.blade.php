@@ -161,6 +161,12 @@
                                             <hr class="dropdown-divider">
                                         </li>
                                         <li>
+                                            <a class="dropdown-item" href="{{ route('createUserPicture') }}">Добавить картину от другого имени</a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
                                             <a class="dropdown-item" href="{{ route('moderationPictures') }}">
                                                 Картины на проверке
                                                 @if (DB::table('pictures')->where('status', '=', 0)->count())

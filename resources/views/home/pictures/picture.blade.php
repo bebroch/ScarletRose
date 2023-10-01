@@ -103,9 +103,8 @@
                         <!-- Удалить картину -->
                         @auth('web')
                             @if (Auth::user()->is_admin)
-                                <!-- Кнопка-триггер модального окна -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop">
+                                    data-bs-target="#{{ $picture->id }}">
                                     Удалить картину
                                 </button>
                             @endif

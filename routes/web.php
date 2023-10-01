@@ -152,6 +152,14 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         // -------------------------------------------------------
 
+        // Добавить картину от другого имени
+        Route::group(['controller' => App\Http\Controllers\Admin\Pictures\PictureController::class, 'prefix' => 'CreatePicture'], function () {
+            Route::get('/', 'showCreaterPicture')->name('createUserPicture');
+            Route::post('/CreatePicture_process', 'process')->name('createUserPicture_process');
+        });
+
+        // -------------------------------------------------------
+
         // Модерация картин
         Route::group(['controller' => App\Http\Controllers\Admin\ModerationPicture\ModerationPictureController::class, 'prefix' => 'Moderation'], function () {
             Route::get('/', 'showModerationPicture')->name('moderationPictures');
@@ -189,15 +197,3 @@ route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
     });
 });
-
-
-
-Route::get('/phpinfo', function () {
-    return phpinfo();
-});
-
-/*
-Route::get('/xdebuginfo', function(){
-    return xdebug_info();
-});
- */

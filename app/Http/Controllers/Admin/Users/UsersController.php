@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Users;
 use App\Http\Controllers\Controller;
 use App\Models\Pictures;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -28,7 +28,16 @@ class UsersController extends Controller
     // Процесс удаление пользователя
     public function deleteProcess($id)
     {
-        User::find($id)->delete();
-        return back();
+        $user = User::find($id);
+
+        $pictures = Pictures::where('user_id', $user->id)->get();
+
+        foreach ($pictures as $picture) {
+            Storage::delete($picture->imagePath);
+            $picture->delete();
+        }
+
+        $user->delete();
+        return redirect(route('pictures'));
     }
 }
