@@ -4,28 +4,22 @@
 
 Далее устанавливаем пакеты и создаём ключ
 <pre>
-```bash
 composer install
 php artisan key:generate
 php artisan config:clear
 php artisan cache:clear
 npm install
-```
 </pre>
 
 Теперь нужно подключить ДБ
 <pre>
-```bash
 php artisan migrate
 php artisan migrate --seed
-```
 </pre>
 
 Запустить фронт
 <pre>
-```bash
 npm run dev
-```
 </pre>
 
 О проекте:
