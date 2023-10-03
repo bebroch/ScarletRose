@@ -2,7 +2,7 @@
 Скопировать .env.example и переименовать в .env
 Прописать .env
 
-Далее устанавливаем пакеты и создаём ключ
+Далее устанавливаем пакеты и создаём ключ, для этого:
 <pre>
 composer install
 php artisan key:generate
@@ -11,13 +11,15 @@ php artisan cache:clear
 npm install
 </pre>
 
-Теперь нужно подключить ДБ
+Теперь нужно подключить ДБ в .env файле
+
+Пишем это:
 <pre>
 php artisan migrate
 php artisan migrate --seed
 </pre>
 
-Запустить фронт
+Запустить фронт:
 <pre>
 npm run dev
 </pre>
